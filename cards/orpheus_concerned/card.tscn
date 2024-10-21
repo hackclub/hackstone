@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=3 uid="uid://be0nsg5tyb27f"]
+
+[ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_3dvit"]
+[ext_resource type="Texture2D" uid="uid://b6gctcucx1lyg" path="res://cards/orpheus_concerned/orpheus_concerned.png" id="2_0qgp0"]
+[ext_resource type="Texture2D" uid="uid://s8613qfo7hln" path="res://art/card_skin_template/card_counterspell_card_back_02.png" id="3_1h5bh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k142s"]
+albedo_texture = ExtResource("2_0qgp0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmo7o"]
+albedo_texture = ExtResource("3_1h5bh")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_encxd"]
+viewport_path = NodePath("AttackAndDefenseViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tiggf"]
+viewport_path = NodePath("DescriptionViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3iix"]
+resource_local_to_scene = true
+transparency = 4
+blend_mode = 4
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_tiggf")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gvs6v"]
+viewport_path = NodePath("DescriptionViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jyqx5"]
+viewport_path = NodePath("TitleViewport")
+
+[node name="RigidBody3D" instance=ExtResource("1_3dvit")]
+power = 1
+toughness = 2
+
+[node name="counterspell_card" parent="card" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_k142s")
+surface_material_override/2 = SubResource("StandardMaterial3D_jmo7o")
+
+[node name="Sprite3D2" parent="card" index="2"]
+texture = SubResource("ViewportTexture_encxd")
+
+[node name="DescriptionSprite" parent="card" index="3"]
+material_override = SubResource("StandardMaterial3D_f3iix")
+texture = SubResource("ViewportTexture_gvs6v")
+
+[node name="TitleSprite" parent="card" index="4"]
+texture = SubResource("ViewportTexture_jyqx5")
+
+[node name="RichTextLabel" parent="TitleViewport" index="1"]
+text = "[b]Concerned Orpheus[/b]"

@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq5lurxxpg0m6"]
+
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kawqa"]
+
+[node name="Menu" type="Node3D"]
+script = ExtResource("1_kawqa")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 694.0
+offset_top = 675.0
+offset_right = 1274.0
+offset_bottom = 807.0
+theme_override_font_sizes/font_size = 90
+text = "PLAY"
+
+[node name="TitleText" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -620.0
+offset_top = 126.0
+offset_right = 768.18
+offset_bottom = 436.18
+grow_horizontal = 2
+pivot_offset = Vector2(672.86, 0)
+theme_override_font_sizes/bold_font_size = 211
+bbcode_enabled = true
+text = "[b]HACKSTONE[/b]"
+
+[connection signal="pressed" from="Panel/PlayButton" to="." method="goto_main"]

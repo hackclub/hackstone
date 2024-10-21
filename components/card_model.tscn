@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://co4q8dl36vr6a"]
+
+[ext_resource type="PackedScene" uid="uid://dk8y64udtsdx0" path="res://models/card/card.glb" id="1_gc2fi"]
+
+[node name="card" instance=ExtResource("1_gc2fi")]
+
+[node name="counterspell_card" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

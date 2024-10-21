@@ -1,0 +1,80 @@
+[gd_scene load_steps=19 format=3 uid="uid://3fwojj544i31"]
+
+[ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_821a5"]
+[ext_resource type="Texture2D" uid="uid://wut6cbf0pwgv" path="res://cards/party_parrot/output-0.png" id="2_y01yf"]
+[ext_resource type="Texture2D" uid="uid://bubo514nt4exq" path="res://cards/party_parrot/output-1.png" id="3_sbttd"]
+[ext_resource type="Texture2D" uid="uid://c0ahhibo0q0yv" path="res://cards/party_parrot/output-2.png" id="4_lbsuh"]
+[ext_resource type="Texture2D" uid="uid://cxcfijqyrsbj0" path="res://cards/party_parrot/output-3.png" id="5_myfiq"]
+[ext_resource type="Texture2D" uid="uid://1orw4e5du7yi" path="res://cards/party_parrot/output-4.png" id="6_212dk"]
+[ext_resource type="Texture2D" uid="uid://c3nyv0ax5ygno" path="res://cards/party_parrot/output-5.png" id="7_sp6h2"]
+[ext_resource type="Texture2D" uid="uid://c0vp4uumf0chh" path="res://cards/party_parrot/output-6.png" id="8_7iuh0"]
+[ext_resource type="Texture2D" uid="uid://c1fw5rjnqrcoi" path="res://cards/party_parrot/output-7.png" id="9_ab2f1"]
+[ext_resource type="Texture2D" uid="uid://vjkqj0w46lmp" path="res://cards/party_parrot/output-8.png" id="10_ihygr"]
+[ext_resource type="Texture2D" uid="uid://dw4mtbl45x4wn" path="res://cards/party_parrot/output-9.png" id="11_bkbjj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_852qk"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1v6af"]
+viewport_path = NodePath("AttackAndDefenseViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_25pfc"]
+viewport_path = NodePath("DescriptionViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2nly"]
+resource_local_to_scene = true
+transparency = 4
+blend_mode = 4
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_25pfc")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hlc52"]
+viewport_path = NodePath("DescriptionViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_v8eu4"]
+viewport_path = NodePath("TitleViewport")
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_s67ib"]
+frames = 10
+speed_scale = 20.0
+frame_0/texture = ExtResource("2_y01yf")
+frame_1/texture = ExtResource("3_sbttd")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("4_lbsuh")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("5_myfiq")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("6_212dk")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("7_sp6h2")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("8_7iuh0")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("9_ab2f1")
+frame_7/duration = 1.0
+frame_8/texture = ExtResource("10_ihygr")
+frame_8/duration = 1.0
+frame_9/texture = ExtResource("11_bkbjj")
+frame_9/duration = 1.0
+
+[node name="RigidBody3D" instance=ExtResource("1_821a5")]
+
+[node name="counterspell_card" parent="card" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_852qk")
+
+[node name="PowerToughnessSprite" parent="card" index="2"]
+texture = SubResource("ViewportTexture_1v6af")
+
+[node name="DescriptionSprite" parent="card" index="3"]
+material_override = SubResource("StandardMaterial3D_f2nly")
+texture = SubResource("ViewportTexture_hlc52")
+
+[node name="TitleSprite" parent="card" index="4"]
+texture = SubResource("ViewportTexture_v8eu4")
+
+[node name="Sprite3D" type="Sprite3D" parent="card" index="5"]
+transform = Transform3D(0.372275, 0, 0, 0, 0.446418, 0, 0, 0, 1, 0, 0.589364, 0.0225132)
+pixel_size = 0.05
+texture = SubResource("AnimatedTexture_s67ib")
+
+[node name="RichTextLabel" parent="TitleViewport" index="1"]
+text = "[b]Party Parrot[/b]"

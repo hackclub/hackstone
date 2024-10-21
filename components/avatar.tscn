@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://4cw3cdp1kc87"]
+
+[ext_resource type="Script" path="res://scripts/Avatar.gd" id="1_dhbvc"]
+[ext_resource type="Texture2D" uid="uid://cm264ab0vqh8v" path="res://art/target.png" id="1_sk8mf"]
+
+[node name="Avatar" type="Panel"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.0
+offset_right = 166.0
+offset_bottom = 98.0
+grow_horizontal = 2
+pivot_offset = Vector2(252, -14)
+script = ExtResource("1_dhbvc")
+current_turn_indicator = NodePath("CurrentActiveTexture")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -20.0
+offset_right = 43.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 49)
+theme_override_font_sizes/normal_font_size = 45
+bbcode_enabled = true
+text = "[center]20[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 204.0
+offset_bottom = 51.0
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "[center]Zach Latta[/center]"
+
+[node name="CurrentActiveTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -124.0
+offset_top = -34.0
+offset_right = 132.0
+offset_bottom = 222.0
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(127, 130)
+texture = ExtResource("1_sk8mf")
+expand_mode = 2

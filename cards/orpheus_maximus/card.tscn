@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://u6lo5h4jbmwu"]
+
+[ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_lvfba"]
+[ext_resource type="Texture2D" uid="uid://s8613qfo7hln" path="res://art/card_skin_template/card_counterspell_card_back_02.png" id="2_wywsh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rf0eu"]
+albedo_texture = ExtResource("2_wywsh")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_op3pn"]
+viewport_path = NodePath("AttackAndDefenseViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_n71ob"]
+viewport_path = NodePath("DescriptionViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gftxk"]
+resource_local_to_scene = true
+transparency = 4
+blend_mode = 4
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_n71ob")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rvo86"]
+viewport_path = NodePath("DescriptionViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3mau7"]
+viewport_path = NodePath("TitleViewport")
+
+[node name="RigidBody3D" instance=ExtResource("1_lvfba")]
+power = 5
+
+[node name="counterspell_card" parent="card" index="0"]
+surface_material_override/2 = SubResource("StandardMaterial3D_rf0eu")
+
+[node name="Sprite3D2" parent="card" index="2"]
+texture = SubResource("ViewportTexture_op3pn")
+
+[node name="DescriptionSprite" parent="card" index="3"]
+material_override = SubResource("StandardMaterial3D_gftxk")
+texture = SubResource("ViewportTexture_rvo86")
+
+[node name="TitleSprite" parent="card" index="4"]
+texture = SubResource("ViewportTexture_3mau7")

@@ -1,0 +1,182 @@
+[gd_scene load_steps=12 format=3 uid="uid://cjtnhugpl35ay"]
+
+[ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
+[ext_resource type="Script" path="res://scripts/Battlefield.gd" id="2_rndq6"]
+[ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="3_6l4o2"]
+[ext_resource type="Script" path="res://scripts/CardIndex.gd" id="4_4jspk"]
+[ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="5_1rng6"]
+[ext_resource type="Script" path="res://scripts/GameLogic.gd" id="6_qmtoo"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_vmqks"]
+device = -1
+keycode = 65
+unicode = 97
+
+[sub_resource type="Shortcut" id="Shortcut_pr2v5"]
+events = [SubResource("InputEventKey_vmqks")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_7555j"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_y0qay"]
+events = [SubResource("InputEventKey_7555j")]
+
+[sub_resource type="Environment" id="Environment_fi0gu"]
+background_mode = 1
+background_color = Color(0.705887, 0.705887, 0.705887, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+size = 15.0
+near = 0.01
+script = ExtResource("1_fysce")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="AddCardButton" type="Button" parent="CanvasLayer"]
+offset_left = 72.0
+offset_top = 72.0
+offset_right = 197.0
+offset_bottom = 122.0
+shortcut = SubResource("Shortcut_pr2v5")
+text = "Add card"
+
+[node name="RemoveCardButton" type="Button" parent="CanvasLayer"]
+offset_left = 212.0
+offset_top = 72.0
+offset_right = 337.0
+offset_bottom = 122.0
+shortcut = SubResource("Shortcut_y0qay")
+text = "Remove card"
+
+[node name="AddCardButton2" type="Button" parent="CanvasLayer"]
+offset_left = 352.0
+offset_top = 72.0
+offset_right = 477.0
+offset_bottom = 122.0
+shortcut = SubResource("Shortcut_pr2v5")
+text = "Add card"
+
+[node name="RemoveCardButton2" type="Button" parent="CanvasLayer"]
+offset_left = 495.0
+offset_top = 72.0
+offset_right = 620.0
+offset_bottom = 122.0
+shortcut = SubResource("Shortcut_y0qay")
+text = "Remove card"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.428807, 0.884797, -0.182373, -0.0726428, 0.16745, 0.983201, 0.900471, 0.434852, -0.00752964, 0, 0, 0)
+light_energy = 0.5
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.428807, 0.884796, -0.182373, -0.842365, -0.464547, -0.273163, -0.326414, 0.0364904, 0.944522, 0, 0, -21.263)
+light_energy = 0.5
+
+[node name="MyBattlefield" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+script = ExtResource("2_rndq6")
+card_prefab = ExtResource("3_6l4o2")
+
+[node name="OpponentBattlefield" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+script = ExtResource("2_rndq6")
+card_prefab = ExtResource("3_6l4o2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fi0gu")
+
+[node name="CardIndex" type="Node3D" parent="."]
+script = ExtResource("4_4jspk")
+
+[node name="OpponentAvatar" parent="." instance=ExtResource("5_1rng6")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -205.0
+offset_right = 0.0
+grow_horizontal = 0
+
+[node name="MyAvatar" parent="." instance=ExtResource("5_1rng6")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -205.0
+offset_top = -98.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GameLogic" type="Node3D" parent="."]
+script = ExtResource("6_qmtoo")
+my_avatar = NodePath("../MyAvatar")
+opponent_avatar = NodePath("../OpponentAvatar")
+my_battlefield = NodePath("../MyBattlefield")
+opponent_battlefield = NodePath("../OpponentBattlefield")
+panel_done = NodePath("../DonePanel")
+button_done = NodePath("../DonePanel/DoneButton")
+panel_notification = NodePath("../NotificationPanel")
+richtext_notification_message = NodePath("../NotificationPanel/RichTextLabel")
+
+[node name="NotificationPanel" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -333.0
+offset_top = -44.0
+offset_right = 333.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(20, 40)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NotificationPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.06
+offset_bottom = 8.06
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]This is a test![/center]"
+
+[node name="DonePanel" type="Panel" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -36.0
+offset_right = -6.0
+offset_bottom = 33.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="DoneButton" type="Button" parent="DonePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 21
+text = "DONE"
+
+[connection signal="pressed" from="CanvasLayer/AddCardButton" to="MyBattlefield" method="_on_add_card_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/RemoveCardButton" to="MyBattlefield" method="_on_remove_card_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/AddCardButton2" to="OpponentBattlefield" method="_on_add_card_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/RemoveCardButton2" to="OpponentBattlefield" method="_on_remove_card_button_pressed"]
+[connection signal="pressed" from="DonePanel/DoneButton" to="GameLogic" method="_on_done_pressed"]
