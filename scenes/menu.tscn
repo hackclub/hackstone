@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq5lurxxpg0m6"]
+[gd_scene load_steps=8 format=3 uid="uid://cq5lurxxpg0m6"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kawqa"]
+[ext_resource type="PackedScene" uid="uid://cyy80f1himq7q" path="res://scenes/flag.tscn" id="2_kkoix"]
+[ext_resource type="Script" path="res://scripts/FpsCounter.gd" id="3_3mbs6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pqisb"]
+blend_mode = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0jba3"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Environment" id="Environment_72dne"]
+background_mode = 1
+
+[sub_resource type="Environment" id="Environment_gk5e2"]
+background_energy_multiplier = 0.0
+ambient_light_source = 1
+tonemap_mode = 3
 
 [node name="Menu" type="Node3D"]
 script = ExtResource("1_kawqa")
@@ -37,5 +53,37 @@ pivot_offset = Vector2(672.86, 0)
 theme_override_font_sizes/bold_font_size = 211
 bbcode_enabled = true
 text = "[b]HACKSTONE[/b]"
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+material = SubResource("CanvasItemMaterial_pqisb")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -509.0
+offset_right = 512.0
+offset_bottom = 3.0
+grow_vertical = 0
+texture = SubResource("ViewportTexture_0jba3")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("3_3mbs6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7617, 230, 10.0851)
+environment = SubResource("Environment_72dne")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334301, 1.00952, 1.33931)
+environment = SubResource("Environment_gk5e2")
+
+[node name="flag" parent="SubViewport" instance=ExtResource("2_kkoix")]
+transform = Transform3D(0.0107671, 0, -0.0225626, 0, 0.025, 0, 0.0225626, 0, 0.0107671, 0, 0, 0)
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="Panel/PlayButton" to="." method="goto_main"]

@@ -35,11 +35,15 @@ func _input(event):
 				return # do nothing, we are just in state of hovering
 			if current_hover != card:
 				if current_hover != null:
-					current_hover.on_hover_end()
+					if "on_hover_end" in current_hover:
+						current_hover.on_hover_end()
 				current_hover = card
-				current_hover.on_hover_begin()
+				
+				if "on_hover_begin" in current_hover:
+					current_hover.on_hover_begin()
 		else:
 			if current_hover != card:
 				if current_hover != null:
-					current_hover.on_hover_end()
+					if "on_hover_end" in current_hover:
+						current_hover.on_hover_end()
 			current_hover = null

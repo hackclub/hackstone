@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://cyy80f1himq7q"]
+
+[ext_resource type="PackedScene" uid="uid://dpsoero1yk3si" path="res://models/flagpole/flag.blend" id="1_nhxda"]
+[ext_resource type="Shader" path="res://shaders/flag.gdshader" id="3_hb30e"]
+[ext_resource type="Texture2D" uid="uid://cp37c554xh3ha" path="res://models/flagpole/flag.png" id="4_j8fpf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_leufx"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.65218, 0.65218, 0.65218, 1)
+metallic = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jb8vf"]
+albedo_color = Color(0.508151, 0.508151, 3.85046e-07, 1)
+metallic = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v7s7n"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5ml32"]
+seamless = true
+noise = SubResource("FastNoiseLite_v7s7n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4ebd"]
+render_priority = 0
+shader = ExtResource("3_hb30e")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/speed = 0.33
+shader_parameter/strength = 0.19
+shader_parameter/albedo_texture = ExtResource("4_j8fpf")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_5ml32")
+
+[node name="flag" instance=ExtResource("1_nhxda")]
+
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_leufx")
+
+[node name="SurfSphere" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jb8vf")
+
+[node name="Cube" parent="." index="2"]
+transform = Transform3D(0.272459, 0, 0, 0, 10.8984, 0, 0, 0, 10.8984, 0, 56.882, -12.7886)
+surface_material_override/0 = SubResource("ShaderMaterial_n4ebd")

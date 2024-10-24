@@ -5,10 +5,6 @@ enum GameState {
 	MY_TURN = 0,
 	OPPONENT_TURN = 1
 }
-enum TurnPhase {
-	CRAFT = 0,
-	ATTACK = 1
-}
 
 @export var my_avatar : NodePath
 @export var opponent_avatar : NodePath
@@ -21,7 +17,6 @@ enum TurnPhase {
 @onready var timer_finished_cb = connect("on_done_pressed", Callable(self, "_on_done_pressed"))
 
 var state : GameState = GameState.MY_TURN
-var phase : TurnPhase = TurnPhase.CRAFT
 
 func add_card(card_scene, battlefield):
 	var node3d_card = card_scene.instantiate() as Node3D
@@ -46,34 +41,12 @@ func _process(delta: float) -> void:
 	pass
 
 func refresh_state():
-	if state == GameState.MY_TURN and phase == TurnPhase.CRAFT:
-		display_notification("Your turn - casting phase")
-		configure_done_button("End phase")
-	elif state == GameState.MY_TURN and phase == TurnPhase.ATTACK:
-		display_notification("Your turn - attack phase")
-		configure_done_button("End turn")
-	elif state == GameState.OPPONENT_TURN and phase == TurnPhase.CRAFT:
-		display_notification("Opponent's turn - casting phase")
-		configure_done_button("End phase")
-	elif state == GameState.OPPONENT_TURN and phase == TurnPhase.ATTACK:
-		display_notification("Opponent's turn - attack phase")
-		configure_done_button("End turn")
+	display_notification("Your turn" if state == GameState.MY_TURN else "Opponent's turn")
+	configure_done_button("Done")
 
 func _on_done_pressed():
-	end_phase()
+	state = GameState.MY_TURN if state == GameState.OPPONENT_TURN else GameState.OPPONENT_TURN
 	refresh_state()
-
-func end_phase():
-	if state == GameState.MY_TURN && phase == TurnPhase.CRAFT:
-		phase = TurnPhase.ATTACK
-	elif state == GameState.MY_TURN && phase == TurnPhase.ATTACK:
-		state = GameState.OPPONENT_TURN
-		phase = TurnPhase.CRAFT
-	elif state == GameState.OPPONENT_TURN && phase == TurnPhase.CRAFT:
-		phase = TurnPhase.ATTACK
-	elif state == GameState.OPPONENT_TURN && phase == TurnPhase.ATTACK:
-		state = GameState.MY_TURN
-		phase = TurnPhase.CRAFT
 
 func configure_done_button(str):
 	get_node(button_done).text = str
