@@ -6,7 +6,7 @@ Welcome to Hackstone, a “You Ship, We Ship” project by Hack Club, where teen
 
 # Engagement model
 
-In this game, every card has a distinct personality and powers, brought to life by animations, graphics, sound effects, and mechanics—all designed and implemented by YOU, the community! Here’s your chance to build something cool, learn Godot, and get into game development by crafting a card that feels uniquely yours and sharing it with the community.  Upon landing a pull request that contains your card implementation, you will be awarded a grant (***NOTE - details of grant TBD***)
+In this game, every card has a distinct personality and powers, brought to life by animations, graphics, sound effects, and mechanics—all designed and implemented by YOU, the community! Here’s your chance to build something cool, learn Godot, and get into game development by crafting a card that feels uniquely yours and sharing it with the community.  Upon landing a pull request that contains your card implementation, and only if you are a teenager, you will be eligible for a grant!!! (***NOTE - details of grant TBD***)
 
 # Basic setup instructions
 
