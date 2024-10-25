@@ -9,10 +9,14 @@ enum GameState {
 @export var my_avatar : NodePath
 @export var my_battlefield : NodePath
 @export var my_hand : NodePath
+@export var my_deck : NodePath
+@export var my_graveyard : NodePath
 
 @export var opponent_avatar : NodePath
 @export var opponent_battlefield : NodePath
 @export var opponent_hand : NodePath
+@export var opponent_deck : NodePath
+@export var opponent_graveyard : NodePath
 
 @export var panel_done : NodePath
 @export var button_done : NodePath
@@ -49,6 +53,14 @@ func deal_cards():
 	add_card(CardIndex.get_random_card(), opponent_hand)
 	add_card(CardIndex.get_random_card(), opponent_hand)
 	add_card(CardIndex.get_random_card(), opponent_hand)
+	
+	for i in 20:
+		add_card(CardIndex.get_random_card(), my_deck)
+		add_card(CardIndex.get_random_card(), opponent_deck)
+		add_card(CardIndex.get_random_card(), my_graveyard)
+		add_card(CardIndex.get_random_card(), opponent_graveyard)
+		
+		
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

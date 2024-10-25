@@ -82,13 +82,17 @@ func do_turn():
 	queue.append("turn_down" if turned else "turn_up")
 	
 func on_hover_begin():
-	print("starting hover on: " + str(self))
+	if turned:
+		return
+	#print("starting hover on: " + str(self))
 	queue.append("hover_begin")
 	
 func on_hover_end():
-	print("ending hover on: " + str(self))
+	if turned:
+		return
+	#print("ending hover on: " + str(self))
 	queue.append("hover_end")
 
 func _on_animation_finished(anim_name):
-	print("Animation finished: " + anim_name + " on anim_player: " + str(anim_player))
+	#print("Animation finished: " + anim_name + " on anim_player: " + str(anim_player))
 	animating = false

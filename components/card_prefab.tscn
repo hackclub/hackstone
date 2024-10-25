@@ -231,7 +231,8 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_h51jn"]
 resource_name = "hover_begin"
-length = 0.15
+length = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -239,7 +240,7 @@ tracks/0/path = NodePath("card:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0.2, 1),
 "update": 0,
 "values": [Vector3(0.5, 0.5, 0.5), Vector3(1.5, 1.5, 1.5)]
@@ -251,7 +252,7 @@ tracks/1/path = NodePath("CollisionShape3D:shape:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(3.63873, 4.99524, 0.0436401), Vector3(10.917, 14.985, 0.132)]
@@ -263,7 +264,7 @@ tracks/2/path = NodePath("card:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0.1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.3)]
@@ -271,7 +272,8 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_j52lu"]
 resource_name = "hover_end"
-length = 0.15
+length = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -279,7 +281,7 @@ tracks/0/path = NodePath("card:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0.2, 1),
 "update": 0,
 "values": [Vector3(1.5, 1.5, 1.5), Vector3(0.5, 0.5, 0.5)]
@@ -291,7 +293,7 @@ tracks/1/path = NodePath("CollisionShape3D:shape:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(10.917, 14.985, 0.132), Vector3(3.63873, 4.99524, 0.0436401)]
@@ -303,7 +305,7 @@ tracks/2/path = NodePath("card:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.15),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0.1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0.3), Vector3(0, 0, 0)]
@@ -426,11 +428,11 @@ surface_material_override/2 = SubResource("StandardMaterial3D_jye3l")
 [node name="Empty" type="Node3D" parent="card"]
 
 [node name="PowerToughnessSprite" type="Sprite3D" parent="card"]
-transform = Transform3D(0.347257, 0, 0, 0, 0.347257, 0, 0, 0, 1.46818, 0.234158, -1.99794, 0.0197141)
+transform = Transform3D(0.347257, 0, 0, 0, 0.347257, 0, 0, 0, 1.46818, 0.234, -1.998, 0.02)
 texture = SubResource("ViewportTexture_po48q")
 
 [node name="DescriptionSprite" type="Sprite3D" parent="card"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00397968, -1.11951, 0.0777267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004, -1.12, 0.02)
 sorting_use_aabb_center = false
 material_override = SubResource("StandardMaterial3D_wunfl")
 cast_shadow = 0
@@ -441,7 +443,7 @@ alpha_scissor_threshold = 0.1
 texture = SubResource("ViewportTexture_nfmpx")
 
 [node name="TitleSprite" type="Sprite3D" parent="card"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32616, 1.95491, 0.0507832)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326, 1.955, 0.02)
 texture = SubResource("ViewportTexture_k3x4d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

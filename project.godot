@@ -31,7 +31,7 @@ window/size/viewport_height=1080
 window/size/mode=3
 window/size/initial_screen=1
 window/size/borderless=true
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [rendering]
 

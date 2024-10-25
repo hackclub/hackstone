@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=14 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
-[ext_resource type="Script" path="res://scripts/Battlefield.gd" id="2_rndq6"]
+[ext_resource type="Script" path="res://scripts/BattlefieldController.gd" id="2_rndq6"]
 [ext_resource type="Script" path="res://scripts/CardIndex.gd" id="4_4jspk"]
 [ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="5_1rng6"]
 [ext_resource type="Script" path="res://scripts/GameLogic.gd" id="6_qmtoo"]
+[ext_resource type="Script" path="res://scripts/DeckController.gd" id="7_3imuv"]
 [ext_resource type="Script" path="res://scripts/HandController.gd" id="7_mqjt8"]
+[ext_resource type="Script" path="res://scripts/GraveyardController.gd" id="8_4bn74"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_vmqks"]
 device = -1
@@ -111,9 +113,13 @@ script = ExtResource("6_qmtoo")
 my_avatar = NodePath("../MyAvatar")
 my_battlefield = NodePath("../MyBattlefield")
 my_hand = NodePath("../MyHand")
+my_deck = NodePath("../MyDeck")
+my_graveyard = NodePath("../MyGraveyard")
 opponent_avatar = NodePath("../OpponentAvatar")
 opponent_battlefield = NodePath("../OpponentBattlefield")
 opponent_hand = NodePath("../OpponentHand")
+opponent_deck = NodePath("../OpponentDeck")
+opponent_graveyard = NodePath("../OpponentGraveyard")
 panel_done = NodePath("../DonePanel")
 button_done = NodePath("../DonePanel/DoneButton")
 panel_notification = NodePath("../NotificationPanel")
@@ -178,6 +184,22 @@ script = ExtResource("7_mqjt8")
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 4.5, 0)
 script = ExtResource("7_mqjt8")
 hidden_hand = true
+
+[node name="MyDeck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, -5.5, 0)
+script = ExtResource("7_3imuv")
+
+[node name="OpponentDeck" type="Node3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.75, 5.5, 0)
+script = ExtResource("7_3imuv")
+
+[node name="MyGraveyard" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -5.5, 0)
+script = ExtResource("8_4bn74")
+
+[node name="OpponentGraveyard" type="Node3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 5.5, 0)
+script = ExtResource("8_4bn74")
 
 [connection signal="pressed" from="CanvasLayer/AddCardButton" to="MyBattlefield" method="_on_add_card_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/RemoveCardButton" to="MyBattlefield" method="_on_remove_card_button_pressed"]
