@@ -1,4 +1,4 @@
-> [!WARNING] 
+> [!WARNING]
 > **Note that Hackstone is currently in the early stages of development.  Instructions found here may be lacking/inadequate/broken!**
 
 # About
@@ -14,7 +14,7 @@ In this game, every card has a distinct personality and powers, brought to life 
 2.  Install Blender.  Download it [here](https://blender.org/download).
 3.	Clone this repository:
 ```
-git clone https://github.com/hackclub/hackstone
+git clone git@github.com:hackclub/hackstone.git
 cd hackstone
 ```
 4.	Open the project in Godot.
