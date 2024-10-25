@@ -1,4 +1,5 @@
-extends Node
+class_name CardController
+extends Node3D
 
 var animating = false
 var tapped = false
@@ -13,9 +14,11 @@ var queue = []
 @export var toughness = 1
 @export var label_power : RichTextLabel
 @export var label_toughness : RichTextLabel
+var original_basis : Basis
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	original_basis = self.transform.basis
 	anim_player = $AnimationPlayer
 	anim_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	var box = $CollisionShape3D
@@ -89,6 +92,3 @@ func on_hover_end():
 func _on_animation_finished(anim_name):
 	print("Animation finished: " + anim_name + " on anim_player: " + str(anim_player))
 	animating = false
-	
-
-		

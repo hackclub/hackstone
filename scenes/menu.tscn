@@ -84,6 +84,5 @@ environment = SubResource("Environment_gk5e2")
 
 [node name="flag" parent="SubViewport" instance=ExtResource("2_kkoix")]
 transform = Transform3D(0.0107671, 0, -0.0225626, 0, 0.025, 0, 0.0225626, 0, 0.0107671, 0, 0, 0)
-metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="Panel/PlayButton" to="." method="goto_main"]

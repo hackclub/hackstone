@@ -10,7 +10,7 @@ albedo_texture = ExtResource("2_6jg6s")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvcvh"]
 albedo_texture = ExtResource("3_ep65n")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0ko1a"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xdl8f"]
 viewport_path = NodePath("AttackAndDefenseViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_247tb"]
@@ -29,7 +29,7 @@ viewport_path = NodePath("DescriptionViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_4gh7w"]
 viewport_path = NodePath("TitleViewport")
 
-[node name="RigidBody3D" instance=ExtResource("1_erpla")]
+[node name="Card" instance=ExtResource("1_erpla")]
 power = 5
 toughness = 5
 
@@ -37,8 +37,8 @@ toughness = 5
 surface_material_override/0 = SubResource("StandardMaterial3D_qwiav")
 surface_material_override/2 = SubResource("StandardMaterial3D_tvcvh")
 
-[node name="Sprite3D2" parent="card" index="2"]
-texture = SubResource("ViewportTexture_0ko1a")
+[node name="PowerToughnessSprite" parent="card" index="2"]
+texture = SubResource("ViewportTexture_xdl8f")
 
 [node name="DescriptionSprite" parent="card" index="3"]
 material_override = SubResource("StandardMaterial3D_g4q7m")
@@ -46,6 +46,9 @@ texture = SubResource("ViewportTexture_p1n16")
 
 [node name="TitleSprite" parent="card" index="4"]
 texture = SubResource("ViewportTexture_4gh7w")
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00283813, -0.00924338, 0.00246477)
 
 [node name="RichTextLabel" parent="TitleViewport" index="1"]
 text = "[b]A stupidly large dragon[/b]"

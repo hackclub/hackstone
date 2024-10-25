@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://3fwojj544i31"]
+[gd_scene load_steps=19 format=3 uid="uid://3fwojj544i31"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_821a5"]
 [ext_resource type="Texture2D" uid="uid://wut6cbf0pwgv" path="res://cards/party_parrot/output-0.png" id="2_y01yf"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://c1fw5rjnqrcoi" path="res://cards/party_parrot/output-7.png" id="9_ab2f1"]
 [ext_resource type="Texture2D" uid="uid://vjkqj0w46lmp" path="res://cards/party_parrot/output-8.png" id="10_ihygr"]
 [ext_resource type="Texture2D" uid="uid://dw4mtbl45x4wn" path="res://cards/party_parrot/output-9.png" id="11_bkbjj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4v1ja"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_1v6af"]
 viewport_path = NodePath("AttackAndDefenseViewport")
@@ -54,10 +56,10 @@ frame_8/duration = 1.0
 frame_9/texture = ExtResource("11_bkbjj")
 frame_9/duration = 1.0
 
-[node name="RigidBody3D" instance=ExtResource("1_821a5")]
+[node name="Card" instance=ExtResource("1_821a5")]
 
 [node name="counterspell_card" parent="card" index="0"]
-surface_material_override/2 = null
+surface_material_override/0 = SubResource("StandardMaterial3D_4v1ja")
 
 [node name="PowerToughnessSprite" parent="card" index="2"]
 texture = SubResource("ViewportTexture_1v6af")

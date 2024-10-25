@@ -141,7 +141,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xve3p")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3wxx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jye3l"]
 albedo_texture = ExtResource("5_2i75m")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_po48q"]
@@ -408,7 +408,7 @@ _data = {
 "untap": SubResource("Animation_8o8kj")
 }
 
-[node name="RigidBody3D" type="RigidBody3D" node_paths=PackedStringArray("label_power", "label_toughness")]
+[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_power", "label_toughness")]
 gravity_scale = 0.0
 script = ExtResource("1_pfeis")
 label_power = NodePath("AttackAndDefenseViewport/PowerLabel")
@@ -421,7 +421,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_npock")
 skeleton = NodePath("")
-surface_material_override/2 = SubResource("StandardMaterial3D_b3wxx")
+surface_material_override/2 = SubResource("StandardMaterial3D_jye3l")
 
 [node name="Empty" type="Node3D" parent="card"]
 
@@ -500,7 +500,7 @@ patch_margin_right = 29
 patch_margin_bottom = 34
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TitleViewport"]
-custom_minimum_size = Vector2(277.31, 102.74)
+custom_minimum_size = Vector2(272.87, 102.74)
 offset_left = 17.7
 offset_top = 15.69
 offset_right = 295.01

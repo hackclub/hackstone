@@ -10,7 +10,7 @@ albedo_texture = ExtResource("2_0qgp0")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmo7o"]
 albedo_texture = ExtResource("3_1h5bh")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_encxd"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_m26qu"]
 viewport_path = NodePath("AttackAndDefenseViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tiggf"]
@@ -29,7 +29,7 @@ viewport_path = NodePath("DescriptionViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_jyqx5"]
 viewport_path = NodePath("TitleViewport")
 
-[node name="RigidBody3D" instance=ExtResource("1_3dvit")]
+[node name="Card" instance=ExtResource("1_3dvit")]
 power = 1
 toughness = 2
 
@@ -37,8 +37,8 @@ toughness = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_k142s")
 surface_material_override/2 = SubResource("StandardMaterial3D_jmo7o")
 
-[node name="Sprite3D2" parent="card" index="2"]
-texture = SubResource("ViewportTexture_encxd")
+[node name="PowerToughnessSprite" parent="card" index="2"]
+texture = SubResource("ViewportTexture_m26qu")
 
 [node name="DescriptionSprite" parent="card" index="3"]
 material_override = SubResource("StandardMaterial3D_f3iix")
