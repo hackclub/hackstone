@@ -25,8 +25,6 @@ enum GameState {
 @export var richtext_notification_message : NodePath
 @onready var timer_finished_cb = connect("on_done_pressed", Callable(self, "_on_done_pressed"))
 
-
-
 var state : GameState = GameState.MY_TURN
 
 func add_card(card_scene, battlefield):
@@ -71,16 +69,68 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		var evt = event as InputEventKey
+		if evt.keycode == KEY_SPACE:
+			await run_tests()
+
+func run_tests():
+	var groups = [my_hand, my_graveyard, my_deck, my_battlefield]
+	for i in 1000:
+		var group = groups[randi() % groups.size()]
+		if group != null:
+			var card = get_node(group).random_card()
+			if card != null:
+				print("clicking card")
+				card_clicked(card)			
+			await get_tree().create_timer(0.1).timeout
+	print("loop done!")
+
 func refresh_state():
 	display_notification("Your turn" if state == GameState.MY_TURN else "Opponent's turn")
 	configure_done_button("Done")
 
 func _on_done_pressed():
 	state = GameState.MY_TURN if state == GameState.OPPONENT_TURN else GameState.OPPONENT_TURN
+	on_turn_start()
 	refresh_state()
 
+func on_turn_start():
+	if state == GameState.OPPONENT_TURN:
+		draw_card(get_node(opponent_hand), get_node(opponent_deck))
+	else:
+		draw_card(get_node(my_hand), get_node(my_deck))
+
+func draw_card(hand, deck):	
+	var card = deck.take_card(0)	
+	if card == null:
+		print("NOTE - player tried to draw a card, failed to do so")
+	else:
+		hand.insert_card(card, hand.get_cards_len())
+		
 func configure_done_button(str):
 	get_node(button_done).text = str
 	
 func display_notification(str):
 	get_node(richtext_notification_message).text = "[center]%s[/center]" % str
+
+func test_clicking(card: CardController):
+	var parent = card.card_group_controller
+	if parent == get_node(my_hand):
+		parent.take(card)
+		get_node(my_battlefield).insert_card(card, 0)
+	elif parent == get_node(my_battlefield):
+		parent.take(card)
+		get_node(my_graveyard).insert_card(card, 0)
+	elif parent == get_node(my_deck):
+		draw_card(get_node(my_hand), get_node(my_deck))
+	elif parent == get_node(my_graveyard):
+		parent.take(card)
+		if randf_range(0, 1.0) < 0.9:
+			get_node(my_deck).insert_card(card, 0)
+		else:
+			get_node(my_battlefield).insert_card(card, 0)
+
+func card_clicked(card: CardController):
+	test_clicking(card)

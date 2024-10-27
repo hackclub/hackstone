@@ -83,6 +83,7 @@ light_energy = 0.5
 [node name="MyBattlefield" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 script = ExtResource("2_rndq6")
+controlled_by_me = true
 
 [node name="OpponentBattlefield" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -179,6 +180,7 @@ text = "DONE"
 [node name="MyHand" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
 script = ExtResource("7_mqjt8")
+controlled_by_me = true
 
 [node name="OpponentHand" type="Node3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 4.5, 0)
@@ -188,6 +190,7 @@ hidden_hand = true
 [node name="MyDeck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, -5.5, 0)
 script = ExtResource("7_3imuv")
+controlled_by_me = true
 
 [node name="OpponentDeck" type="Node3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.75, 5.5, 0)
@@ -196,6 +199,7 @@ script = ExtResource("7_3imuv")
 [node name="MyGraveyard" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -5.5, 0)
 script = ExtResource("8_4bn74")
+controlled_by_me = true
 
 [node name="OpponentGraveyard" type="Node3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 5.5, 0)

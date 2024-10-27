@@ -1,6 +1,7 @@
 extends Node3D
 
-@export var animation_speed = 5.0
+@export var animation_speed = 5
+@export var controlled_by_me = false
 var managed_cards : Array[Node3D] = []
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +21,9 @@ func _process(delta: float) -> void:
 	
 func get_cards() -> Array[Node3D]:
 	return managed_cards
+
+func take(card: CardController) -> Node3D:
+	return take_card(managed_cards.find(card))	
 	
 func take_card(index: int) -> Node3D:
 	if index < 0 or index >= len(managed_cards):
@@ -27,12 +31,21 @@ func take_card(index: int) -> Node3D:
 		return
 	var taken_card = managed_cards[index]
 	managed_cards.remove_at(index)
-	remove_child(taken_card)
+	var global_position = taken_card.global_position
+	remove_child(taken_card)	
+	get_tree().root.add_child(taken_card)
+	taken_card.global_position = global_position
+	taken_card.card_group_controller = null
 	return taken_card
 	
 func insert_card(card: Node3D, index: int) -> void:
+	var global_position = card.global_position
+	if card.get_parent() != null:
+		card.get_parent().remove_child(card)
 	managed_cards.insert(index, card)
 	add_child(card)
+	card.card_group_controller = self
+	card.position = self.to_local(global_position)
 	
 func get_desired_position(index: int) -> Vector3:
 	push_error("get_desired_position must be implemented")
@@ -64,3 +77,16 @@ func disappear_card(index: int):
 	
 func _on_remove_card_button_pressed():
 	await disappear_card(0)
+
+func is_controlled_by_me():
+	return controlled_by_me
+
+func random_card() -> CardController:
+	if managed_cards.size() == 0:
+		return null
+	return managed_cards[randi() % managed_cards.size()]
+
+# By default, do nothing when cards are clicked...
+func card_clicked(card: CardController):
+	var gamelogic = get_node("../GameLogic")
+	gamelogic.card_clicked(card)

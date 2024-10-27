@@ -22,3 +22,4 @@ func get_desired_rotation(index: int) -> Basis:
 	var degs = spread_degrees * index_ratio
 	var rot = Basis.IDENTITY.rotated(Vector3.FORWARD, degs - spread_degrees/2)
 	return rot
+	

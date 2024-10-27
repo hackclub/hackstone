@@ -15,6 +15,8 @@ var queue = []
 @export var label_power : RichTextLabel
 @export var label_toughness : RichTextLabel
 var original_basis : Basis
+var debug = false
+var card_group_controller = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,6 +33,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	process_queue()
+	if debug:
+		print("transform: " + str(self.global_position))
 	
 func process_queue():
 	if animating == true:
@@ -71,7 +75,9 @@ func do_next_test():
 
 
 func on_clicked() -> void:
-	do_next_test()
+	if card_group_controller != null:
+		card_group_controller.card_clicked(self)
+	#do_next_test()
 
 func do_tap() -> void:	
 	tapped = !tapped
