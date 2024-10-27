@@ -128,7 +128,7 @@ func test_clicking(card: CardController):
 	elif parent == get_node(my_graveyard):
 		parent.take(card)
 		if randf_range(0, 1.0) < 0.9:
-			get_node(my_deck).insert_card(card, get_node(my_deck).get_cards_len()-1, card.global_position)
+			get_node(my_deck).insert_card(card, get_node(my_deck).get_cards_len(), card.global_position)
 		else:
 			get_node(my_battlefield).insert_card(card, 0, card.global_position)
 
