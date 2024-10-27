@@ -6,7 +6,7 @@ func get_desired_position(index: int) -> Vector3:
 	var width_per_card = float(desired_width) / float(num_cards)
 	var absolute_x_offset = width_per_card * float(index)
 	var centered_x_offset = -desired_width/2 + absolute_x_offset + width_per_card/2
-	return Vector3(centered_x_offset, 0, 0)
+	return Vector3(centered_x_offset, 0, -0.05*index)
 
 func get_desired_rotation(index: int):
-	return Basis.IDENTITY
+	return Basis.IDENTITY.rotated(Vector3.UP, deg_to_rad(0.1 * float(index)))

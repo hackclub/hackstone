@@ -11,10 +11,14 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:	
 	for i in range(0, len(managed_cards)):
+		var desired_pos = get_desired_position(i)
 		managed_cards[i].transform.origin = \
-		managed_cards[i].transform.origin.lerp(get_desired_position(i), \
+		managed_cards[i].transform.origin.lerp(desired_pos, \
 		delta * animation_speed)		
-
+		
+		if managed_cards[i].transform.origin.distance_squared_to(desired_pos) < 0.01:
+			managed_cards[i].moving = false		
+		
 		var orig_basis : Basis = managed_cards[i].original_basis
 		var rotation : Basis = get_desired_rotation(i)
 		managed_cards[i].transform.basis = managed_cards[i].transform.basis.slerp(orig_basis * rotation, delta * animation_speed)
@@ -38,8 +42,8 @@ func take_card(index: int) -> Node3D:
 	taken_card.card_group_controller = null
 	return taken_card
 	
-func insert_card(card: Node3D, index: int) -> void:
-	var global_position = card.global_position
+func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
+	card.moving = true
 	if card.get_parent() != null:
 		card.get_parent().remove_child(card)
 	managed_cards.insert(index, card)

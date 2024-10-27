@@ -5,6 +5,7 @@ var animating = false
 var tapped = false
 var turned = false
 var hovered = false
+var moving = false
 var anim_player = null
 
 enum CardState {TAP = 0, UNTAP = 1, TURN_DOWN = 2, TURN_UP = 3}
@@ -39,12 +40,13 @@ func _process(delta: float) -> void:
 func process_queue():
 	if animating == true:
 		return
-		
+	
 	var operation = dequeue()
 	if operation != null:
 		animating = true
 		anim_player.play(operation)
 		await anim_player.animation_finished
+		animating = false
 	
 
 func dequeue():
@@ -101,4 +103,7 @@ func on_hover_end():
 
 func _on_animation_finished(anim_name):
 	#print("Animation finished: " + anim_name + " on anim_player: " + str(anim_player))
-	animating = false
+	if queue.is_empty():
+		animating = false
+	else:
+		process_queue()

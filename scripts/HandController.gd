@@ -2,8 +2,8 @@ extends "res://scripts/CardGroupController.gd"
 	
 @export var hidden_hand = false
 	
-func insert_card(card: Node3D, index: int) -> void:
-	super.insert_card(card, index)	
+func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
+	super.insert_card(card, index, global_position)	
 	if hidden_hand:
 		card.do_turn()
 
@@ -17,9 +17,13 @@ func get_desired_position(index: int) -> Vector3:
 
 func get_desired_rotation(index: int) -> Basis:
 	var num_cards = get_cards_len()
+	if num_cards <= 1:
+		return Basis.IDENTITY
 	var spread_degrees = deg_to_rad(90.0)
 	var index_ratio = float(index) / (float(num_cards)-1)
 	var degs = spread_degrees * index_ratio
 	var rot = Basis.IDENTITY.rotated(Vector3.FORWARD, degs - spread_degrees/2)
+	rot = rot.rotated(Vector3.UP, deg_to_rad(0.1 * float(index)))
+
 	return rot
 	

@@ -30,7 +30,7 @@ var state : GameState = GameState.MY_TURN
 func add_card(card_scene, battlefield):
 	var node3d_card = card_scene.instantiate() as Node3D
 	node3d_card.transform.origin = Vector3(0, -20, 50)
-	get_node(battlefield).insert_card(node3d_card, 0)
+	get_node(battlefield).insert_card(node3d_card, 0, node3d_card.transform.origin)
 	
 func deal_cards():
 	add_card(CardIndex.get_random_card(), my_battlefield)
@@ -81,7 +81,7 @@ func run_tests():
 		var group = groups[randi() % groups.size()]
 		if group != null:
 			var card = get_node(group).random_card()
-			if card != null:
+			if card != null and card.moving == false:
 				print("clicking card")
 				card_clicked(card)			
 			await get_tree().create_timer(0.1).timeout
@@ -107,7 +107,7 @@ func draw_card(hand, deck):
 	if card == null:
 		print("NOTE - player tried to draw a card, failed to do so")
 	else:
-		hand.insert_card(card, hand.get_cards_len())
+		hand.insert_card(card, hand.get_cards_len(), card.global_position)
 		
 func configure_done_button(str):
 	get_node(button_done).text = str
@@ -119,18 +119,18 @@ func test_clicking(card: CardController):
 	var parent = card.card_group_controller
 	if parent == get_node(my_hand):
 		parent.take(card)
-		get_node(my_battlefield).insert_card(card, 0)
+		get_node(my_battlefield).insert_card(card, 0, card.global_position)
 	elif parent == get_node(my_battlefield):
 		parent.take(card)
-		get_node(my_graveyard).insert_card(card, 0)
+		get_node(my_graveyard).insert_card(card, 0, card.global_position)
 	elif parent == get_node(my_deck):
 		draw_card(get_node(my_hand), get_node(my_deck))
 	elif parent == get_node(my_graveyard):
 		parent.take(card)
 		if randf_range(0, 1.0) < 0.9:
-			get_node(my_deck).insert_card(card, 0)
+			get_node(my_deck).insert_card(card, get_node(my_deck).get_cards_len()-1, card.global_position)
 		else:
-			get_node(my_battlefield).insert_card(card, 0)
+			get_node(my_battlefield).insert_card(card, 0, card.global_position)
 
 func card_clicked(card: CardController):
 	test_clicking(card)
