@@ -6,7 +6,7 @@ var current_hover = null
 var is_dragging = false
 var drag_start_position = Vector2.ZERO
 var click_threshold = 10  # Distance threshold to differentiate between click and drag
-
+var clicked_card = null
 
 func find_hovered_card(mouse_pos:Vector2):
 	var space_state = get_world_3d().get_direct_space_state()
@@ -49,14 +49,18 @@ func handle_mousebutton(event):
 	if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if card != null:
 			print("Clickdown on " + card.name)
+			clicked_card = card
 			is_dragging = false
 			drag_start_position = event.position
 	elif not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if is_dragging:
 			print("Drop detected!")
+			clicked_card.on_clicked()
 		else:
 			print("Click detected!")
+			clicked_card.on_clicked()
 	else:
+		clicked_card = null
 		hovering(find_hovered_card(get_viewport().get_mouse_position()))		
 
 # Called every frame. Detects a click and casts a ray from the camera.
