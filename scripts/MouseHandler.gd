@@ -7,6 +7,8 @@ var is_dragging = false
 var drag_start_position = Vector2.ZERO
 var click_threshold = 10  # Distance threshold to differentiate between click and drag
 var clicked_card = null
+var group_dragged_from = null
+@onready var game_logic = get_node("../GameLogic")
 
 func find_hovered_card(mouse_pos:Vector2):
 	var space_state = get_world_3d().get_direct_space_state()
@@ -28,9 +30,11 @@ func hovering(card):
 	if card == current_hover:
 		return
 	if current_hover != null:
+		print("stopping hover on " + current_hover.name)
 		current_hover.on_hover_end()
 	current_hover = card
 	if current_hover != null:
+		print("starting hover on " + current_hover.name)
 		current_hover.on_hover_begin()
 
 func handle_mousemotion(event):
@@ -42,23 +46,47 @@ func handle_mousemotion(event):
 	else:
 		hovering(find_hovered_card(get_viewport().get_mouse_position()))		
 
+func start_click(event, card: CardController):
+	print("Clickdown on " + card.name)
+	clicked_card = card
+	is_dragging = false
+	drag_start_position = event.position
+	group_dragged_from = card.card_group_controller
+	var gp = card.global_position
+	get_node(game_logic.dragger).insert_card(group_dragged_from.take(card), 0, gp)
+
+func on_dropped(event, card: CardController):
+	print("Drop detected!")
+	var gp = card.global_position
+	card.card_group_controller.take(card)
+	group_dragged_from.insert_card(card, 0, gp)
+	clear_mouse_state()
+
+func on_clicked(event, card: CardController):
+	print("Click detected!")
+	var gp = card.global_position
+	card.card_group_controller.take(card)
+	group_dragged_from.insert_card(card, 0, gp)
+	clicked_card.on_clicked()
+	clear_mouse_state()
+
+func clear_mouse_state():
+	is_dragging = false
+	clicked_card = null
+	drag_start_position = Vector2.ZERO
+	group_dragged_from = null
 
 func handle_mousebutton(event):
 	hovering(null)
 	var card = find_hovered_card(get_viewport().get_mouse_position())
 	if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if card != null:
-			print("Clickdown on " + card.name)
-			clicked_card = card
-			is_dragging = false
-			drag_start_position = event.position
+			start_click(event, card)
 	elif not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if is_dragging:
-			print("Drop detected!")
-			clicked_card.on_clicked()
+			on_dropped(event, clicked_card)
 		else:
-			print("Click detected!")
-			clicked_card.on_clicked()
+			on_clicked(event, clicked_card)
 	else:
 		clicked_card = null
 		hovering(find_hovered_card(get_viewport().get_mouse_position()))		

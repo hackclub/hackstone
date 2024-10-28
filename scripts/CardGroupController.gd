@@ -92,5 +92,4 @@ func random_card() -> CardController:
 
 # By default, do nothing when cards are clicked...
 func card_clicked(card: CardController):
-	var gamelogic = get_node("../GameLogic")
-	gamelogic.card_clicked(card)
+	get_node("../GameLogic").card_clicked(card)

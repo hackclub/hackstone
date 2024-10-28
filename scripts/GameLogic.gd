@@ -18,6 +18,8 @@ enum GameState {
 @export var opponent_deck : NodePath
 @export var opponent_graveyard : NodePath
 
+@export var dragger : NodePath
+
 @export var panel_done : NodePath
 @export var button_done : NodePath
 
@@ -26,6 +28,7 @@ enum GameState {
 @onready var timer_finished_cb = connect("on_done_pressed", Callable(self, "_on_done_pressed"))
 
 var state : GameState = GameState.MY_TURN
+var instance = null
 
 func add_card(card_scene, battlefield):
 	var node3d_card = card_scene.instantiate() as Node3D
@@ -62,6 +65,7 @@ func deal_cards():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	instance = self
 	deal_cards()
 	refresh_state()
 

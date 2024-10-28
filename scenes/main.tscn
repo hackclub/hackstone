@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=15 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
 [ext_resource type="Script" path="res://scripts/BattlefieldController.gd" id="2_rndq6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/DeckController.gd" id="7_3imuv"]
 [ext_resource type="Script" path="res://scripts/HandController.gd" id="7_mqjt8"]
 [ext_resource type="Script" path="res://scripts/GraveyardController.gd" id="8_4bn74"]
+[ext_resource type="Script" path="res://scripts/DragController.gd" id="9_slc2b"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_vmqks"]
 device = -1
@@ -121,6 +122,7 @@ opponent_battlefield = NodePath("../OpponentBattlefield")
 opponent_hand = NodePath("../OpponentHand")
 opponent_deck = NodePath("../OpponentDeck")
 opponent_graveyard = NodePath("../OpponentGraveyard")
+dragger = NodePath("../Dragger")
 panel_done = NodePath("../DonePanel")
 button_done = NodePath("../DonePanel/DoneButton")
 panel_notification = NodePath("../NotificationPanel")
@@ -204,6 +206,9 @@ controlled_by_me = true
 [node name="OpponentGraveyard" type="Node3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 5.5, 0)
 script = ExtResource("8_4bn74")
+
+[node name="Dragger" type="Node3D" parent="."]
+script = ExtResource("9_slc2b")
 
 [connection signal="pressed" from="CanvasLayer/AddCardButton" to="MyBattlefield" method="_on_add_card_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/RemoveCardButton" to="MyBattlefield" method="_on_remove_card_button_pressed"]
