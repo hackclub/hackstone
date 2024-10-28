@@ -209,6 +209,7 @@ script = ExtResource("8_4bn74")
 
 [node name="Dragger" type="Node3D" parent="."]
 script = ExtResource("9_slc2b")
+animation_speed = 50
 
 [connection signal="pressed" from="CanvasLayer/AddCardButton" to="MyBattlefield" method="_on_add_card_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/RemoveCardButton" to="MyBattlefield" method="_on_remove_card_button_pressed"]

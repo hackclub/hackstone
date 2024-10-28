@@ -37,12 +37,32 @@ func hovering(card):
 		print("starting hover on " + current_hover.name)
 		current_hover.on_hover_begin()
 
+func handle_dragmotion():
+	if clicked_card == null or clicked_card.card_group_controller == null:
+		print("Weird")
+	
+	var mouse_pos = get_viewport().get_mouse_position()
+
+	# Get the ray origin and direction in world space from the camera
+	var ray_origin = project_ray_origin(mouse_pos)
+	var ray_direction = project_ray_normal(mouse_pos)
+
+	# Define a plane at y=0 (e.g., ground plane), or define your plane
+	var plane = Plane(Vector3(0, 0, 1), 3)  # Plane facing up at y=0
+
+	# Calculate intersection of ray with the plane
+	var intersect_pos = plane.intersects_ray(ray_origin, ray_direction)
+	clicked_card.card_group_controller.position_override = intersect_pos
+
 func handle_mousemotion(event):
 	if event.button_mask & MOUSE_BUTTON_MASK_LEFT:
 		# Check if the mouse has moved enough to consider it a drag
 		if not is_dragging and drag_start_position.distance_to(event.position) > click_threshold:
-			is_dragging = true	
+			is_dragging = true				
 			print("transitioned to dragging")
+			handle_dragmotion()
+		elif is_dragging:
+			handle_dragmotion()
 	else:
 		hovering(find_hovered_card(get_viewport().get_mouse_position()))		
 
@@ -54,6 +74,7 @@ func start_click(event, card: CardController):
 	group_dragged_from = card.card_group_controller
 	var gp = card.global_position
 	get_node(game_logic.dragger).insert_card(group_dragged_from.take(card), 0, gp)
+	handle_dragmotion()
 
 func on_dropped(event, card: CardController):
 	print("Drop detected!")
