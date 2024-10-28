@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://u6lo5h4jbmwu"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_lvfba"]
-[ext_resource type="Texture2D" uid="uid://s8613qfo7hln" path="res://art/card_skin_template/card_counterspell_card_back_02.png" id="2_wywsh"]
+[ext_resource type="Texture2D" uid="uid://cpwpa546g7vf0" path="res://cards/orpheus_maximus/card_orpheus.png" id="2_70kl8"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rf0eu"]
-albedo_texture = ExtResource("2_wywsh")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csxmx"]
+albedo_texture = ExtResource("2_70kl8")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_frtko"]
 viewport_path = NodePath("AttackAndDefenseViewport")
@@ -26,10 +26,11 @@ viewport_path = NodePath("DescriptionViewport")
 viewport_path = NodePath("TitleViewport")
 
 [node name="Card" instance=ExtResource("1_lvfba")]
+card_name = "Orpheus Maximus"
 power = 5
 
 [node name="counterspell_card" parent="card" index="0"]
-surface_material_override/2 = SubResource("StandardMaterial3D_rf0eu")
+surface_material_override/0 = SubResource("StandardMaterial3D_csxmx")
 
 [node name="PowerToughnessSprite" parent="card" index="2"]
 texture = SubResource("ViewportTexture_frtko")

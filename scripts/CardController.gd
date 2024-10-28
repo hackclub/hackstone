@@ -11,8 +11,10 @@ var anim_player = null
 enum CardState {TAP = 0, UNTAP = 1, TURN_DOWN = 2, TURN_UP = 3}
 var test_state : CardState = 0
 var queue = []
+@export var card_name : String = ""
 @export var power = 0
 @export var toughness = 1
+@export var label_title : RichTextLabel
 @export var label_power : RichTextLabel
 @export var label_toughness : RichTextLabel
 var original_basis : Basis
@@ -21,6 +23,8 @@ var card_group_controller = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self.name = card_name
+	label_title.text = "[b]" + card_name + "[/b]"
 	original_basis = self.transform.basis
 	anim_player = $AnimationPlayer
 	anim_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
@@ -33,11 +37,11 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	process_queue()
+	_process_queue()
 	if debug:
 		print("transform: " + str(self.global_position))
 	
-func process_queue():
+func _process_queue():
 	if animating == true:
 		return
 	
@@ -106,4 +110,4 @@ func _on_animation_finished(anim_name):
 	if queue.is_empty():
 		animating = false
 	else:
-		process_queue()
+		_process_queue()

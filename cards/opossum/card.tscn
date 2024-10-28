@@ -1,14 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bg1nrtw7f0nth"]
+[gd_scene load_steps=9 format=3 uid="uid://bg1nrtw7f0nth"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_cceoh"]
 [ext_resource type="Texture2D" uid="uid://duya7j74gc7f" path="res://cards/opossum/card_opossum.png" id="2_u5egr"]
-[ext_resource type="Texture2D" uid="uid://s8613qfo7hln" path="res://art/card_skin_template/card_counterspell_card_back_02.png" id="3_mlfj3"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4eltk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5i6d"]
 albedo_texture = ExtResource("2_u5egr")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghigc"]
-albedo_texture = ExtResource("3_mlfj3")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_jb8mi"]
 viewport_path = NodePath("AttackAndDefenseViewport")
@@ -30,12 +26,12 @@ viewport_path = NodePath("DescriptionViewport")
 viewport_path = NodePath("TitleViewport")
 
 [node name="Card" instance=ExtResource("1_cceoh")]
+card_name = "Opossum"
 power = 1
 toughness = 2
 
 [node name="counterspell_card" parent="card" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_4eltk")
-surface_material_override/2 = SubResource("StandardMaterial3D_ghigc")
+surface_material_override/0 = SubResource("StandardMaterial3D_f5i6d")
 
 [node name="PowerToughnessSprite" parent="card" index="2"]
 texture = SubResource("ViewportTexture_jb8mi")

@@ -410,9 +410,10 @@ _data = {
 "untap": SubResource("Animation_8o8kj")
 }
 
-[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_power", "label_toughness")]
+[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness")]
 gravity_scale = 0.0
 script = ExtResource("1_pfeis")
+label_title = NodePath("TitleViewport/RichTextLabel")
 label_power = NodePath("AttackAndDefenseViewport/PowerLabel")
 label_toughness = NodePath("AttackAndDefenseViewport/ToughnessLabel")
 
@@ -513,26 +514,6 @@ theme_override_font_sizes/bold_font_size = 22
 bbcode_enabled = true
 text = "[b]Orpheus Maximus[/b]"
 scroll_active = false
-
-[node name="AttackViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(1024, 256)
-render_target_update_mode = 4
-
-[node name="RichTextLabel" type="RichTextLabel" parent="AttackViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/default_color = Color(2, 2, 2, 1)
-theme_override_font_sizes/normal_font_size = 35
-theme_override_font_sizes/bold_font_size = 35
-bbcode_enabled = true
-text = "[b][color=red]3[/color][/b]"
-fit_content = true
 
 [node name="AttackAndDefenseViewport" type="SubViewport" parent="."]
 transparent_bg = true

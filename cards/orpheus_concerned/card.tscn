@@ -1,14 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://be0nsg5tyb27f"]
+[gd_scene load_steps=9 format=3 uid="uid://be0nsg5tyb27f"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_3dvit"]
 [ext_resource type="Texture2D" uid="uid://b6gctcucx1lyg" path="res://cards/orpheus_concerned/orpheus_concerned.png" id="2_0qgp0"]
-[ext_resource type="Texture2D" uid="uid://s8613qfo7hln" path="res://art/card_skin_template/card_counterspell_card_back_02.png" id="3_1h5bh"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k142s"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8qu0"]
 albedo_texture = ExtResource("2_0qgp0")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmo7o"]
-albedo_texture = ExtResource("3_1h5bh")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_m26qu"]
 viewport_path = NodePath("AttackAndDefenseViewport")
@@ -30,12 +26,12 @@ viewport_path = NodePath("DescriptionViewport")
 viewport_path = NodePath("TitleViewport")
 
 [node name="Card" instance=ExtResource("1_3dvit")]
+card_name = "Concerned Orpheus"
 power = 1
 toughness = 2
 
 [node name="counterspell_card" parent="card" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_k142s")
-surface_material_override/2 = SubResource("StandardMaterial3D_jmo7o")
+surface_material_override/0 = SubResource("StandardMaterial3D_o8qu0")
 
 [node name="PowerToughnessSprite" parent="card" index="2"]
 texture = SubResource("ViewportTexture_m26qu")

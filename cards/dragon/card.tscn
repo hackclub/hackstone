@@ -1,14 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bd33jd7cgnam0"]
+[gd_scene load_steps=9 format=3 uid="uid://bd33jd7cgnam0"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_erpla"]
 [ext_resource type="Texture2D" uid="uid://d4dq3knlwss5f" path="res://cards/dragon/card_dragon.png" id="2_6jg6s"]
-[ext_resource type="Texture2D" uid="uid://s8613qfo7hln" path="res://art/card_skin_template/card_counterspell_card_back_02.png" id="3_ep65n"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwiav"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_duxc1"]
 albedo_texture = ExtResource("2_6jg6s")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvcvh"]
-albedo_texture = ExtResource("3_ep65n")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xdl8f"]
 viewport_path = NodePath("AttackAndDefenseViewport")
@@ -30,12 +26,12 @@ viewport_path = NodePath("DescriptionViewport")
 viewport_path = NodePath("TitleViewport")
 
 [node name="Card" instance=ExtResource("1_erpla")]
+card_name = "A stupidly large dragon"
 power = 5
 toughness = 5
 
 [node name="counterspell_card" parent="card" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_qwiav")
-surface_material_override/2 = SubResource("StandardMaterial3D_tvcvh")
+surface_material_override/0 = SubResource("StandardMaterial3D_duxc1")
 
 [node name="PowerToughnessSprite" parent="card" index="2"]
 texture = SubResource("ViewportTexture_xdl8f")

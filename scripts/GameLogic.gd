@@ -84,7 +84,7 @@ func run_tests():
 			if card != null and card.moving == false:
 				print("clicking card")
 				card_clicked(card)			
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.5).timeout
 	print("loop done!")
 
 func refresh_state():
