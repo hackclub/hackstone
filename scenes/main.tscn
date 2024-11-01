@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=17 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
 [ext_resource type="Script" path="res://scripts/BattlefieldController.gd" id="2_rndq6"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/HandController.gd" id="7_mqjt8"]
 [ext_resource type="Script" path="res://scripts/GraveyardController.gd" id="8_4bn74"]
 [ext_resource type="Script" path="res://scripts/DragController.gd" id="9_slc2b"]
+[ext_resource type="Script" path="res://scripts/DropArea.gd" id="10_w3wlf"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_vmqks"]
 device = -1
@@ -29,6 +30,9 @@ events = [SubResource("InputEventKey_7555j")]
 [sub_resource type="Environment" id="Environment_fi0gu"]
 background_mode = 1
 background_color = Color(0.705887, 0.705887, 0.705887, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6w8eg"]
+size = Vector2(1914, 219)
 
 [node name="root" type="Node3D"]
 
@@ -192,7 +196,6 @@ hidden_hand = true
 [node name="MyDeck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, -5.5, 0)
 script = ExtResource("7_3imuv")
-controlled_by_me = true
 
 [node name="OpponentDeck" type="Node3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.75, 5.5, 0)
@@ -201,7 +204,6 @@ script = ExtResource("7_3imuv")
 [node name="MyGraveyard" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -5.5, 0)
 script = ExtResource("8_4bn74")
-controlled_by_me = true
 
 [node name="OpponentGraveyard" type="Node3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 5.5, 0)
@@ -210,6 +212,16 @@ script = ExtResource("8_4bn74")
 [node name="Dragger" type="Node3D" parent="."]
 script = ExtResource("9_slc2b")
 animation_speed = 50
+
+[node name="Dropzones" type="CanvasLayer" parent="."]
+
+[node name="BattlefieldDropzone" type="Area2D" parent="Dropzones"]
+position = Vector2(0, 431)
+script = ExtResource("10_w3wlf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dropzones/BattlefieldDropzone"]
+position = Vector2(960, 217)
+shape = SubResource("RectangleShape2D_6w8eg")
 
 [connection signal="pressed" from="CanvasLayer/AddCardButton" to="MyBattlefield" method="_on_add_card_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/RemoveCardButton" to="MyBattlefield" method="_on_remove_card_button_pressed"]

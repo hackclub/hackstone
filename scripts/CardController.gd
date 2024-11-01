@@ -8,6 +8,7 @@ var hovered = false
 var moving = false
 var anim_player = null
 
+enum CardType {MINION, HACK}
 enum CardState {TAP = 0, UNTAP = 1, TURN_DOWN = 2, TURN_UP = 3}
 var test_state : CardState = 0
 var queue = []
@@ -17,6 +18,7 @@ var queue = []
 @export var label_title : RichTextLabel
 @export var label_power : RichTextLabel
 @export var label_toughness : RichTextLabel
+@export var type : CardType
 var original_basis : Basis
 var debug = false
 var card_group_controller = null
@@ -111,3 +113,9 @@ func _on_animation_finished(anim_name):
 		animating = false
 	else:
 		_process_queue()
+
+func is_controlled_by_me():
+	if card_group_controller == null:
+		print("weird")
+		return false
+	return card_group_controller.is_controlled_by_me()		

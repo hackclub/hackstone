@@ -3,6 +3,7 @@ extends Node3D
 @export var animation_speed = 5
 @export var controlled_by_me = false
 var managed_cards : Array[Node3D] = []
+var current_drag_point = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -93,3 +94,6 @@ func random_card() -> CardController:
 # By default, do nothing when cards are clicked...
 func card_clicked(card: CardController):
 	get_node("../GameLogic").card_clicked(card)
+
+func set_drag_point(drag_point):
+	current_drag_point = drag_point

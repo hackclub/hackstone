@@ -17,7 +17,7 @@ run/max_fps=120
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [autoload]
 

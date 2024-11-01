@@ -58,6 +58,7 @@ frame_9/duration = 1.0
 
 [node name="Card" instance=ExtResource("1_821a5")]
 card_name = "Party Parrot"
+type = 1
 
 [node name="counterspell_card" parent="card" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_kom82")
