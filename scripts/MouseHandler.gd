@@ -207,7 +207,8 @@ func start_target_click(event, card):
 	print("Should start targetting")
 
 func on_target_dropped(event, card):
-	print("Target completed")
+	var hovered_card = find_hovered_card(get_viewport().get_mouse_position())
+	print("Target completed - target: " + hovered_card.name)
 	clear_mouse_state()
 	
 func on_target_clicked(event, card):

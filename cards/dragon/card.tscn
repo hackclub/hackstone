@@ -1,6 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd33jd7cgnam0"]
+[gd_scene load_steps=9 format=3 uid="uid://bd33jd7cgnam0"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_erpla"]
+[ext_resource type="Texture2D" uid="uid://d4dq3knlwss5f" path="res://cards/dragon/card_dragon.png" id="2_6jg6s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sn4no"]
+albedo_texture = ExtResource("2_6jg6s")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xdl8f"]
 viewport_path = NodePath("AttackAndDefenseViewport")
@@ -27,7 +31,7 @@ power = 5
 toughness = 5
 
 [node name="counterspell_card" parent="card" index="0"]
-surface_material_override/2 = null
+surface_material_override/0 = SubResource("StandardMaterial3D_sn4no")
 
 [node name="PowerToughnessSprite" parent="card" index="2"]
 texture = SubResource("ViewportTexture_xdl8f")
