@@ -12,7 +12,7 @@ var clicked_card = null
 var group_dragged_from = null
 var old_drop_point = null
 @onready var game_logic = get_node("../GameLogic")
-@onready var battlefield_dropzone = get_node("../Dropzones/BattlefieldDropzone")
+@onready var battlefield_dropzone = get_node("../Main Canvas/Dropzones/BattlefieldDropzone")
 const CardType = preload("res://scripts/CardController.gd").CardType
 
 func get_drop_point(mouse_position:Vector2):
@@ -100,11 +100,9 @@ func determine_dragtype(card : CardController):
 		from_group = card.card_group_controller
 				
 	if from_group == get_node(game_logic.my_battlefield):
-		print("battlefield target drag")
 		return DragType.TARGET
 	
 	if from_group == get_node(game_logic.my_hand):
-		print("was from hand")
 		var type = card.type
 		if clicked_card != null:
 			type = clicked_card.type
@@ -120,13 +118,10 @@ func handle_mousemotion(event):
 	if event.button_mask & MOUSE_BUTTON_MASK_LEFT:
 		match determine_dragtype(clicked_card):
 			DragType.TARGET:
-				print("target mousemotion")
 				handle_targeting_mousemotion()
 			DragType.PLACEMENT:
-				print("placement mousemotion")
 				handle_placement_mousemotion()
 			DragType.NONE:
-				print("No drag type")
 				pass
 	else:
 		hovering(find_hovered_card(get_viewport().get_mouse_position()))		

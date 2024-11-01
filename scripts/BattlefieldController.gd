@@ -9,7 +9,6 @@ func get_desired_position(index: int) -> Vector3:
 	if current_drag_point != null:
 		num_cards += 1	
 		current_drag_index = card_index_of_point(current_drag_point)
-		print("drag index: " + str(current_drag_index))
 		if current_drag_index <= index:
 			index += 1
 
