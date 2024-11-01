@@ -25,7 +25,7 @@ viewport_path = NodePath("DescriptionViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_ot2bv"]
 viewport_path = NodePath("TitleViewport")
 
-[node name="Card" instance=ExtResource("1_tesb7")]
+[node name="Card2" instance=ExtResource("1_tesb7")]
 card_name = "An Orphling"
 
 [node name="counterspell_card" parent="card" index="0"]

@@ -93,7 +93,11 @@ func random_card() -> CardController:
 
 # By default, do nothing when cards are clicked...
 func card_clicked(card: CardController):
-	get_node("../GameLogic").card_clicked(card)
+	get_tree().current_scene.get_node("GameLogic").card_clicked(card)
+
+func index_of_card(card: CardController):
+	return managed_cards.find(card)
+		
 
 func set_drag_point(drag_point):
 	current_drag_point = drag_point

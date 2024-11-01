@@ -103,9 +103,17 @@ func _on_done_pressed():
 func on_turn_start():
 	if state == GameState.OPPONENT_TURN:
 		draw_card(get_node(opponent_hand), get_node(opponent_deck))
+		reset_all_cards(get_node(opponent_battlefield))
 	else:
 		draw_card(get_node(my_hand), get_node(my_deck))
+		reset_all_cards(get_node(my_battlefield))
 
+func reset_all_cards(card_group_controller):
+	for card in card_group_controller.get_cards():
+		if card.tapped:
+			card.do_tap()
+		card.heal()
+			
 func draw_card(hand, deck):	
 	var card = deck.take_card(0)	
 	if card == null:

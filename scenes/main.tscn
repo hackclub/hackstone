@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=18 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
+[ext_resource type="PackedScene" uid="uid://dhw27v0raxlxp" path="res://components/arrow.tscn" id="2_5cnle"]
 [ext_resource type="Script" path="res://scripts/BattlefieldController.gd" id="2_rndq6"]
 [ext_resource type="Script" path="res://scripts/CardIndex.gd" id="4_4jspk"]
 [ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="5_1rng6"]
@@ -39,13 +40,16 @@ size = Vector2(1914, 219)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fi0gu")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("arrow_controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 size = 15.0
 near = 0.01
 script = ExtResource("1_fysce")
+arrow_controller = NodePath("../Main Canvas/Arrow")
 
 [node name="Main Canvas" type="CanvasLayer" parent="."]
+
+[node name="Arrow" parent="Main Canvas" instance=ExtResource("2_5cnle")]
 
 [node name="AddCardButton" type="Button" parent="Main Canvas"]
 visible = false

@@ -22,6 +22,7 @@ var queue = []
 var original_basis : Basis
 var debug = false
 var card_group_controller = null
+var current_toughness
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,6 +36,7 @@ func _ready() -> void:
 	box.shape = (box.shape as BoxShape3D).duplicate()
 	label_power.text = str(power)
 	label_toughness.text = str(toughness)
+	current_toughness = toughness
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -81,7 +83,6 @@ func do_next_test():
 	if test_state >= 4:
 		test_state = 0
 
-
 func on_clicked() -> void:
 	if card_group_controller != null:
 		card_group_controller.card_clicked(self)
@@ -113,6 +114,18 @@ func _on_animation_finished(anim_name):
 		animating = false
 	else:
 		_process_queue()
+
+func damage(amount):
+	current_toughness -= amount
+	label_toughness.text = str(toughness)
+	
+func is_dead():
+	return current_toughness <= 0
+	
+func heal():
+	current_toughness = toughness
+	label_toughness.text = str(toughness)
+
 
 func is_controlled_by_me():
 	if card_group_controller == null:

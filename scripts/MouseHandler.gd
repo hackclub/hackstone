@@ -14,6 +14,7 @@ var old_drop_point = null
 @onready var game_logic = get_node("../GameLogic")
 @onready var battlefield_dropzone = get_node("../Main Canvas/Dropzones/BattlefieldDropzone")
 const CardType = preload("res://scripts/CardController.gd").CardType
+@export var arrow_controller : Control
 
 func get_drop_point(mouse_position:Vector2):
 	if battlefield_dropzone.hovered:
@@ -93,11 +94,25 @@ func handle_targeting_mousemotion():
 	if not is_dragging and drag_start_position.distance_to(battlefield_dropzone.get_global_mouse_position()) > click_threshold:
 		print("transitioned to dragging")
 		is_dragging = true
+		arrow_controller.visible = true
+	if is_dragging:
+		var start = unproject_position(clicked_card.transform.origin)
+		var index_of_card_in_group = clicked_card.card_group_controller.index_of_card(clicked_card)
+		arrow_controller.start_point = drag_start_position
+		arrow_controller.end_point = battlefield_dropzone.get_global_mouse_position()
+		var target = find_hovered_card(battlefield_dropzone.get_global_mouse_position())
+		if target != null && target != clicked_card:
+			print("should check droppability")
 		
 func determine_dragtype(card : CardController):
 	var from_group = group_dragged_from
 	if from_group == null and card != null:
 		from_group = card.card_group_controller
+
+	# Tapped cards should not be draggable	
+	if clicked_card != null:
+		if clicked_card.tapped:
+			return DragType.NONE
 				
 	if from_group == get_node(game_logic.my_battlefield):
 		return DragType.TARGET
@@ -185,6 +200,7 @@ func clear_mouse_state():
 		old_drop_point.unhint()
 		old_drop_point = null
 	targeting = false
+	arrow_controller.visible = false
 
 func handle_start_placement(event, card):
 	if event.pressed:
@@ -198,12 +214,41 @@ func handle_start_placement(event, card):
 func start_target_click(event, card):
 	clicked_card = card
 	group_dragged_from = card.card_group_controller
+	drag_start_position = event.position
 	targeting = true
 	print("Should start targetting")
 
+func play_hack(played_card, target):
+	print("Target completed - target: " + target.name)
+	played_card.card_group_controller.take(played_card)
+	# todo: this only works for protagonist, not enemy
+	get_node(game_logic.my_graveyard).insert_card(played_card, 0, played_card.global_position)
+
+func play_attack(played_card, target):
+	print(played_card.name + " attacking " + target.name)
+
+	target.damage(played_card.power)
+	if target.is_dead():
+		target.card_group_controller.take(target)
+		get_node(game_logic.opponent_graveyard).insert_card(target, 0, target.global_position)
+
+	played_card.damage(target.power)
+	if played_card.is_dead():
+		played_card.card_group_controller.take(played_card)
+		get_node(game_logic.my_graveyard).insert_card(played_card, 0, played_card.global_position)
+	else:
+		played_card.do_tap()
+
+		
 func on_target_dropped(event, card):
 	var hovered_card = find_hovered_card(get_viewport().get_mouse_position())
-	print("Target completed - target: " + hovered_card.name)
+	
+	if clicked_card.card_group_controller == get_node(game_logic.my_hand):
+		play_hack(clicked_card, hovered_card)
+	
+	if clicked_card.card_group_controller == get_node(game_logic.my_battlefield):
+		play_attack(clicked_card, hovered_card)
+		
 	clear_mouse_state()
 	
 func on_target_clicked(event, card):

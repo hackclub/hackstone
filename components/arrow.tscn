@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/Arrow.gd" id="1_jssce"]
 
 [node name="Arrow" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -10,3 +11,5 @@ offset_bottom = 40.0
 script = ExtResource("1_jssce")
 start_point = Vector2(50, 50)
 end_point = Vector2(200, 200)
+line_color = Color(0.309869, 0.284007, 0.278631, 1)
+line_width = 5.0

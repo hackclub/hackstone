@@ -25,7 +25,7 @@ viewport_path = NodePath("DescriptionViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_jyqx5"]
 viewport_path = NodePath("TitleViewport")
 
-[node name="Card" instance=ExtResource("1_3dvit")]
+[node name="Card2" instance=ExtResource("1_3dvit")]
 card_name = "Concerned Orpheus"
 power = 1
 toughness = 2
