@@ -80,6 +80,7 @@ metadata/_edit_lock_ = true
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334301, 1.00952, 1.33931)
+visible = false
 environment = SubResource("Environment_gk5e2")
 
 [node name="flag" parent="SubViewport" instance=ExtResource("2_kkoix")]

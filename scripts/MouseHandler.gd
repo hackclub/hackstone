@@ -235,7 +235,7 @@ func play_attack(played_card, target):
 	played_card.damage(target.power)
 	if played_card.is_dead():
 		played_card.card_group_controller.take(played_card)
-		get_node(game_logic.my_graveyard).insert_card(played_card, 0, played_card.global_position)
+		get_node(game_logic.my_graveyard).insert_card(played_card, 0, target.global_position)
 	else:
 		played_card.do_tap()
 
