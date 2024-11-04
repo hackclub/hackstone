@@ -43,8 +43,15 @@ func hovering(card):
 	# no transition if its the same
 	if card == current_hover:
 		return
-		
-	if card != null and not card.is_controlled_by_me():
+	
+	var valid_hover_cardgroups = [
+		get_node(game_logic.my_hand), 
+		get_node(game_logic.my_battlefield),
+		get_node(game_logic.my_graveyard),
+		get_node(game_logic.opponent_battlefield),
+		get_node(game_logic.opponent_graveyard),
+		]
+	if card != null and card.card_group_controller not in valid_hover_cardgroups:
 		return
 		
 	if current_hover != null:

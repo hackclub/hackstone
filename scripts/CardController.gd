@@ -118,7 +118,7 @@ func _on_animation_finished(anim_name):
 func damage(amount):
 	print(str(self.name) + " got damaged for " + str(amount))
 	current_toughness -= amount
-	label_toughness.text = str(toughness)
+	label_toughness.text = str(current_toughness)
 	
 func is_dead():
 	return current_toughness <= 0
