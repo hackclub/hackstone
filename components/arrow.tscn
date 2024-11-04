@@ -4,6 +4,7 @@
 
 [node name="Arrow" type="Control"]
 visible = false
+clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

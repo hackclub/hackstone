@@ -33,23 +33,23 @@ unicode = 114
 events = [SubResource("InputEventKey_7555j")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w8eg"]
-size = Vector2(1914, 219)
+size = Vector2(1941, 208)
 
 [node name="root" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fi0gu")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("arrow_controller")]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("game_logic", "battlefield_dropzone", "arrow_controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 size = 15.0
 near = 0.01
 script = ExtResource("1_fysce")
+game_logic = NodePath("../GameLogic")
+battlefield_dropzone = NodePath("../Dropzones/BattlefieldDropzone")
 arrow_controller = NodePath("../Main Canvas/Arrow")
 
 [node name="Main Canvas" type="CanvasLayer" parent="."]
-
-[node name="Arrow" parent="Main Canvas" instance=ExtResource("2_5cnle")]
 
 [node name="AddCardButton" type="Button" parent="Main Canvas"]
 visible = false
@@ -86,20 +86,6 @@ offset_right = 620.0
 offset_bottom = 122.0
 shortcut = SubResource("Shortcut_y0qay")
 text = "Remove card"
-
-[node name="OpponentAvatar" parent="Main Canvas" instance=ExtResource("5_1rng6")]
-offset_left = -102.5
-offset_right = 102.5
-
-[node name="MyAvatar" parent="Main Canvas" instance=ExtResource("5_1rng6")]
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -102.5
-offset_top = -98.0
-offset_right = 102.5
-offset_bottom = 0.0
-grow_vertical = 0
 
 [node name="NotificationPanel" type="Panel" parent="Main Canvas"]
 visible = false
@@ -152,14 +138,33 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 21
 text = "DONE"
 
-[node name="Dropzones" type="CanvasLayer" parent="Main Canvas"]
+[node name="Arrow" parent="Main Canvas" instance=ExtResource("2_5cnle")]
+offset_right = 1914.0
+offset_bottom = 1074.0
+mouse_filter = 2
 
-[node name="BattlefieldDropzone" type="Area2D" parent="Main Canvas/Dropzones"]
+[node name="OpponentAvatar" parent="." instance=ExtResource("5_1rng6")]
+offset_left = -102.5
+offset_right = 102.5
+
+[node name="MyAvatar" parent="." instance=ExtResource("5_1rng6")]
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -102.5
+offset_top = -98.0
+offset_right = 102.5
+offset_bottom = 0.0
+grow_vertical = 0
+
+[node name="Dropzones" type="CanvasLayer" parent="."]
+
+[node name="BattlefieldDropzone" type="Area2D" parent="Dropzones"]
 position = Vector2(0, 431)
 script = ExtResource("10_w3wlf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Main Canvas/Dropzones/BattlefieldDropzone"]
-position = Vector2(960, 217)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dropzones/BattlefieldDropzone"]
+position = Vector2(960.5, 215)
 shape = SubResource("RectangleShape2D_6w8eg")
 
 [node name="CardIndex" type="Node3D" parent="."]
@@ -167,12 +172,12 @@ script = ExtResource("4_4jspk")
 
 [node name="GameLogic" type="Node3D" parent="."]
 script = ExtResource("6_qmtoo")
-my_avatar = NodePath("../Main Canvas/MyAvatar")
+my_avatar = NodePath("../MyAvatar")
 my_battlefield = NodePath("../Card Groups/Mine/MyBattlefield")
 my_hand = NodePath("../Card Groups/Mine/MyHand")
 my_deck = NodePath("../Card Groups/Mine/MyDeck")
 my_graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
-opponent_avatar = NodePath("../Main Canvas/OpponentAvatar")
+opponent_avatar = NodePath("../OpponentAvatar")
 opponent_battlefield = NodePath("../Card Groups/Opponent/OpponentBattlefield")
 opponent_hand = NodePath("../Card Groups/Opponent/OpponentHand")
 opponent_deck = NodePath("../Card Groups/Opponent/OpponentDeck")

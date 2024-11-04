@@ -7,3 +7,4 @@ func _mouse_enter() -> void:
 	
 func _mouse_exit() -> void:
 	hovered = false
+	

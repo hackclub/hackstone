@@ -31,6 +31,10 @@ window/size/viewport_height=1080
 window/size/initial_screen=1
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+avatar=""
+
 [rendering]
 
 renderer/rendering_method="mobile"
