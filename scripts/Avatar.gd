@@ -20,6 +20,10 @@ func damage(amount: int) -> void:
 	print(str(self.name) + " got damaged for " + str(amount))
 	toughness -= amount
 	refresh()
+	
+	if toughness <= 0:
+		get_tree().change_scene_to_packed(load("res://scenes/gameover.tscn"))
+
 
 func refresh():
 	toughness_text.text = "[center]%d[/center]" % (toughness)

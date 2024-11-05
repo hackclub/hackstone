@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://0v5nwtgmtug1"]
+
+[ext_resource type="Script" path="res://scripts/gameover.gd" id="1_adks2"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_adks2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -441.0
+offset_top = -89.0
+offset_right = 467.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(447, 113)
+theme_override_font_sizes/normal_font_size = 142
+bbcode_enabled = true
+text = "[center]Game Over[/center]"
