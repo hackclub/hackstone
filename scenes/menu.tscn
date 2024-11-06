@@ -31,11 +31,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PlayButton" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 694.0
-offset_top = 675.0
-offset_right = 1274.0
-offset_bottom = 807.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -553.0
+offset_top = -595.0
+offset_right = 619.0
+offset_bottom = -279.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.626386, 0.626386)
+pivot_offset = Vector2(582, 146)
 theme_override_font_sizes/font_size = 90
 text = "PLAY"
 

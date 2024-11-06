@@ -218,7 +218,6 @@ func handle_left_click_placement(event, card):
 			
 func start_target_click(event, target):
 	if target.is_in_group("avatar"):
-		print("avatar")
 		clear_mouse_state()
 		return
 	clicked_card = target
@@ -227,12 +226,38 @@ func start_target_click(event, target):
 	drag_start_position = event.position
 	targeting = true
 
+func is_hackable(attacker, target):
+	if attacker.card_group_controller == target.card_group_controller:
+		return false
+		
+	if target.card_group_controller == get_node(game_logic.my_graveyard) or target.card_group_controller == get_node(game_logic.opponent_graveyard):
+		return false
+	
+	return true
+	
+func is_attackable(attacker, target):
+	if attacker.card_group_controller == target.card_group_controller:
+		return false
+		
+	if target.card_group_controller == get_node(game_logic.my_graveyard) or target.card_group_controller == get_node(game_logic.opponent_graveyard):
+		return false
+		
+	if target.card_group_controller == get_node(game_logic.my_hand) or target.card_group_controller == get_node(game_logic.opponent_hand):
+		return false
+	
+	return true
+
 func play_hack(played_card, target):
+	if not is_hackable(played_card, target):
+		return false
+
 	played_card.card_group_controller.take(played_card)
 	# todo: this only works for protagonist, not enemy
 	get_node(game_logic.my_graveyard).insert_card(played_card, 0, played_card.global_position)
 
 func play_attack(played_card, target):
+	if not is_attackable(played_card, target):
+		return false
 	target.damage(played_card.power)
 	if target is CardController and target.is_dead():
 		target.card_group_controller.take(target)

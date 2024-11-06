@@ -6,6 +6,7 @@ extends Panel
 @export var dropzone : Node
 var toughness : int = 20
 var power : int = 0
+var card_group_controller : Node = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,4 +28,4 @@ func damage(amount: int) -> void:
 
 func refresh():
 	toughness_text.text = "[center]%d[/center]" % (toughness)
-	
+		

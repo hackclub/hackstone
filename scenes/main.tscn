@@ -33,7 +33,7 @@ unicode = 114
 events = [SubResource("InputEventKey_7555j")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w8eg"]
-size = Vector2(1941, 208)
+size = Vector2(2554.5, 284)
 
 [node name="root" type="Node3D"]
 
@@ -46,7 +46,7 @@ size = 15.0
 near = 0.01
 script = ExtResource("1_fysce")
 game_logic = NodePath("../GameLogic")
-battlefield_dropzone = NodePath("../Dropzones/BattlefieldDropzone")
+battlefield_dropzone = NodePath("../Dropzones/Control/BattlefieldDropzone")
 arrow_controller = NodePath("../Main Canvas/Arrow")
 
 [node name="Main Canvas" type="CanvasLayer" parent="."]
@@ -159,12 +159,29 @@ grow_vertical = 0
 
 [node name="Dropzones" type="CanvasLayer" parent="."]
 
-[node name="BattlefieldDropzone" type="Area2D" parent="Dropzones"]
-position = Vector2(0, 431)
+[node name="Control" type="Control" parent="Dropzones"]
+layout_mode = 3
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -26.0
+offset_right = 4.0
+offset_bottom = 247.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1295, 196)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="BattlefieldDropzone" type="Area2D" parent="Dropzones/Control"]
+position = Vector2(972, 79)
 script = ExtResource("10_w3wlf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dropzones/BattlefieldDropzone"]
-position = Vector2(960.5, 215)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dropzones/Control/BattlefieldDropzone"]
+position = Vector2(307, 87)
 shape = SubResource("RectangleShape2D_6w8eg")
 
 [node name="CardIndex" type="Node3D" parent="."]
