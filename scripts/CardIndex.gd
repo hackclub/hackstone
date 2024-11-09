@@ -1,4 +1,5 @@
 extends Node3D
+const CardType = preload("res://scripts/CardController.gd").CardType
 
 var card_library : Array[PackedScene] = [
 	]
@@ -19,3 +20,12 @@ func get_random_card() -> PackedScene:
 	var ret = card_library[num]
 	return ret
 	
+func get_random_minion() -> PackedScene:
+	var card
+	while(true):
+		card = get_random_card()
+		if card.type == CardType.MINION:
+			break
+	return card
+			
+		

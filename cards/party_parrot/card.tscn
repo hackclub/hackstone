@@ -14,6 +14,9 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kom82"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_v8eu4"]
+viewport_path = NodePath("TitleViewport")
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_1v6af"]
 viewport_path = NodePath("AttackAndDefenseViewport")
 
@@ -29,9 +32,6 @@ albedo_texture = SubResource("ViewportTexture_25pfc")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hlc52"]
 viewport_path = NodePath("DescriptionViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_v8eu4"]
-viewport_path = NodePath("TitleViewport")
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_s67ib"]
 frames = 10
@@ -58,25 +58,26 @@ frame_9/duration = 1.0
 
 [node name="Card" instance=ExtResource("1_821a5")]
 card_name = "Party Parrot"
+subtype = "Emoji"
+power = -1
+toughness = -1
+casting_cost = 1
 type = 1
 
 [node name="counterspell_card" parent="card" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_kom82")
 
-[node name="PowerToughnessSprite" parent="card" index="2"]
+[node name="TitleSprite" parent="card" index="2"]
+texture = SubResource("ViewportTexture_v8eu4")
+
+[node name="PowerToughnessSprite" parent="card" index="3"]
 texture = SubResource("ViewportTexture_1v6af")
 
-[node name="DescriptionSprite" parent="card" index="3"]
+[node name="DescriptionSprite" parent="card" index="4"]
 material_override = SubResource("StandardMaterial3D_f2nly")
 texture = SubResource("ViewportTexture_hlc52")
-
-[node name="TitleSprite" parent="card" index="4"]
-texture = SubResource("ViewportTexture_v8eu4")
 
 [node name="Sprite3D" type="Sprite3D" parent="card" index="5"]
 transform = Transform3D(0.372275, 0, 0, 0, 0.446418, 0, 0, 0, 1, 0, 0.589364, 0.0225132)
 pixel_size = 0.05
 texture = SubResource("AnimatedTexture_s67ib")
-
-[node name="RichTextLabel" parent="TitleViewport" index="1"]
-text = "[b]Party Parrot[/b]"

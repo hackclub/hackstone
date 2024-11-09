@@ -14,7 +14,7 @@
 
 [sub_resource type="Environment" id="Environment_fi0gu"]
 background_mode = 1
-background_color = Color(0.705887, 0.705887, 0.705887, 1)
+background_color = Color(0.484884, 0.472692, 0.473723, 1)
 
 [sub_resource type="InputEventKey" id="InputEventKey_vmqks"]
 device = -1

@@ -1,5 +1,7 @@
 extends Node3D
 
+const CardType = preload("res://scripts/CardController.gd").CardType
+
 signal on_done_pressed
 enum GameState {
 	MY_TURN = 0,
@@ -32,6 +34,9 @@ var instance = null
 
 func add_card(card_scene, battlefield):
 	var node3d_card = card_scene.instantiate() as Node3D
+	if node3d_card.type == CardType.HACK:
+		node3d_card.queue_free()
+		return
 	node3d_card.transform.origin = Vector3(0, -20, 50)
 	get_node(battlefield).insert_card(node3d_card, 0, node3d_card.transform.origin)
 	

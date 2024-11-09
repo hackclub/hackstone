@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://dxdy4c55rwyag"]
+[gd_scene load_steps=37 format=4 uid="uid://dxdy4c55rwyag"]
 
 [ext_resource type="Script" path="res://scripts/CardController.gd" id="1_pfeis"]
 [ext_resource type="Texture2D" uid="uid://cpwpa546g7vf0" path="res://cards/orpheus_maximus/card_orpheus.png" id="2_wefk8"]
@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://2ml1s0jdha7w" path="res://art/card_skin_template/card_counterspell_card_back_effects.png" id="4_5wt4x"]
 [ext_resource type="Texture2D" uid="uid://rlupg0vs4ko8" path="res://art/card_skin_template/counterspell_card_counterspell_card_back_02.png" id="5_2i75m"]
 [ext_resource type="Texture2D" uid="uid://d2lnjqd528c5j" path="res://art/card_skin_template/dot.png" id="5_wf1j1"]
+[ext_resource type="Texture2D" uid="uid://bxcli71e622oa" path="res://art/card_skin_template/background_rect_4xdark.png" id="7_pm8y7"]
+[ext_resource type="Theme" uid="uid://cdb82eyjhsla4" path="res://themes/card.tres" id="8_lkgco"]
+[ext_resource type="Texture2D" uid="uid://r7y1dc6vfpa8" path="res://art/github/star-filled.png" id="10_hmqt2"]
+[ext_resource type="Texture2D" uid="uid://bhpqonfiembbk" path="res://art/hackclub/pow.png" id="11_5iwf3"]
+[ext_resource type="Texture2D" uid="uid://bphjgh2fp7hvk" path="res://art/hackclub/heart.png" id="12_7mteo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx6a1"]
 resource_name = "Card Image"
@@ -144,6 +149,9 @@ shadow_mesh = SubResource("ArrayMesh_xve3p")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jye3l"]
 albedo_texture = ExtResource("5_2i75m")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_k3x4d"]
+viewport_path = NodePath("TitleViewport")
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_po48q"]
 viewport_path = NodePath("AttackAndDefenseViewport")
 
@@ -159,9 +167,6 @@ albedo_texture = SubResource("ViewportTexture_ri7do")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nfmpx"]
 viewport_path = NodePath("DescriptionViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_k3x4d"]
-viewport_path = NodePath("TitleViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_huxpf"]
 size = Vector3(3.63873, 4.99524, 0.0436401)
@@ -410,30 +415,48 @@ _data = {
 "untap": SubResource("Animation_8o8kj")
 }
 
-[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btjd5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqnan"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2foru"]
+
+[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "power_container", "toughness_container")]
 gravity_scale = 0.0
 script = ExtResource("1_pfeis")
-label_title = NodePath("TitleViewport/RichTextLabel")
-label_power = NodePath("AttackAndDefenseViewport/PowerLabel")
-label_toughness = NodePath("AttackAndDefenseViewport/ToughnessLabel")
+description = "[color=41e18e][b]Replace me[/b][/color]: Does something generic.  Please replace this with your own text."
+label_title = NodePath("AttackAndDefenseViewport/Panel/TitleBackground/TitleLabel")
+label_power = NodePath("AttackAndDefenseViewport/Panel/TitleBackground/Target/Power")
+label_toughness = NodePath("AttackAndDefenseViewport/Panel/TitleBackground/Heart/Power2")
+label_casting_cost = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/Star/CastingCostLabel")
+label_flavortext = NodePath("DescriptionViewport/CardInfo/MarginContainer2/Control/Flavortext")
+label_subtype = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/Subtype")
+label_description = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/VBoxContainer/Description")
+label_type = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/CardType")
+power_container = NodePath("AttackAndDefenseViewport/Panel/TitleBackground/Target")
+toughness_container = NodePath("AttackAndDefenseViewport/Panel/TitleBackground/Heart")
 
 [node name="card" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="counterspell_card" type="MeshInstance3D" parent="card"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00625388, -1.58946e-07, 0.000475556)
 mesh = SubResource("ArrayMesh_npock")
 skeleton = NodePath("")
 surface_material_override/2 = SubResource("StandardMaterial3D_jye3l")
 
 [node name="Empty" type="Node3D" parent="card"]
 
+[node name="TitleSprite" type="Sprite3D" parent="card"]
+transform = Transform3D(0.760983, 0, 0, 0, 0.760983, 0, 0, 0, 1, -0.560862, 2.09435, 0.02)
+texture = SubResource("ViewportTexture_k3x4d")
+
 [node name="PowerToughnessSprite" type="Sprite3D" parent="card"]
-transform = Transform3D(0.347257, 0, 0, 0, 0.347257, 0, 0, 0, 1.46818, 0.234, -1.998, 0.02)
+transform = Transform3D(0.632914, 0, 0, 0, 0.632914, 0, 0, 0, 1.47148, 0.003274, 2.03477, 0.02)
 texture = SubResource("ViewportTexture_po48q")
 
 [node name="DescriptionSprite" type="Sprite3D" parent="card"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004, -1.12, 0.02)
+transform = Transform3D(0.634982, 0, 0, 0, 0.634982, 0, 0, 0, 1, 0.0043656, -1.5005, 0.02)
 sorting_use_aabb_center = false
 material_override = SubResource("StandardMaterial3D_wunfl")
 cast_shadow = 0
@@ -442,10 +465,6 @@ double_sided = false
 alpha_cut = 2
 alpha_scissor_threshold = 0.1
 texture = SubResource("ViewportTexture_nfmpx")
-
-[node name="TitleSprite" type="Sprite3D" parent="card"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326, 1.955, 0.02)
-texture = SubResource("ViewportTexture_k3x4d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00283813, -0.098938, 0.00246477)
@@ -458,124 +477,337 @@ libraries = {
 
 [node name="DescriptionViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(312, 125)
+size = Vector2i(512, 256)
 render_target_update_mode = 4
 
-[node name="NinePatchRect" type="NinePatchRect" parent="DescriptionViewport"]
-offset_right = 444.0
-offset_bottom = 123.56
-texture = ExtResource("3_xunk5")
-region_rect = Rect2(0.178, -0.759, 386.362, 255.629)
-patch_margin_left = 219
-patch_margin_top = 33
-patch_margin_right = 225
-patch_margin_bottom = 34
+[node name="CardInfo" type="Panel" parent="DescriptionViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_lkgco")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_btjd5")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="DescriptionViewport/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_lkgco")
+texture = ExtResource("7_pm8y7")
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="DescriptionViewport"]
+[node name="MarginContainer" type="MarginContainer" parent="DescriptionViewport/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_lkgco")
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionViewport/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("8_lkgco")
+theme_override_constants/separation = 1
+
+[node name="TitleContainerHBox" type="HBoxContainer" parent="DescriptionViewport/CardInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_lkgco")
+
+[node name="CardType" type="RichTextLabel" parent="DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox"]
 clip_contents = false
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 307.26
-offset_bottom = 102.61
-theme_override_colors/default_color = Color(3, 3, 3, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+theme = ExtResource("8_lkgco")
+theme_override_font_sizes/normal_font_size = 1
 bbcode_enabled = true
-text = "This is a test, please let's see how this work and lorem ipsum This is a test, please let's see how this work and blah blah blah blah blah blah"
+text = "[b][right]Minion[/right][/b]"
+fit_content = true
 scroll_active = false
+autowrap_mode = 0
+
+[node name="Delimiter" type="RichTextLabel" parent="DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox"]
+custom_minimum_size = Vector2(11.75, 29.11)
+layout_mode = 2
+theme = ExtResource("8_lkgco")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[b][center]-[/center][/b]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Subtype" type="RichTextLabel" parent="DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("8_lkgco")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[b]Testing[/b]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Star" type="TextureRect" parent="DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("10_hmqt2")
+expand_mode = 3
+
+[node name="CastingCostLabel" type="RichTextLabel" parent="DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/Star"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -83.18
+offset_top = -16.32
+offset_right = -35.18
+offset_bottom = 17.68
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.242515, 0.498554, 0.946884, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center][b]x10[/b][/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionViewport/CardInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("8_lkgco")
+
+[node name="Description" type="RichTextLabel" parent="DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("8_lkgco")
+bbcode_enabled = true
+text = "[color=d500d9][b]Replace Me[/b][/color]: Does something generic.  Please replace this with your own text."
+
+[node name="MarginContainer2" type="MarginContainer" parent="DescriptionViewport/CardInfo"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -37.0
+offset_bottom = -6.94
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("8_lkgco")
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 0
+
+[node name="Control" type="Control" parent="DescriptionViewport/CardInfo/MarginContainer2"]
+custom_minimum_size = Vector2(0, 22.37)
+layout_mode = 2
+
+[node name="Flavortext" type="RichTextLabel" parent="DescriptionViewport/CardInfo/MarginContainer2/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_lkgco")
+bbcode_enabled = true
+text = "[i]Have you ever danced with the devil in the pale moonlight?[/i]"
+scroll_active = false
+autowrap_mode = 0
 
 [node name="TitleViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(376, 64)
+size = Vector2i(256, 50)
 render_target_update_mode = 4
 
 [node name="NinePatchRect" type="NinePatchRect" parent="TitleViewport"]
+visible = false
 offset_right = 313.64
 offset_bottom = 64.0
 texture = ExtResource("3_xunk5")
 region_rect = Rect2(0, 0, 257.031, 258.249)
-patch_margin_left = 27
-patch_margin_top = 27
-patch_margin_right = 29
-patch_margin_bottom = 34
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TitleViewport"]
-custom_minimum_size = Vector2(272.87, 102.74)
-offset_left = 17.7
-offset_top = 15.69
-offset_right = 295.01
-offset_bottom = 118.43
-theme_override_colors/default_color = Color(3, 3, 3, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/bold_font_size = 22
-bbcode_enabled = true
-text = "[b]Orpheus Maximus[/b]"
-scroll_active = false
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
 
 [node name="AttackAndDefenseViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(1024, 128)
+size = Vector2i(512, 100)
 render_target_update_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="AttackAndDefenseViewport"]
+[node name="Panel" type="Panel" parent="AttackAndDefenseViewport"]
+offset_right = 512.0
+offset_bottom = 100.0
+theme = ExtResource("8_lkgco")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
+
+[node name="TextureRect" type="TextureRect" parent="AttackAndDefenseViewport/Panel"]
+visible = false
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -64.0
-offset_right = 128.0
-offset_bottom = 64.0
+offset_top = -190.0
+offset_right = 509.0
+offset_bottom = -45.0
 grow_vertical = 2
 texture = ExtResource("5_wf1j1")
-expand_mode = 1
+expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="AttackAndDefenseViewport"]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -64.0
-offset_right = -128.0
-offset_bottom = 64.0
-grow_horizontal = 0
-grow_vertical = 2
-texture = ExtResource("5_wf1j1")
-expand_mode = 1
-
-[node name="PowerLabel" type="RichTextLabel" parent="AttackAndDefenseViewport"]
+[node name="NinePatchRect" type="NinePatchRect" parent="AttackAndDefenseViewport/Panel"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 44.8
-offset_top = 13.71
-offset_right = -851.2
-offset_bottom = 13.71
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/default_color = Color(2, 2, 2, 1)
-theme_override_font_sizes/normal_font_size = 72
-bbcode_enabled = true
-text = "3"
-fit_content = true
+theme = ExtResource("8_lkgco")
+texture = ExtResource("7_pm8y7")
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
-[node name="ToughnessLabel" type="RichTextLabel" parent="AttackAndDefenseViewport"]
+[node name="TitleBackground" type="Panel" parent="AttackAndDefenseViewport/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2foru")
+
+[node name="Target" type="TextureRect" parent="AttackAndDefenseViewport/Panel/TitleBackground"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 3.0
+offset_top = -49.5
+offset_right = 102.0
+offset_bottom = 49.5
+grow_vertical = 2
+texture = ExtResource("11_5iwf3")
+expand_mode = 3
+
+[node name="Power" type="RichTextLabel" parent="AttackAndDefenseViewport/Panel/TitleBackground/Target"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.5
+offset_top = -17.0
+offset_right = 15.5
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(13.6411, 14.5)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/bold_italics_font_size = 0
+theme_override_font_sizes/italics_font_size = 0
+theme_override_font_sizes/mono_font_size = 0
+theme_override_font_sizes/normal_font_size = 0
+bbcode_enabled = true
+text = "[center][b]33[/b][/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Heart" type="TextureRect" parent="AttackAndDefenseViewport/Panel/TitleBackground"]
+layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -208.85
-offset_top = -50.72
-offset_right = -80.85
-offset_bottom = 77.28
+offset_left = -96.0
+offset_top = -54.0
+offset_bottom = 54.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_colors/default_color = Color(2, 2, 2, 1)
-theme_override_font_sizes/normal_font_size = 72
+texture = ExtResource("12_7mteo")
+expand_mode = 1
+
+[node name="Power2" type="RichTextLabel" parent="AttackAndDefenseViewport/Panel/TitleBackground/Heart"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -15.76
+offset_right = 30.0
+offset_bottom = 48.24
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/bold_italics_font_size = 0
+theme_override_font_sizes/italics_font_size = 0
+theme_override_font_sizes/mono_font_size = 0
+theme_override_font_sizes/normal_font_size = 0
 bbcode_enabled = true
-text = "0"
-fit_content = true
+text = "[center][b]-3[/b][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TitleLabel" type="RichTextLabel" parent="AttackAndDefenseViewport/Panel/TitleBackground"]
+custom_minimum_size = Vector2(359.25, 36.09)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.625
+offset_top = -18.045
+offset_right = 179.625
+offset_bottom = 18.045
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(779.104, -126.758)
+theme = ExtResource("8_lkgco")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/bold_font_size = 35
+bbcode_enabled = true
+text = "[center][b]LONG TITLE OF CARD[/b][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

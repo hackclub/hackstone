@@ -3,8 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_tesb7"]
 [ext_resource type="Texture2D" uid="uid://b8ue2yw23wxhb" path="res://cards/orpheus_orphling/card_orphling.png" id="2_bgor1"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5umw7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2wly"]
 albedo_texture = ExtResource("2_bgor1")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ot2bv"]
+viewport_path = NodePath("TitleViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_c1lre"]
 viewport_path = NodePath("AttackAndDefenseViewport")
@@ -22,24 +25,22 @@ albedo_texture = SubResource("ViewportTexture_ugcvc")
 [sub_resource type="ViewportTexture" id="ViewportTexture_w5d0v"]
 viewport_path = NodePath("DescriptionViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ot2bv"]
-viewport_path = NodePath("TitleViewport")
-
 [node name="Card2" instance=ExtResource("1_tesb7")]
 card_name = "An Orphling"
+subtype = "Dinosaur"
+flavortext = "Hello world!"
+description = ""
+casting_cost = 0
 
 [node name="counterspell_card" parent="card" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_5umw7")
+surface_material_override/0 = SubResource("StandardMaterial3D_l2wly")
 
-[node name="PowerToughnessSprite" parent="card" index="2"]
-texture = SubResource("ViewportTexture_c1lre")
-
-[node name="DescriptionSprite" parent="card" index="3"]
-material_override = SubResource("StandardMaterial3D_6al8g")
-texture = SubResource("ViewportTexture_w5d0v")
-
-[node name="TitleSprite" parent="card" index="4"]
+[node name="TitleSprite" parent="card" index="2"]
 texture = SubResource("ViewportTexture_ot2bv")
 
-[node name="RichTextLabel" parent="TitleViewport" index="1"]
-text = "[b]An Orphling[/b]"
+[node name="PowerToughnessSprite" parent="card" index="3"]
+texture = SubResource("ViewportTexture_c1lre")
+
+[node name="DescriptionSprite" parent="card" index="4"]
+material_override = SubResource("StandardMaterial3D_6al8g")
+texture = SubResource("ViewportTexture_w5d0v")

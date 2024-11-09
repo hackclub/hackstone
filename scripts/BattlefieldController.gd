@@ -12,6 +12,8 @@ func get_desired_position(index: int) -> Vector3:
 		if current_drag_index <= index:
 			index += 1
 
+	desired_total_width = 3 * float(num_cards)
+
 	var width_per_card = float(desired_total_width) / float(num_cards)
 	var absolute_x_offset = width_per_card * float(index)
 	var centered_x_offset = -desired_total_width/2 + absolute_x_offset + width_per_card/2	

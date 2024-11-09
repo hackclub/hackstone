@@ -12,32 +12,62 @@ enum CardType {MINION, HACK}
 enum CardState {TAP = 0, UNTAP = 1, TURN_DOWN = 2, TURN_UP = 3}
 var test_state : CardState = 0
 var queue = []
-@export var card_name : String = ""
+@export var card_name : String = "Unknown"
+@export var subtype : String = "Unknown"
 @export var power = 0
 @export var toughness = 1
+@export var flavortext : String = "This text should be replaced"
+@export var description : String = "[color=d500d9][b]Replace me[/b][/color]: Does something generic.  Please replace this with your own text."
+@export var casting_cost : int = 10
 @export var label_title : RichTextLabel
 @export var label_power : RichTextLabel
 @export var label_toughness : RichTextLabel
+@export var label_casting_cost : RichTextLabel
+@export var label_flavortext : RichTextLabel
+@export var label_subtype : RichTextLabel
+@export var label_description : RichTextLabel
+@export var label_type : RichTextLabel
+@export var power_container : Node
+@export var toughness_container : Node
 @export var type : CardType
+
 var original_basis : Basis
 var debug = false
 var card_group_controller = null
 var current_toughness
 
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.name = card_name
-	label_title.text = "[b]" + card_name + "[/b]"
 	original_basis = self.transform.basis
 	anim_player = $AnimationPlayer
 	anim_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	var box = $CollisionShape3D
 	# VERY IMPORTANT - shapes do not seem to be
 	box.shape = (box.shape as BoxShape3D).duplicate()
-	label_power.text = str(power)
-	label_toughness.text = str(toughness)
-	current_toughness = toughness
+	current_toughness = toughness		
+	refresh_power_toughness()
 	
+func refresh_power_toughness():
+	match type:
+		CardType.MINION:
+			label_type.text = "[b][right]Minion[/right][/b]"
+		CardType.HACK:
+			label_type.text = "[b][right]Hack[/right][/b]"
+			power_container.visible = false
+			toughness_container.visible = false
+	label_power.text = "[center][b]" + str(power) + "[/b][/center]"
+	label_toughness.text = "[center][b]" + str(current_toughness) + "[/b][/center]"
+	label_casting_cost.text = "[right][b]x" + str(casting_cost) + "[/b][/right]"
+	label_flavortext.text = "[i]" + flavortext + "[/i]"
+	label_description.text = make_description()
+	label_title.text = "[center][b]" + card_name + "[/b][/center]"
+	label_subtype.text = "[b]" + subtype + "[/b]"
+	
+	
+func make_description():
+	return description
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -118,14 +148,14 @@ func _on_animation_finished(anim_name):
 func damage(amount):
 	print(str(self.name) + " got damaged for " + str(amount))
 	current_toughness -= amount
-	label_toughness.text = str(current_toughness)
+	refresh_power_toughness()
 	
 func is_dead():
 	return current_toughness <= 0
 	
 func heal():
 	current_toughness = toughness
-	label_toughness.text = str(toughness)
+	refresh_power_toughness()
 
 
 func is_controlled_by_me():

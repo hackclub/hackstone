@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://u6lo5h4jbmwu"]
+[gd_scene load_steps=7 format=3 uid="uid://u6lo5h4jbmwu"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_lvfba"]
-[ext_resource type="Texture2D" uid="uid://cpwpa546g7vf0" path="res://cards/orpheus_maximus/card_orpheus.png" id="2_70kl8"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_csxmx"]
-albedo_texture = ExtResource("2_70kl8")
+[sub_resource type="ViewportTexture" id="ViewportTexture_3mau7"]
+viewport_path = NodePath("TitleViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_frtko"]
 viewport_path = NodePath("AttackAndDefenseViewport")
@@ -22,22 +21,20 @@ albedo_texture = SubResource("ViewportTexture_n71ob")
 [sub_resource type="ViewportTexture" id="ViewportTexture_rvo86"]
 viewport_path = NodePath("DescriptionViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_3mau7"]
-viewport_path = NodePath("TitleViewport")
-
 [node name="Card2" instance=ExtResource("1_lvfba")]
 card_name = "Orpheus Maximus"
+subtype = "Dinosaur"
 power = 5
+flavortext = "Nothing gets in my way... NOTHING!"
+description = ""
+casting_cost = 4
 
-[node name="counterspell_card" parent="card" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_csxmx")
+[node name="TitleSprite" parent="card" index="2"]
+texture = SubResource("ViewportTexture_3mau7")
 
-[node name="PowerToughnessSprite" parent="card" index="2"]
+[node name="PowerToughnessSprite" parent="card" index="3"]
 texture = SubResource("ViewportTexture_frtko")
 
-[node name="DescriptionSprite" parent="card" index="3"]
+[node name="DescriptionSprite" parent="card" index="4"]
 material_override = SubResource("StandardMaterial3D_gftxk")
 texture = SubResource("ViewportTexture_rvo86")
-
-[node name="TitleSprite" parent="card" index="4"]
-texture = SubResource("ViewportTexture_3mau7")

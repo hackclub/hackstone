@@ -1,0 +1,65 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cdb82eyjhsla4"]
+
+[ext_resource type="FontFile" uid="uid://fka8ycspbc1h" path="res://fonts/phantomsans/PhantomSans0.8-Regular.otf" id="1_m2f5b"]
+[ext_resource type="FontFile" uid="uid://c4daplyykkrh0" path="res://fonts/phantomsans/PhantomSans0.8-Bold.otf" id="1_ugs37"]
+[ext_resource type="FontFile" uid="uid://c674yn7ksic1f" path="res://fonts/phantomsans/PhantomSans0.8-BoldItalic.otf" id="2_jyxsr"]
+[ext_resource type="FontFile" uid="uid://ch43jo72ybgvx" path="res://fonts/phantomsans/PhantomSans0.8-Italic.otf" id="3_vdjsh"]
+[ext_resource type="FontFile" uid="uid://dgm5u2r5eydx0" path="res://fonts/phantomsans/PhantomSans0.8-Book.otf" id="4_n5qmk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrhib"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_diubw"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[resource]
+default_font = ExtResource("1_ugs37")
+default_font_size = 28
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/colors/font_selected_color = Color(0, 0, 0, 0)
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+RichTextLabel/colors/selection_color = Color(0.1, 0.1, 1, 0.8)
+RichTextLabel/colors/table_border = Color(0, 0, 0, 0)
+RichTextLabel/colors/table_even_row_bg = Color(0, 0, 0, 0)
+RichTextLabel/colors/table_odd_row_bg = Color(0, 0, 0, 0)
+RichTextLabel/constants/line_separation = 0
+RichTextLabel/constants/outline_size = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/shadow_outline_size = 1
+RichTextLabel/constants/table_h_separation = 3
+RichTextLabel/constants/table_v_separation = 3
+RichTextLabel/constants/text_highlight_h_padding = 3
+RichTextLabel/constants/text_highlight_v_padding = 3
+RichTextLabel/font_sizes/bold_font_size = 30
+RichTextLabel/font_sizes/italics_font_size = 19
+RichTextLabel/font_sizes/normal_font_size = 29
+RichTextLabel/fonts/bold_font = ExtResource("1_ugs37")
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_jyxsr")
+RichTextLabel/fonts/italics_font = ExtResource("3_vdjsh")
+RichTextLabel/fonts/mono_font = ExtResource("4_n5qmk")
+RichTextLabel/fonts/normal_font = ExtResource("1_m2f5b")
+RichTextLabel/styles/focus = SubResource("StyleBoxFlat_hrhib")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_diubw")

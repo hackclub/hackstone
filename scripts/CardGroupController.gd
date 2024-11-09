@@ -47,6 +47,8 @@ func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
 	card.moving = true
 	if card.get_parent() != null:
 		card.get_parent().remove_child(card)
+	if index < 0 or index > len(managed_cards):
+		print("PROBLEM! - " + str(index))
 	managed_cards.insert(index, card)
 	add_child(card)
 	card.card_group_controller = self
