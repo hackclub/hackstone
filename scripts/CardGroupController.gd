@@ -11,14 +11,14 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:	
-	for i in range(0, len(managed_cards)):
+	for i in range(0, len(managed_cards)):		
 		var desired_pos = get_desired_position(i)
 		managed_cards[i].transform.origin = \
 		managed_cards[i].transform.origin.lerp(desired_pos, \
 		delta * animation_speed)		
 		
 		if managed_cards[i].transform.origin.distance_squared_to(desired_pos) < 0.01:
-			managed_cards[i].moving = false		
+			managed_cards[i].moving = false					
 		
 		var orig_basis : Basis = managed_cards[i].original_basis
 		var rotation : Basis = get_desired_rotation(i)

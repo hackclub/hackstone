@@ -33,7 +33,7 @@ unicode = 114
 events = [SubResource("InputEventKey_7555j")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w8eg"]
-size = Vector2(2554.5, 284)
+size = Vector2(2554.5, 769)
 
 [node name="root" type="Node3D"]
 
@@ -181,7 +181,7 @@ position = Vector2(972, 79)
 script = ExtResource("10_w3wlf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dropzones/Control/BattlefieldDropzone"]
-position = Vector2(307, 87)
+position = Vector2(307, 9.5)
 shape = SubResource("RectangleShape2D_6w8eg")
 
 [node name="CardIndex" type="Node3D" parent="."]
