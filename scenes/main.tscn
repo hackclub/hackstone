@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=21 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
 [ext_resource type="PackedScene" uid="uid://dhw27v0raxlxp" path="res://components/arrow.tscn" id="2_5cnle"]
 [ext_resource type="Script" path="res://scripts/BattlefieldController.gd" id="2_rndq6"]
+[ext_resource type="Texture2D" uid="uid://domow2y248mbp" path="res://art/github/star.png" id="3_xkvhj"]
 [ext_resource type="Script" path="res://scripts/CardIndex.gd" id="4_4jspk"]
+[ext_resource type="Texture2D" uid="uid://r7y1dc6vfpa8" path="res://art/github/star-filled.png" id="4_na3d7"]
 [ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="5_1rng6"]
 [ext_resource type="Script" path="res://scripts/GameLogic.gd" id="6_qmtoo"]
 [ext_resource type="Script" path="res://scripts/DeckController.gd" id="7_3imuv"]
@@ -31,6 +33,8 @@ unicode = 114
 
 [sub_resource type="Shortcut" id="Shortcut_y0qay"]
 events = [SubResource("InputEventKey_7555j")]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivckr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w8eg"]
 size = Vector2(2554.5, 769)
@@ -143,6 +147,146 @@ offset_right = 1914.0
 offset_bottom = 1074.0
 mouse_filter = 2
 
+[node name="Panel" type="Panel" parent="Main Canvas"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -937.0
+offset_top = -81.0001
+offset_right = 101.33
+offset_bottom = 18.9999
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.666, 0.666)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ivckr")
+
+[node name="Unfilled Stars" type="HBoxContainer" parent="Main Canvas/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect7" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect8" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect9" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect10" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="Filled Stars" type="HBoxContainer" parent="Main Canvas/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect7" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect8" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect9" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect10" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
 [node name="OpponentAvatar" parent="." instance=ExtResource("5_1rng6")]
 offset_left = -102.5
 offset_right = 102.5
@@ -181,7 +325,7 @@ position = Vector2(972, 79)
 script = ExtResource("10_w3wlf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dropzones/Control/BattlefieldDropzone"]
-position = Vector2(307, 9.5)
+position = Vector2(307, 7)
 shape = SubResource("RectangleShape2D_6w8eg")
 
 [node name="CardIndex" type="Node3D" parent="."]
