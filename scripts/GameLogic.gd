@@ -34,45 +34,48 @@ var instance = null
 
 func add_card(card_scene, battlefield):
 	var node3d_card = card_scene.instantiate() as Node3D
-	if node3d_card.type == CardType.HACK:
+	if node3d_card.type == CardType.HACK and (battlefield == my_battlefield or battlefield == opponent_battlefield):
 		node3d_card.queue_free()
 		return
 	node3d_card.transform.origin = Vector3(0, -20, 50)
 	get_node(battlefield).insert_card(node3d_card, 0, node3d_card.transform.origin)
+
+func add_test_battlefield_cards(time_between_cards):
+	add_card(CardIndex.get_random_card(), my_battlefield)
+	await get_tree().create_timer(time_between_cards).timeout
+	add_card(CardIndex.get_random_card(), my_battlefield)
+	await get_tree().create_timer(time_between_cards).timeout
+	add_card(CardIndex.get_random_card(), my_battlefield)
+	await get_tree().create_timer(time_between_cards).timeout
+	add_card(CardIndex.get_random_card(), my_battlefield)
+	await get_tree().create_timer(time_between_cards).timeout
+	add_card(CardIndex.get_random_card(), opponent_battlefield)
+	await get_tree().create_timer(time_between_cards).timeout
+	add_card(CardIndex.get_random_card(), opponent_battlefield)
+	await get_tree().create_timer(time_between_cards).timeout
+	add_card(CardIndex.get_random_card(), opponent_battlefield)
+	await get_tree().create_timer(time_between_cards).timeout
+	add_card(CardIndex.get_random_card(), opponent_battlefield)
+	await get_tree().create_timer(time_between_cards).timeout	
 	
 func deal_cards():
-	add_card(CardIndex.get_random_card(), my_battlefield)
-	add_card(CardIndex.get_random_card(), my_battlefield)
-	add_card(CardIndex.get_random_card(), my_battlefield)
-	add_card(CardIndex.get_random_card(), my_battlefield)
-	add_card(CardIndex.get_random_card(), opponent_battlefield)
-	add_card(CardIndex.get_random_card(), opponent_battlefield)
-	add_card(CardIndex.get_random_card(), opponent_battlefield)
-	add_card(CardIndex.get_random_card(), opponent_battlefield)
-	add_card(CardIndex.get_random_card(), my_hand)
-	add_card(CardIndex.get_random_card(), my_hand)
-	add_card(CardIndex.get_random_card(), my_hand)
-	add_card(CardIndex.get_random_card(), my_hand)
-	add_card(CardIndex.get_random_card(), my_hand)
-	add_card(CardIndex.get_random_card(), opponent_hand)
-	add_card(CardIndex.get_random_card(), opponent_hand)
-	add_card(CardIndex.get_random_card(), opponent_hand)
-	add_card(CardIndex.get_random_card(), opponent_hand)
-	add_card(CardIndex.get_random_card(), opponent_hand)
+	var time_between_cards = 0.25
+	#await add_test_battlefield_cards(time_between_cards)
+	
+	for i in 7:
+		add_card(CardIndex.get_random_card(), my_hand)
+		add_card(CardIndex.get_random_card(), opponent_hand)
+		await get_tree().create_timer(time_between_cards).timeout
 	
 	for i in 20:
 		add_card(CardIndex.get_random_card(), my_deck)
 		add_card(CardIndex.get_random_card(), opponent_deck)
-		add_card(CardIndex.get_random_card(), my_graveyard)
-		add_card(CardIndex.get_random_card(), opponent_graveyard)
-		
-		
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	instance = self
-	deal_cards()
 	refresh_state()
+	await deal_cards()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
