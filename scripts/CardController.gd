@@ -29,6 +29,7 @@ var queue = []
 @export var label_type : RichTextLabel
 @export var power_container : Node
 @export var toughness_container : Node
+@export var cost_container : Node
 @export var type : CardType
 
 var original_basis : Basis
@@ -157,9 +158,12 @@ func heal():
 	current_toughness = toughness
 	refresh_power_toughness()
 
-func set_visibility(visibility):
+func show_power_toughness(visibility):
 	power_container.visible = visibility
 	toughness_container.visible = visibility
+
+func show_cost(visibility):
+	cost_container.visible = visibility
 
 func is_controlled_by_me():
 	if card_group_controller == null:

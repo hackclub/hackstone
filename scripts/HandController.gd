@@ -4,14 +4,14 @@ extends "res://scripts/CardGroupController.gd"
 	
 func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
 	super.insert_card(card, index, global_position)	
-	card.set_visibility(!hidden_hand)
+	card.show_power_toughness(!hidden_hand)
 
 func get_desired_position(index: int) -> Vector3:
 	var num_cards = get_cards_len()
 	var desired_width = 4
 	var width_per_card = float(desired_width) / float(num_cards)
 	var absolute_x_offset = width_per_card * float(index)
-	var centered_x_offset = -desired_width/2 + absolute_x_offset + width_per_card*2
+	var centered_x_offset = -desired_width/2 + absolute_x_offset + width_per_card
 	return Vector3(centered_x_offset, 0, -0.01 * float(index))
 
 func get_desired_rotation(index: int) -> Basis:

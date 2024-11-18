@@ -47,7 +47,8 @@ func get_card_visibility():
 	return true
 
 func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
-	card.set_visibility(get_card_visibility())
+	card.show_power_toughness(get_card_visibility())
+	card.show_cost(true)
 	card.moving = true
 	if card.get_parent() != null:
 		card.get_parent().remove_child(card)

@@ -428,20 +428,21 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2upq3"]
 
-[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "power_container", "toughness_container")]
+[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "power_container", "toughness_container", "cost_container")]
 gravity_scale = 0.0
 script = ExtResource("1_pfeis")
 description = "[color=41e18e][b]Replace me[/b][/color]: Does something generic.  Please replace this with your own text."
 label_title = NodePath("TitleViewport/Panel/TitleBackground/TitleLabel")
-label_power = NodePath("PowerToughnessViewport/Panel/TitleBackground/Target/Power")
-label_toughness = NodePath("PowerToughnessViewport/Panel/TitleBackground/Heart/Power2")
-label_casting_cost = NodePath("CostViewport/Panel/CastingCostLabel")
+label_power = NodePath("PowerToughnessViewport/Panel/TitleBackground/PowerContainer/Power")
+label_toughness = NodePath("PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer/Heart")
+label_casting_cost = NodePath("CostViewport/CostPanel/CastingCostLabel")
 label_flavortext = NodePath("DescriptionViewport/CardInfo/MarginContainer2/Control/Flavortext")
 label_subtype = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/Subtype")
 label_description = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/VBoxContainer/Description")
 label_type = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/CardType")
-power_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/Target")
-toughness_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/Heart")
+power_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/PowerContainer")
+toughness_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer")
+cost_container = NodePath("card/CastingCostSprite")
 
 [node name="card" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -744,7 +745,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2foru")
 
-[node name="Target" type="TextureRect" parent="PowerToughnessViewport/Panel/TitleBackground"]
+[node name="PowerContainer" type="TextureRect" parent="PowerToughnessViewport/Panel/TitleBackground"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -758,7 +759,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("11_5iwf3")
 expand_mode = 3
 
-[node name="Power" type="RichTextLabel" parent="PowerToughnessViewport/Panel/TitleBackground/Target"]
+[node name="Power" type="RichTextLabel" parent="PowerToughnessViewport/Panel/TitleBackground/PowerContainer"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -787,7 +788,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Heart" type="TextureRect" parent="PowerToughnessViewport/Panel/TitleBackground"]
+[node name="ToughnessContainer" type="TextureRect" parent="PowerToughnessViewport/Panel/TitleBackground"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -804,7 +805,7 @@ scale = Vector2(2.24, 2.24)
 texture = ExtResource("12_7mteo")
 expand_mode = 1
 
-[node name="Power2" type="RichTextLabel" parent="PowerToughnessViewport/Panel/TitleBackground/Heart"]
+[node name="Heart" type="RichTextLabel" parent="PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 8
@@ -837,7 +838,7 @@ transparent_bg = true
 size = Vector2i(128, 128)
 render_target_update_mode = 4
 
-[node name="Panel" type="Panel" parent="CostViewport"]
+[node name="CostPanel" type="Panel" parent="CostViewport"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -845,7 +846,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2upq3")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CostViewport/Panel"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CostViewport/CostPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -864,7 +865,7 @@ patch_margin_top = 26
 patch_margin_right = 25
 patch_margin_bottom = 24
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="CostViewport/Panel"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="CostViewport/CostPanel"]
 modulate = Color(0.179688, 0.405961, 0.777152, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -884,7 +885,7 @@ patch_margin_top = 25
 patch_margin_right = 25
 patch_margin_bottom = 25
 
-[node name="CastingCostLabel" type="RichTextLabel" parent="CostViewport/Panel"]
+[node name="CastingCostLabel" type="RichTextLabel" parent="CostViewport/CostPanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
