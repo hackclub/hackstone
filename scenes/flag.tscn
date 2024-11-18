@@ -24,7 +24,7 @@ noise = SubResource("FastNoiseLite_v7s7n")
 render_priority = 0
 shader = ExtResource("3_hb30e")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/speed = 0.33
+shader_parameter/speed = 0.15
 shader_parameter/strength = 0.19
 shader_parameter/albedo_texture = ExtResource("4_j8fpf")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_5ml32")
@@ -39,4 +39,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jb8vf")
 
 [node name="Cube" parent="." index="2"]
 transform = Transform3D(0.272459, 0, 0, 0, 10.8984, 0, 0, 0, 10.8984, 0, 56.882, -12.7886)
+cast_shadow = 0
 surface_material_override/0 = SubResource("ShaderMaterial_n4ebd")

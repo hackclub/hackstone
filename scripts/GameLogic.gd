@@ -13,6 +13,7 @@ enum GameState {
 @export var my_hand : NodePath
 @export var my_deck : NodePath
 @export var my_graveyard : NodePath
+@export var my_draw_display : NodePath
 
 @export var opponent_avatar : NodePath
 @export var opponent_battlefield : NodePath
@@ -101,7 +102,7 @@ func run_tests():
 
 func refresh_state():
 	display_notification("Your turn" if state == GameState.MY_TURN else "Opponent's turn")
-	configure_done_button("Done")
+	configure_done_button("DONE")
 
 func _on_done_pressed():
 	state = GameState.MY_TURN if state == GameState.OPPONENT_TURN else GameState.OPPONENT_TURN
@@ -112,9 +113,25 @@ func on_turn_start():
 	if state == GameState.OPPONENT_TURN:
 		draw_card(get_node(opponent_hand), get_node(opponent_deck))
 		reset_all_cards(get_node(opponent_battlefield))
+		Thread.new().start(Callable(self, "_perform_ai"))
 	else:
-		draw_card(get_node(my_hand), get_node(my_deck))
+		draw_card(get_node(my_draw_display), get_node(my_deck))
 		reset_all_cards(get_node(my_battlefield))
+
+func _perform_ai():
+	while(true):
+		await get_tree().create_timer(1.0).timeout
+		var next_action = get_next_action()
+		if next_action == null:
+			break
+		next_action.call()
+	await get_tree().create_timer(1.0).timeout
+	_on_done_pressed()
+
+func get_next_action():
+	var ai_hand = get_node(opponent_hand).get_cards()
+	var ai_battlefield = get_node(opponent_battlefield).get_cards()
+	var player_battlefield = get_node(my_battlefield).get_cards()
 
 func reset_all_cards(card_group_controller):
 	for card in card_group_controller.get_cards():

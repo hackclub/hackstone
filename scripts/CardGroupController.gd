@@ -42,8 +42,12 @@ func take_card(index: int) -> Node3D:
 	taken_card.global_position = global_position
 	taken_card.card_group_controller = null
 	return taken_card
-	
+
+func get_card_visibility():
+	return true
+
 func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
+	card.set_visibility(get_card_visibility())
 	card.moving = true
 	if card.get_parent() != null:
 		card.get_parent().remove_child(card)

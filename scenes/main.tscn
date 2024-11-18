@@ -1,22 +1,36 @@
-[gd_scene load_steps=21 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=36 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
 [ext_resource type="PackedScene" uid="uid://dhw27v0raxlxp" path="res://components/arrow.tscn" id="2_5cnle"]
 [ext_resource type="Script" path="res://scripts/BattlefieldController.gd" id="2_rndq6"]
+[ext_resource type="FontFile" uid="uid://c4daplyykkrh0" path="res://fonts/phantomsans/PhantomSans0.8-Bold.otf" id="2_svvj4"]
+[ext_resource type="Texture2D" uid="uid://dhrki7qfnf2ng" path="res://art/counterspell_hackclub/Reference/pink_button_hover.png" id="3_4vba1"]
+[ext_resource type="Texture2D" uid="uid://cnnpcx755qf7q" path="res://art/counterspell_hackclub/Reference/pink_button.png" id="3_vbm72"]
 [ext_resource type="Texture2D" uid="uid://domow2y248mbp" path="res://art/github/star.png" id="3_xkvhj"]
 [ext_resource type="Script" path="res://scripts/CardIndex.gd" id="4_4jspk"]
 [ext_resource type="Texture2D" uid="uid://r7y1dc6vfpa8" path="res://art/github/star-filled.png" id="4_na3d7"]
 [ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="5_1rng6"]
 [ext_resource type="Script" path="res://scripts/GameLogic.gd" id="6_qmtoo"]
+[ext_resource type="Texture2D" uid="uid://bxcli71e622oa" path="res://art/card_skin_template/background_rect_4xdark.png" id="6_rl25m"]
 [ext_resource type="Script" path="res://scripts/DeckController.gd" id="7_3imuv"]
 [ext_resource type="Script" path="res://scripts/HandController.gd" id="7_mqjt8"]
 [ext_resource type="Script" path="res://scripts/GraveyardController.gd" id="8_4bn74"]
 [ext_resource type="Script" path="res://scripts/DragController.gd" id="9_slc2b"]
 [ext_resource type="Script" path="res://scripts/DropArea.gd" id="10_w3wlf"]
+[ext_resource type="Script" path="res://scripts/CardDisplayController.gd" id="13_kk3ip"]
+[ext_resource type="Texture2D" uid="uid://c1kuehp5fdmdr" path="res://art/counterspell_hackclub/Reference/bg1_big.png" id="16_sjurj"]
+[ext_resource type="Texture2D" uid="uid://d7tnyehh7oxt" path="res://art/counterspell_hackclub/Reference/bg5.png" id="19_tm8m1"]
+[ext_resource type="Texture2D" uid="uid://bnwngrd34ng6o" path="res://art/counterspell_hackclub/Reference/cloud1.png" id="20_m3ydw"]
 
 [sub_resource type="Environment" id="Environment_fi0gu"]
 background_mode = 1
 background_color = Color(0.484884, 0.472692, 0.473723, 1)
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_normalized = true
+volumetric_fog_density = 1.427
 
 [sub_resource type="InputEventKey" id="InputEventKey_vmqks"]
 device = -1
@@ -34,10 +48,51 @@ unicode = 114
 [sub_resource type="Shortcut" id="Shortcut_y0qay"]
 events = [SubResource("InputEventKey_7555j")]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oblri"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rnwxm"]
+texture = ExtResource("3_4vba1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sp5r6"]
+texture = ExtResource("3_vbm72")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivckr"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aknhm"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w8eg"]
-size = Vector2(2554.5, 769)
+size = Vector2(2554.5, 576)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ppge7"]
+emission_shape_scale = Vector3(0.74, 10, 2)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 2)
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 0.0
+initial_velocity_min = 0.1
+initial_velocity_max = 0.5
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 0.999978
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 0.0999978
+linear_accel_max = 0.169998
+scale_min = 5.0
+scale_max = 80.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0585v"]
+transparency = 1
+blend_mode = 4
+cull_mode = 2
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(0.141176, 0.141176, 0.141176, 0.0196078)
+albedo_texture = ExtResource("20_m3ydw")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_74hvr"]
+material = SubResource("StandardMaterial3D_0585v")
 
 [node name="root" type="Node3D"]
 
@@ -131,6 +186,7 @@ offset_right = -6.0
 offset_bottom = 33.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oblri")
 
 [node name="DoneButton" type="Button" parent="Main Canvas/DonePanel"]
 layout_mode = 1
@@ -139,7 +195,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 21
+tooltip_text = "Ends your turn"
+theme_override_fonts/font = ExtResource("2_svvj4")
+theme_override_font_sizes/font_size = 43
+theme_override_styles/hover = SubResource("StyleBoxTexture_rnwxm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_sp5r6")
 text = "DONE"
 
 [node name="Arrow" parent="Main Canvas" instance=ExtResource("2_5cnle")]
@@ -147,22 +207,47 @@ offset_right = 1914.0
 offset_bottom = 1074.0
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="Main Canvas"]
+[node name="Stars" type="Node2D" parent="Main Canvas"]
+position = Vector2(501, 541)
+scale = Vector2(0.5, 0.5)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Main Canvas/Stars"]
+clip_contents = true
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -937.0
-offset_top = -81.0001
-offset_right = 101.33
-offset_bottom = 18.9999
+offset_left = 1095.0
+offset_top = 960.0
+offset_right = 1818.0
+offset_bottom = 1072.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_rl25m")
+region_rect = Rect2(1.5, 3.25, 254.5, 251.5)
+patch_margin_left = 19
+patch_margin_top = 20
+patch_margin_right = 22
+patch_margin_bottom = 19
+
+[node name="Stars" type="Panel" parent="Main Canvas/Stars"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1114.0
+offset_top = 983.0
+offset_right = 2152.33
+offset_bottom = 1083.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.666, 0.666)
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ivckr")
 
-[node name="Unfilled Stars" type="HBoxContainer" parent="Main Canvas/Panel"]
+[node name="Unfilled Stars" type="HBoxContainer" parent="Main Canvas/Stars/Stars"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,57 +256,57 @@ offset_right = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect2" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect3" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect4" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect4" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect5" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect5" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect6" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect6" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect7" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect7" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect8" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect8" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect9" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect9" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect10" type="TextureRect" parent="Main Canvas/Panel/Unfilled Stars"]
+[node name="TextureRect10" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="Filled Stars" type="HBoxContainer" parent="Main Canvas/Panel"]
+[node name="Filled Stars" type="HBoxContainer" parent="Main Canvas/Stars/Stars"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -230,76 +315,77 @@ offset_right = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect2" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect3" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect4" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect4" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 visible = false
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect5" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect5" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 visible = false
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect6" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect6" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 visible = false
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect7" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect7" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 visible = false
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect8" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect8" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 visible = false
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect9" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect9" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 visible = false
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect10" type="TextureRect" parent="Main Canvas/Panel/Filled Stars"]
+[node name="TextureRect10" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
 visible = false
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="OpponentAvatar" parent="." instance=ExtResource("5_1rng6")]
-offset_left = -102.5
-offset_right = 102.5
-
-[node name="MyAvatar" parent="." instance=ExtResource("5_1rng6")]
-anchors_preset = 7
-anchor_top = 1.0
+[node name="Panel" type="Panel" parent="Main Canvas"]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -102.5
-offset_top = -98.0
-offset_right = 102.5
-offset_bottom = 0.0
-grow_vertical = 0
+offset_left = 1049.0
+offset_top = 1021.0
+offset_right = -509.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Stars are what you use to play cards.  Stars are replenished every turn, and you gain access to one more each new turn (max of 10)."
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+theme_override_styles/panel = SubResource("StyleBoxEmpty_aknhm")
 
 [node name="Dropzones" type="CanvasLayer" parent="."]
 
@@ -310,9 +396,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = 4.0
-offset_top = -26.0
+offset_top = -347.0
 offset_right = 4.0
-offset_bottom = 247.0
+offset_bottom = 224.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(1295, 196)
@@ -325,7 +411,7 @@ position = Vector2(972, 79)
 script = ExtResource("10_w3wlf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dropzones/Control/BattlefieldDropzone"]
-position = Vector2(307, 7)
+position = Vector2(-8, 192)
 shape = SubResource("RectangleShape2D_6w8eg")
 
 [node name="CardIndex" type="Node3D" parent="."]
@@ -338,6 +424,7 @@ my_battlefield = NodePath("../Card Groups/Mine/MyBattlefield")
 my_hand = NodePath("../Card Groups/Mine/MyHand")
 my_deck = NodePath("../Card Groups/Mine/MyDeck")
 my_graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
+my_draw_display = NodePath("../Card Groups/Mine/MyDrawDisplay")
 opponent_avatar = NodePath("../OpponentAvatar")
 opponent_battlefield = NodePath("../Card Groups/Opponent/OpponentBattlefield")
 opponent_hand = NodePath("../Card Groups/Opponent/OpponentHand")
@@ -350,6 +437,7 @@ panel_notification = NodePath("../Main Canvas/NotificationPanel")
 richtext_notification_message = NodePath("../Main Canvas/NotificationPanel/RichTextLabel")
 
 [node name="Lights" type="Node3D" parent="."]
+visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
 transform = Transform3D(-0.428807, 0.884797, -0.182373, -0.0726428, 0.16745, 0.983201, 0.900471, 0.434851, -0.00752959, 0, 0, 0)
@@ -364,31 +452,36 @@ light_energy = 0.5
 [node name="Mine" type="Node3D" parent="Card Groups"]
 
 [node name="MyBattlefield" type="Node3D" parent="Card Groups/Mine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.86888, 0)
 script = ExtResource("2_rndq6")
 controlled_by_me = true
 
 [node name="MyHand" type="Node3D" parent="Card Groups/Mine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.835007, -4.85194, 0)
 script = ExtResource("7_mqjt8")
 controlled_by_me = true
 
 [node name="MyDeck" type="Node3D" parent="Card Groups/Mine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, -5.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, -4.331, 0)
 script = ExtResource("7_3imuv")
 
 [node name="MyGraveyard" type="Node3D" parent="Card Groups/Mine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -5.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -4.331, 0)
 script = ExtResource("8_4bn74")
+
+[node name="MyDrawDisplay" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("destination_cardgroup")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0434408, -0.3, 4.6705)
+script = ExtResource("13_kk3ip")
+destination_cardgroup = NodePath("../MyHand")
 
 [node name="Opponent" type="Node3D" parent="Card Groups"]
 
 [node name="OpponentBattlefield" type="Node3D" parent="Card Groups/Opponent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.818743, 0)
 script = ExtResource("2_rndq6")
 
 [node name="OpponentHand" type="Node3D" parent="Card Groups/Opponent"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 4.5, 0)
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.655712, 4.64073, 0)
 script = ExtResource("7_mqjt8")
 hidden_hand = true
 
@@ -405,6 +498,104 @@ script = ExtResource("8_4bn74")
 [node name="Dragger" type="Node3D" parent="Card Groups/Special"]
 script = ExtResource("9_slc2b")
 animation_speed = 50
+
+[node name="CloudGPUParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.2796, 0, -24.6282)
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+gi_mode = 0
+visibility_range_end = 500.0
+amount = 50
+lifetime = 41.29
+preprocess = 60.0
+randomness = 0.46
+process_material = SubResource("ParticleProcessMaterial_ppge7")
+draw_pass_1 = SubResource("QuadMesh_74hvr")
+
+[node name="CityScape" type="Node3D" parent="."]
+
+[node name="Sprite3D5" type="Sprite3D" parent="CityScape"]
+transform = Transform3D(138.836, 0, 0, 0, 138.836, 0, 0, 0, 2, 0, 2.518, -127)
+texture = ExtResource("19_tm8m1")
+
+[node name="Node3D" type="Node3D" parent="CityScape"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="CityScape/Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
+modulate = Color(0.180151, 0.260296, 0.553372, 1)
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D4" type="Sprite3D" parent="CityScape/Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
+modulate = Color(0.0739803, 0.118656, 0.284365, 1)
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D2" type="Sprite3D" parent="CityScape/Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
+modulate = Color(0.285414, 0.391143, 0.753332, 1)
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D3" type="Sprite3D" parent="CityScape/Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
+modulate = Color(0.469683, 0.551314, 0.84292, 1)
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Node3D2" type="Node3D" parent="CityScape"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="CityScape/Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
+modulate = Color(0.180151, 0.260296, 0.553372, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D4" type="Sprite3D" parent="CityScape/Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
+modulate = Color(0.0739803, 0.118656, 0.284365, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D2" type="Sprite3D" parent="CityScape/Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
+modulate = Color(0.285414, 0.391143, 0.753332, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D3" type="Sprite3D" parent="CityScape/Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
+modulate = Color(0.469683, 0.551314, 0.84292, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="OpponentAvatar" parent="." instance=ExtResource("5_1rng6")]
+offset_left = -69.0
+offset_right = 69.0
+tooltip_text = "Your arch nemesis.  Win the game by reducing their life to 0."
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+
+[node name="MyAvatar" parent="." instance=ExtResource("5_1rng6")]
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -69.0
+offset_top = -120.0
+offset_right = 69.0
+offset_bottom = 0.0
+grow_vertical = 0
+pivot_offset = Vector2(70, 119)
+tooltip_text = "It's you!  Don't let your life total get to 0."
+mouse_filter = 1
+mouse_default_cursor_shape = 16
 
 [connection signal="pressed" from="Main Canvas/AddCardButton" to="Card Groups/Mine/MyBattlefield" method="_on_add_card_button_pressed"]
 [connection signal="pressed" from="Main Canvas/RemoveCardButton" to="Card Groups/Mine/MyBattlefield" method="_on_remove_card_button_pressed"]

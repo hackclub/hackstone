@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d7tnyehh7oxt"
-path.s3tc="res://.godot/imported/bg5.png-276890dafc4c74d48b62afccaee0ea77.s3tc.ctex"
-path.etc2="res://.godot/imported/bg5.png-276890dafc4c74d48b62afccaee0ea77.etc2.ctex"
+uid="uid://bu0sgh032x5eo"
+path.s3tc="res://.godot/imported/cloud5.png-7f8752b1f3d7e690914bb3450223821c.s3tc.ctex"
+path.etc2="res://.godot/imported/cloud5.png-7f8752b1f3d7e690914bb3450223821c.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://art/counterspell_hackclub/Reference/bg5.png"
-dest_files=["res://.godot/imported/bg5.png-276890dafc4c74d48b62afccaee0ea77.s3tc.ctex", "res://.godot/imported/bg5.png-276890dafc4c74d48b62afccaee0ea77.etc2.ctex"]
+source_file="res://art/counterspell_hackclub/Reference/cloud5.png"
+dest_files=["res://.godot/imported/cloud5.png-7f8752b1f3d7e690914bb3450223821c.s3tc.ctex", "res://.godot/imported/cloud5.png-7f8752b1f3d7e690914bb3450223821c.etc2.ctex"]
 
 [params]
 

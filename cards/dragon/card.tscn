@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bd33jd7cgnam0"]
+[gd_scene load_steps=10 format=3 uid="uid://bd33jd7cgnam0"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_erpla"]
 [ext_resource type="Texture2D" uid="uid://d4dq3knlwss5f" path="res://cards/dragon/card_dragon.png" id="2_6jg6s"]
@@ -6,11 +6,8 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sn4no"]
 albedo_texture = ExtResource("2_6jg6s")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4gh7w"]
-viewport_path = NodePath("TitleViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_xdl8f"]
-viewport_path = NodePath("AttackAndDefenseViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_x7f83"]
+viewport_path = NodePath("PowerToughnessViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_247tb"]
 viewport_path = NodePath("DescriptionViewport")
@@ -25,6 +22,12 @@ albedo_texture = SubResource("ViewportTexture_247tb")
 [sub_resource type="ViewportTexture" id="ViewportTexture_p1n16"]
 viewport_path = NodePath("DescriptionViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_0tvsc"]
+viewport_path = NodePath("CostViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4gh7w"]
+viewport_path = NodePath("TitleViewport")
+
 [node name="Card" instance=ExtResource("1_erpla")]
 card_name = "A stupidly large dragon"
 subtype = "Dragon"
@@ -36,21 +39,18 @@ description = "[color=41e18e][b]Announcement[/b][/color]: Deal 5 damage to all e
 [node name="counterspell_card" parent="card" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_sn4no")
 
-[node name="TitleSprite" parent="card" index="2"]
-texture = SubResource("ViewportTexture_4gh7w")
+[node name="PowerToughnessSprite" parent="card" index="2"]
+texture = SubResource("ViewportTexture_x7f83")
 
-[node name="PowerToughnessSprite" parent="card" index="3"]
-texture = SubResource("ViewportTexture_xdl8f")
-
-[node name="DescriptionSprite" parent="card" index="4"]
+[node name="DescriptionSprite" parent="card" index="3"]
 material_override = SubResource("StandardMaterial3D_g4q7m")
 texture = SubResource("ViewportTexture_p1n16")
 
+[node name="CastingCostSprite" parent="card" index="4"]
+texture = SubResource("ViewportTexture_0tvsc")
+
+[node name="TitleSprite" parent="card" index="5"]
+texture = SubResource("ViewportTexture_4gh7w")
+
 [node name="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00283813, -0.00924338, 0.00246477)
-
-[node name="TitleLabel" parent="AttackAndDefenseViewport/Panel/TitleBackground" index="2"]
-offset_top = -13.465
-offset_bottom = 22.625
-theme_override_font_sizes/bold_font_size = 27
-text = "[center][b]A ridiculously large dragon[/b][/center]"

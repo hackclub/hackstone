@@ -1,57 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://4cw3cdp1kc87"]
+[gd_scene load_steps=7 format=3 uid="uid://4cw3cdp1kc87"]
 
 [ext_resource type="Script" path="res://scripts/Avatar.gd" id="1_dhbvc"]
 [ext_resource type="Texture2D" uid="uid://cm264ab0vqh8v" path="res://art/target.png" id="1_sk8mf"]
+[ext_resource type="Texture2D" uid="uid://b47mnp8qk81lr" path="res://art/hackclub/anonymous.png" id="2_y8lvm"]
 [ext_resource type="Script" path="res://scripts/DropArea.gd" id="3_lcydh"]
+[ext_resource type="Texture2D" uid="uid://bxcli71e622oa" path="res://art/card_skin_template/background_rect_4xdark.png" id="5_kykam"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dcqe6"]
-size = Vector2(205, 98)
+size = Vector2(156, 138)
 
 [node name="Avatar" type="Panel" node_paths=PackedStringArray("current_turn_indicator", "title_text", "toughness_text", "dropzone") groups=["avatar"]]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -39.0
-offset_right = 166.0
-offset_bottom = 98.0
+offset_right = 99.0
+offset_bottom = 120.0
 grow_horizontal = 2
-pivot_offset = Vector2(104, -5)
+pivot_offset = Vector2(69, 3)
 mouse_filter = 2
 script = ExtResource("1_dhbvc")
 current_turn_indicator = NodePath("CurrentActiveTexture")
-title_text = NodePath("TitleRichTextLabel")
-toughness_text = NodePath("ToughnessRichTextLabel")
+title_text = NodePath("NinePatchRect2/TitleRichTextLabel")
+toughness_text = NodePath("NinePatchRect/NinePatchRect/ToughnessRichTextLabel")
 dropzone = NodePath("Area2D")
 
-[node name="ToughnessRichTextLabel" type="RichTextLabel" parent="."]
+[node name="NinePatchRect3" type="NinePatchRect" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -43.5
-offset_top = -20.0
-offset_right = 43.5
-offset_bottom = 43.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(50, 49)
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 45
-bbcode_enabled = true
-text = "[center]20[/center]"
-fit_content = true
-scroll_active = false
-
-[node name="TitleRichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_right = 204.0
-offset_bottom = 51.0
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 31
-bbcode_enabled = true
-text = "[center]Anonymous[/center]"
+texture = ExtResource("2_y8lvm")
 
 [node name="CurrentActiveTexture" type="TextureRect" parent="."]
 layout_mode = 0
@@ -65,9 +46,80 @@ mouse_filter = 2
 texture = ExtResource("1_sk8mf")
 expand_mode = 2
 
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -48.0
+offset_right = 43.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(53, 29)
+texture = ExtResource("5_kykam")
+patch_margin_left = 16
+patch_margin_top = 21
+patch_margin_right = 16
+patch_margin_bottom = 15
+
+[node name="ToughnessRichTextLabel" type="RichTextLabel" parent="NinePatchRect/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -24.5
+offset_right = 44.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43.5, 32)
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]20[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 204.0
+offset_bottom = 46.0
+texture = ExtResource("5_kykam")
+patch_margin_left = 17
+patch_margin_top = 25
+patch_margin_right = 20
+patch_margin_bottom = 15
+
+[node name="TitleRichTextLabel" type="RichTextLabel" parent="NinePatchRect2"]
+visible = false
+layout_mode = 0
+offset_top = -2.0
+offset_right = 204.0
+offset_bottom = 49.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "[center]Anonymous[/center]"
+
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("3_lcydh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(102.5, 49)
+position = Vector2(70, 67)
 shape = SubResource("RectangleShape2D_dcqe6")

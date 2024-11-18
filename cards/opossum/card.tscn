@@ -1,16 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bg1nrtw7f0nth"]
+[gd_scene load_steps=10 format=3 uid="uid://bg1nrtw7f0nth"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_cceoh"]
 [ext_resource type="Texture2D" uid="uid://duya7j74gc7f" path="res://cards/opossum/card_opossum.png" id="2_u5egr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ay1f8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6uf41"]
 albedo_texture = ExtResource("2_u5egr")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_e8ddd"]
-viewport_path = NodePath("TitleViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_jb8mi"]
-viewport_path = NodePath("AttackAndDefenseViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_7jkd4"]
+viewport_path = NodePath("PowerToughnessViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_56q1j"]
 viewport_path = NodePath("DescriptionViewport")
@@ -25,6 +22,12 @@ albedo_texture = SubResource("ViewportTexture_56q1j")
 [sub_resource type="ViewportTexture" id="ViewportTexture_pxnlk"]
 viewport_path = NodePath("DescriptionViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_se5js"]
+viewport_path = NodePath("CostViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_e8ddd"]
+viewport_path = NodePath("TitleViewport")
+
 [node name="Card2" instance=ExtResource("1_cceoh")]
 card_name = "Opossum"
 subtype = "Beast"
@@ -35,14 +38,17 @@ description = "[color=41e18e][b]Rabid[/b][/color]: Enemies damaged by Opossum be
 casting_cost = 1
 
 [node name="counterspell_card" parent="card" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_ay1f8")
+surface_material_override/0 = SubResource("StandardMaterial3D_6uf41")
 
-[node name="TitleSprite" parent="card" index="2"]
-texture = SubResource("ViewportTexture_e8ddd")
+[node name="PowerToughnessSprite" parent="card" index="2"]
+texture = SubResource("ViewportTexture_7jkd4")
 
-[node name="PowerToughnessSprite" parent="card" index="3"]
-texture = SubResource("ViewportTexture_jb8mi")
-
-[node name="DescriptionSprite" parent="card" index="4"]
+[node name="DescriptionSprite" parent="card" index="3"]
 material_override = SubResource("StandardMaterial3D_gd18v")
 texture = SubResource("ViewportTexture_pxnlk")
+
+[node name="CastingCostSprite" parent="card" index="4"]
+texture = SubResource("ViewportTexture_se5js")
+
+[node name="TitleSprite" parent="card" index="5"]
+texture = SubResource("ViewportTexture_e8ddd")

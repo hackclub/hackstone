@@ -46,7 +46,7 @@ func _ready() -> void:
 	var box = $CollisionShape3D
 	# VERY IMPORTANT - shapes do not seem to be
 	box.shape = (box.shape as BoxShape3D).duplicate()
-	current_toughness = toughness		
+	current_toughness = toughness
 	refresh_power_toughness()
 	
 func refresh_power_toughness():
@@ -59,7 +59,7 @@ func refresh_power_toughness():
 			toughness_container.visible = false
 	label_power.text = "[center][b]" + str(power) + "[/b][/center]"
 	label_toughness.text = "[center][b]" + str(current_toughness) + "[/b][/center]"
-	label_casting_cost.text = "[right][b]x" + str(casting_cost) + "[/b][/right]"
+	label_casting_cost.text = "[b][center]%d[/center][/b]" % (casting_cost)
 	label_flavortext.text = "[i]" + flavortext + "[/i]"
 	label_description.text = make_description()
 	label_title.text = "[center][b]" + card_name + "[/b][/center]"
@@ -157,6 +157,9 @@ func heal():
 	current_toughness = toughness
 	refresh_power_toughness()
 
+func set_visibility(visibility):
+	power_container.visible = visibility
+	toughness_container.visible = visibility
 
 func is_controlled_by_me():
 	if card_group_controller == null:

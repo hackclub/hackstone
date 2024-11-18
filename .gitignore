@@ -1,3 +1,9 @@
+# Builds
+builds
+
+# Python stuff (web serving)
+venv
+
 # Godot 4+ specific ignores
 .godot/
 /android/

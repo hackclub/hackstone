@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwtifyf2pjseg"]
+
+[ext_resource type="Texture2D" uid="uid://bnwngrd34ng6o" path="res://art/counterspell_hackclub/Reference/cloud1.png" id="1_pnonq"]
+[ext_resource type="Texture2D" uid="uid://bu0sgh032x5eo" path="res://art/counterspell_hackclub/Reference/cloud5.png" id="2_daban"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_m26l1"]
+frames = 2
+frame_0/texture = ExtResource("1_pnonq")
+frame_1/texture = ExtResource("2_daban")
+frame_1/duration = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1xo0"]
+transparency = 1
+depth_draw_mode = 1
+albedo_color = Color(0.32549, 0.341176, 0.32549, 0.00784314)
+albedo_texture = SubResource("AnimatedTexture_m26l1")
+grow_amount = 2.643
+
+[sub_resource type="QuadMesh" id="QuadMesh_h7u1v"]
+material = SubResource("StandardMaterial3D_o1xo0")
+orientation = 1
+
+[node name="Clouds" type="CPUParticles3D"]
+amount = 20
+lifetime = 50.0
+preprocess = 90.0
+mesh = SubResource("QuadMesh_h7u1v")
+emission_shape = 3
+emission_box_extents = Vector3(1.08, 10.32, 1.08)
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0.025, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+orbit_velocity_curve = null
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 10.0
+scale_amount_max = 30.0

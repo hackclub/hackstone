@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://3fwojj544i31"]
+[gd_scene load_steps=20 format=3 uid="uid://3fwojj544i31"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_821a5"]
 [ext_resource type="Texture2D" uid="uid://wut6cbf0pwgv" path="res://cards/party_parrot/output-0.png" id="2_y01yf"]
@@ -13,9 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://dw4mtbl45x4wn" path="res://cards/party_parrot/output-9.png" id="11_bkbjj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kom82"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_v8eu4"]
-viewport_path = NodePath("TitleViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_1v6af"]
 viewport_path = NodePath("AttackAndDefenseViewport")
@@ -32,6 +29,9 @@ albedo_texture = SubResource("ViewportTexture_25pfc")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hlc52"]
 viewport_path = NodePath("DescriptionViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tmb4q"]
+viewport_path = NodePath("CostViewport")
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_s67ib"]
 frames = 10
@@ -56,6 +56,9 @@ frame_8/duration = 1.0
 frame_9/texture = ExtResource("11_bkbjj")
 frame_9/duration = 1.0
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_v8eu4"]
+viewport_path = NodePath("TitleViewport")
+
 [node name="Card" instance=ExtResource("1_821a5")]
 card_name = "Party Parrot"
 subtype = "Emoji"
@@ -67,17 +70,20 @@ type = 1
 [node name="counterspell_card" parent="card" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_kom82")
 
-[node name="TitleSprite" parent="card" index="2"]
-texture = SubResource("ViewportTexture_v8eu4")
-
-[node name="PowerToughnessSprite" parent="card" index="3"]
+[node name="PowerToughnessSprite" parent="card" index="2"]
 texture = SubResource("ViewportTexture_1v6af")
 
-[node name="DescriptionSprite" parent="card" index="4"]
+[node name="DescriptionSprite" parent="card" index="3"]
 material_override = SubResource("StandardMaterial3D_f2nly")
 texture = SubResource("ViewportTexture_hlc52")
 
+[node name="CastingCostSprite" parent="card" index="4"]
+texture = SubResource("ViewportTexture_tmb4q")
+
 [node name="Sprite3D" type="Sprite3D" parent="card" index="5"]
-transform = Transform3D(0.372275, 0, 0, 0, 0.446418, 0, 0, 0, 1, 0, 0.589364, 0.0225132)
+transform = Transform3D(0.372275, 0, 0, 0, 0.446418, 0, 0, 0, 1, 0, 1.18155, 0.0225132)
 pixel_size = 0.05
 texture = SubResource("AnimatedTexture_s67ib")
+
+[node name="TitleSprite" parent="card" index="6"]
+texture = SubResource("ViewportTexture_v8eu4")
