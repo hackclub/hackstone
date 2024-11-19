@@ -3,6 +3,10 @@ extends "res://scripts/CardGroupController.gd"
 var desired_total_width : float = 20
 var current_drag_index : int
 
+func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
+	super.insert_card(card, index, global_position)	
+	card.show_cost(false)
+
 func get_desired_position(index: int) -> Vector3:
 	var num_cards = get_cards_len()
 
@@ -12,7 +16,7 @@ func get_desired_position(index: int) -> Vector3:
 		if current_drag_index <= index:
 			index += 1
 
-	desired_total_width = 3 * float(num_cards)
+	desired_total_width = 3.0 * float(num_cards)
 
 	var width_per_card = float(desired_total_width) / float(num_cards)
 	var absolute_x_offset = width_per_card * float(index)

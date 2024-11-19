@@ -63,7 +63,7 @@ func deal_cards():
 	var time_between_cards = 0.25
 	#await add_test_battlefield_cards(time_between_cards)
 	
-	for i in 7:
+	for i in 1:
 		add_card(CardIndex.get_random_card(), my_hand)
 		add_card(CardIndex.get_random_card(), opponent_hand)
 		await get_tree().create_timer(time_between_cards).timeout
