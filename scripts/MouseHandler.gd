@@ -35,7 +35,11 @@ func find_hovered_card(mouse_pos:Vector2):
 	var result = space_state.intersect_ray(params)
 	
 	if result:
-		return result.collider
+		if result.collider is CardController:
+			return result.collider as CardController
+		if result.collider.get_parent() is Avatar:
+			return result.collider.get_parent() as Avatar
+		return null
 	else:
 		return null
 	
@@ -251,6 +255,8 @@ func play_hack(played_card, target):
 	if not is_hackable(played_card, target):
 		return false
 
+	await played_card.play(target)
+
 	played_card.card_group_controller.take(played_card)
 	# todo: this only works for protagonist, not enemy
 	get_node(game_logic.my_graveyard).insert_card(played_card, 0, played_card.global_position)
@@ -258,17 +264,8 @@ func play_hack(played_card, target):
 func play_attack(played_card, target):
 	if not is_attackable(played_card, target):
 		return false
-	target.damage(played_card.power)
-	if target is CardController and target.is_dead():
-		target.card_group_controller.take(target)
-		get_node(game_logic.opponent_graveyard).insert_card(target, 0, target.global_position)
-
-	played_card.damage(target.power)
-	if played_card.is_dead():
-		played_card.card_group_controller.take(played_card)
-		get_node(game_logic.my_graveyard).insert_card(played_card, 0, target.global_position)
-	else:
-		played_card.do_tap()
+		
+	played_card.play(target)
 		
 func on_target_dropped(event, card):
 	var target = find_hover_target()
@@ -303,9 +300,9 @@ func handle_left_button(event, target):
 func find_hover_target():
 	var target = find_hovered_card(get_viewport().get_mouse_position())
 	
-	if get_node(game_logic.my_avatar).dropzone.hovered:
+	if get_node(game_logic.my_avatar).hovered:
 		target = get_node(game_logic.my_avatar)
-	if get_node(game_logic.opponent_avatar).dropzone.hovered:
+	if get_node(game_logic.opponent_avatar).hovered:
 		target = get_node(game_logic.opponent_avatar)
 	
 	return target

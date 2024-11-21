@@ -25,8 +25,8 @@ func get_desired_rotation(index: int) -> Basis:
 	var degs = spread_degrees * index_ratio
 	var rot = Basis.IDENTITY
 	if hidden_hand:
-		rot = rot.rotated(Vector3.RIGHT, deg_to_rad(180))		
-		rot = rot.rotated(Vector3.FORWARD, deg_to_rad(180))		
+		rot = rot.rotated(Vector3.RIGHT, deg_to_rad(180))
+		rot = rot.rotated(Vector3.FORWARD, deg_to_rad(180))
 	if num_cards <= 1:
 		return rot
 

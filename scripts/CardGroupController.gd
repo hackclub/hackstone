@@ -4,6 +4,7 @@ extends Node3D
 @export var controlled_by_me = false
 var managed_cards : Array[Node3D] = []
 var current_drag_point = null
+@export var graveyard : Node = null 	# the graveyard associated w/ this card group controller
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

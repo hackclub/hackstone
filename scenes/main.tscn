@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://domow2y248mbp" path="res://art/github/star.png" id="3_xkvhj"]
 [ext_resource type="Script" path="res://scripts/CardIndex.gd" id="4_4jspk"]
 [ext_resource type="Texture2D" uid="uid://r7y1dc6vfpa8" path="res://art/github/star-filled.png" id="4_na3d7"]
-[ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="5_1rng6"]
 [ext_resource type="Script" path="res://scripts/GameLogic.gd" id="6_qmtoo"]
 [ext_resource type="Texture2D" uid="uid://bxcli71e622oa" path="res://art/card_skin_template/background_rect_4xdark.png" id="6_rl25m"]
 [ext_resource type="Script" path="res://scripts/DeckController.gd" id="7_3imuv"]
@@ -21,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c1kuehp5fdmdr" path="res://art/counterspell_hackclub/Reference/bg1_big.png" id="16_sjurj"]
 [ext_resource type="Texture2D" uid="uid://d7tnyehh7oxt" path="res://art/counterspell_hackclub/Reference/bg5.png" id="19_tm8m1"]
 [ext_resource type="Texture2D" uid="uid://bnwngrd34ng6o" path="res://art/counterspell_hackclub/Reference/cloud1.png" id="20_m3ydw"]
+[ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="21_5rpq5"]
 
 [sub_resource type="Environment" id="Environment_fi0gu"]
 background_mode = 1
@@ -61,7 +61,7 @@ texture = ExtResource("3_vbm72")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aknhm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w8eg"]
-size = Vector2(2554.5, 576)
+size = Vector2(2554.5, 514)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ppge7"]
 emission_shape_scale = Vector3(0.74, 10, 2)
@@ -411,7 +411,7 @@ position = Vector2(972, 79)
 script = ExtResource("10_w3wlf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dropzones/Control/BattlefieldDropzone"]
-position = Vector2(-8, 192)
+position = Vector2(-8, 324)
 shape = SubResource("RectangleShape2D_6w8eg")
 
 [node name="CardIndex" type="Node3D" parent="."]
@@ -451,47 +451,56 @@ light_energy = 0.5
 
 [node name="Mine" type="Node3D" parent="Card Groups"]
 
-[node name="MyBattlefield" type="Node3D" parent="Card Groups/Mine"]
+[node name="MyBattlefield" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.86888, 0)
 script = ExtResource("2_rndq6")
 controlled_by_me = true
+graveyard = NodePath("../MyGraveyard")
 
-[node name="MyHand" type="Node3D" parent="Card Groups/Mine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.835007, -4.85194, 0)
+[node name="MyHand" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.709553, -6.28475, 0)
 script = ExtResource("7_mqjt8")
 controlled_by_me = true
+graveyard = NodePath("../MyGraveyard")
 
-[node name="MyDeck" type="Node3D" parent="Card Groups/Mine"]
+[node name="MyDeck" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, -4.331, 0)
 script = ExtResource("7_3imuv")
+graveyard = NodePath("../MyGraveyard")
 
-[node name="MyGraveyard" type="Node3D" parent="Card Groups/Mine"]
+[node name="MyGraveyard" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -4.331, 0)
 script = ExtResource("8_4bn74")
+graveyard = NodePath(".")
 
-[node name="MyDrawDisplay" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("destination_cardgroup")]
+[node name="MyDrawDisplay" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("destination_cardgroup", "graveyard")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0434408, -0.3, 4.6705)
 script = ExtResource("13_kk3ip")
 destination_cardgroup = NodePath("../MyHand")
+graveyard = NodePath("../MyGraveyard")
 
 [node name="Opponent" type="Node3D" parent="Card Groups"]
 
-[node name="OpponentBattlefield" type="Node3D" parent="Card Groups/Opponent"]
+[node name="OpponentBattlefield" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.818743, 0)
 script = ExtResource("2_rndq6")
+graveyard = NodePath("../OpponentGraveyard")
 
-[node name="OpponentHand" type="Node3D" parent="Card Groups/Opponent"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.655712, 4.64073, 0)
+[node name="OpponentHand" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.748875, 8.03919, 0)
 script = ExtResource("7_mqjt8")
 hidden_hand = true
+graveyard = NodePath("../OpponentGraveyard")
 
-[node name="OpponentDeck" type="Node3D" parent="Card Groups/Opponent"]
+[node name="OpponentDeck" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.75, 5.5, 0)
 script = ExtResource("7_3imuv")
+graveyard = NodePath("../OpponentGraveyard")
 
-[node name="OpponentGraveyard" type="Node3D" parent="Card Groups/Opponent"]
+[node name="OpponentGraveyard" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 5.5, 0)
 script = ExtResource("8_4bn74")
+graveyard = NodePath(".")
 
 [node name="Special" type="Node3D" parent="Card Groups"]
 
@@ -576,26 +585,15 @@ double_sided = false
 alpha_cut = 1
 texture = ExtResource("16_sjurj")
 
-[node name="OpponentAvatar" parent="." instance=ExtResource("5_1rng6")]
-offset_left = -69.0
-offset_right = 69.0
-tooltip_text = "Your arch nemesis.  Win the game by reducing their life to 0."
-mouse_filter = 1
-mouse_default_cursor_shape = 16
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MyAvatar" parent="." instance=ExtResource("5_1rng6")]
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -69.0
-offset_top = -120.0
-offset_right = 69.0
-offset_bottom = 0.0
-grow_vertical = 0
-pivot_offset = Vector2(70, 119)
-tooltip_text = "It's you!  Don't let your life total get to 0."
-mouse_filter = 1
-mouse_default_cursor_shape = 16
+[node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.99695, 0)
+graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
+
+[node name="OpponentAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.87758, 0)
+graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
 
 [connection signal="pressed" from="Main Canvas/AddCardButton" to="Card Groups/Mine/MyBattlefield" method="_on_add_card_button_pressed"]
 [connection signal="pressed" from="Main Canvas/RemoveCardButton" to="Card Groups/Mine/MyBattlefield" method="_on_remove_card_button_pressed"]

@@ -7,7 +7,6 @@ var turned = false
 var hovered = false
 var moving = false
 var anim_player = null
-
 enum CardType {MINION, HACK}
 enum CardState {TAP = 0, UNTAP = 1, TURN_DOWN = 2, TURN_UP = 3}
 var test_state : CardState = 0
@@ -170,3 +169,22 @@ func is_controlled_by_me():
 		print("weird")
 		return false
 	return card_group_controller.is_controlled_by_me()		
+
+func move_to_graveyard():
+	var graveyard = card_group_controller.graveyard
+	card_group_controller.take(self)
+	graveyard.insert_card(self, 0, self.global_position)
+
+
+func play(target):
+	print("Playing card %s on %s" % [name, target.name])
+	target.damage(power)
+	
+	if target is CardController and target.is_dead():
+		target.move_to_graveyard()
+
+	damage(target.power)
+	if is_dead():
+		move_to_graveyard()
+	else:
+		do_tap()

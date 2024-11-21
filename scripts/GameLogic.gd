@@ -132,6 +132,8 @@ func get_next_action():
 	var ai_hand = get_node(opponent_hand).get_cards()
 	var ai_battlefield = get_node(opponent_battlefield).get_cards()
 	var player_battlefield = get_node(my_battlefield).get_cards()
+	
+	return null
 
 func reset_all_cards(card_group_controller):
 	for card in card_group_controller.get_cards():
