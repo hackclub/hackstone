@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 
 CardIndex="*res://scripts/CardIndex.gd"
 Scenes="*res://scripts/MainMenu.gd"
+Audio="*res://scripts/Audio.gd"
 
 [display]
 

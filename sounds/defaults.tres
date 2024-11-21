@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://d3f4j3k5ep0ew"]
+
+[ext_resource type="AudioStream" uid="uid://cdt7b5s5buo81" path="res://sounds/hit.ogg" id="1_8b5rk"]
+[ext_resource type="AudioStream" uid="uid://3nilbvu8p7s7" path="res://sounds/draw.mp3" id="2_kk36w"]
+
+[sub_resource type="GDScript" id="GDScript_yrye7"]
+script/source = "@export var sounds : Dictionary
+"
+
+[resource]
+script = SubResource("GDScript_yrye7")
+sounds = {
+"draw": ExtResource("2_kk36w"),
+"hit": ExtResource("1_8b5rk")
+}

@@ -1,6 +1,7 @@
-[gd_scene load_steps=39 format=4 uid="uid://dxdy4c55rwyag"]
+[gd_scene load_steps=40 format=4 uid="uid://dxdy4c55rwyag"]
 
 [ext_resource type="Script" path="res://scripts/CardController.gd" id="1_pfeis"]
+[ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="2_r6i3w"]
 [ext_resource type="Texture2D" uid="uid://cpwpa546g7vf0" path="res://cards/orpheus_maximus/card_orpheus.png" id="2_wefk8"]
 [ext_resource type="Texture2D" uid="uid://s8613qfo7hln" path="res://art/card_skin_template/card_counterspell_card_back_02.png" id="3_kn6cs"]
 [ext_resource type="Texture2D" uid="uid://2ml1s0jdha7w" path="res://art/card_skin_template/card_counterspell_card_back_effects.png" id="4_5wt4x"]
@@ -443,6 +444,7 @@ label_type = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContaine
 power_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/PowerContainer")
 toughness_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer")
 cost_container = NodePath("card/CastingCostSprite")
+sound_resource = ExtResource("2_r6i3w")
 
 [node name="card" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

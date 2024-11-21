@@ -142,6 +142,8 @@ func reset_all_cards(card_group_controller):
 		card.heal()
 			
 func draw_card(hand, deck):	
+	var sounds = ResourceLoader.load("res://sounds/defaults.tres").sounds
+	Audio.play(sounds.get("draw"))
 	var card = deck.take_card(0)	
 	if card == null:
 		print("NOTE - player tried to draw a card, failed to do so")

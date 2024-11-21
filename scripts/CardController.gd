@@ -30,6 +30,7 @@ var queue = []
 @export var toughness_container : Node
 @export var cost_container : Node
 @export var type : CardType
+@export var sound_resource : Resource = null
 
 var original_basis : Basis
 var debug = false
@@ -39,6 +40,8 @@ var current_toughness
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if sound_resource == null:
+		sound_resource = load("res://sounds/defaults.tres")
 	self.name = card_name
 	original_basis = self.transform.basis
 	anim_player = $AnimationPlayer
@@ -146,6 +149,7 @@ func _on_animation_finished(anim_name):
 		_process_queue()
 
 func damage(amount):
+	Audio.play(sound_resource.sounds.get("hit"))
 	print(str(self.name) + " got damaged for " + str(amount))
 	current_toughness -= amount
 	refresh_power_toughness()
