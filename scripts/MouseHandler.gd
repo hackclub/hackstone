@@ -12,13 +12,13 @@ var clicked_card = null
 var group_dragged_from = null
 var old_drop_point = null
 @export var game_logic = Node
-@export var battlefield_dropzone : Node
 const CardType = preload("res://scripts/CardController.gd").CardType
 @export var arrow_controller : Control
 @export var sound_resource : Resource
+var mouse_hovering_battlefield = false
 
 func get_drop_point(mouse_position:Vector2):
-	if battlefield_dropzone.hovered:
+	if mouse_hovering_battlefield:
 		var space_state = get_world_3d().get_direct_space_state()
 		var params = PhysicsRayQueryParameters3D.new()
 		var drop_point = project_ray_origin(mouse_position) + project_ray_normal(mouse_position) * 20
@@ -71,7 +71,8 @@ func handle_placement_mousemotion():
 		clear_mouse_state()
 		return
 		
-	if not is_dragging and drag_start_position.distance_to(battlefield_dropzone.get_global_mouse_position()) > click_threshold:
+	if not is_dragging and drag_start_position.distance_to(arrow_controller.get_global_mouse_position()) > click_threshold:
+		print("started dragging")
 		is_dragging = true
 
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -89,7 +90,7 @@ func handle_placement_mousemotion():
 		return
 	clicked_card.card_group_controller.position_override = intersect_pos
 	
-	var drop_point = get_drop_point(battlefield_dropzone.get_global_mouse_position())
+	var drop_point = get_drop_point(arrow_controller.get_global_mouse_position())
 	if drop_point != null:
 		if old_drop_point != null:
 			old_drop_point.unhint()
@@ -102,14 +103,14 @@ func handle_placement_mousemotion():
 			old_drop_point = null
 
 func handle_targeting_mousemotion():
-	if not is_dragging and drag_start_position.distance_to(battlefield_dropzone.get_global_mouse_position()) > click_threshold:
+	if not is_dragging and drag_start_position.distance_to(arrow_controller.get_global_mouse_position()) > click_threshold:
 		is_dragging = true
 		arrow_controller.visible = true
 	if is_dragging:
 		var start = unproject_position(clicked_card.transform.origin)
 		var index_of_card_in_group = clicked_card.card_group_controller.index_of_card(clicked_card)
 		arrow_controller.start_point = drag_start_position
-		arrow_controller.end_point = battlefield_dropzone.get_global_mouse_position()
+		arrow_controller.end_point = arrow_controller.get_global_mouse_position()
 
 		var target = find_hover_target()
 		if target != null && target != clicked_card:
@@ -179,7 +180,7 @@ func on_placement_dropped(event, card: CardController):
 		old_drop_point = null
 
 	var gp = card.global_position
-	var drop_point = get_drop_point(battlefield_dropzone.get_global_mouse_position())
+	var drop_point = get_drop_point(arrow_controller.get_global_mouse_position())
 	
 	if drop_point != null:
 		card.card_group_controller.take(card)
@@ -205,6 +206,7 @@ func on_placement_clicked(event, card: CardController):
 	clear_mouse_state()
 
 func clear_mouse_state():
+	print("clearing mouse state")
 	is_dragging = false
 	clicked_card = null
 	drag_start_position = Vector2.ZERO
@@ -328,3 +330,12 @@ func _input(event):
 		return handle_mousemotion(event)
 	elif (not is_dragging and not targeting):
 		hovering(find_hovered_card(get_viewport().get_mouse_position()))		
+
+
+func _on_battlefield_mouse_entered() -> void:
+	#print("mouse entered battlefield")
+	mouse_hovering_battlefield = true
+	
+func _on_battlefield_mouse_exited() -> void:
+	#print("mouse exited battlefield")
+	mouse_hovering_battlefield = false

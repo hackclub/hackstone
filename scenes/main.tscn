@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=38 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
 [ext_resource type="PackedScene" uid="uid://dhw27v0raxlxp" path="res://components/arrow.tscn" id="2_5cnle"]
@@ -15,13 +15,14 @@
 [ext_resource type="Script" path="res://scripts/HandController.gd" id="7_mqjt8"]
 [ext_resource type="Script" path="res://scripts/GraveyardController.gd" id="8_4bn74"]
 [ext_resource type="Script" path="res://scripts/DragController.gd" id="9_slc2b"]
-[ext_resource type="Script" path="res://scripts/DropArea.gd" id="10_w3wlf"]
+[ext_resource type="Script" path="res://scripts/Notifier.gd" id="10_yh5st"]
 [ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="12_g1dgu"]
 [ext_resource type="Script" path="res://scripts/CardDisplayController.gd" id="13_kk3ip"]
 [ext_resource type="Texture2D" uid="uid://c1kuehp5fdmdr" path="res://art/counterspell_hackclub/Reference/bg1_big.png" id="16_sjurj"]
 [ext_resource type="Texture2D" uid="uid://d7tnyehh7oxt" path="res://art/counterspell_hackclub/Reference/bg5.png" id="19_tm8m1"]
 [ext_resource type="Texture2D" uid="uid://bnwngrd34ng6o" path="res://art/counterspell_hackclub/Reference/cloud1.png" id="20_m3ydw"]
 [ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="21_5rpq5"]
+[ext_resource type="AudioStream" uid="uid://bamttpx8po6un" path="res://sounds/background_game_music.ogg" id="24_tx78l"]
 
 [sub_resource type="Environment" id="Environment_fi0gu"]
 background_mode = 1
@@ -32,37 +33,6 @@ ssil_enabled = true
 sdfgi_enabled = true
 glow_normalized = true
 volumetric_fog_density = 1.427
-
-[sub_resource type="InputEventKey" id="InputEventKey_vmqks"]
-device = -1
-keycode = 65
-unicode = 97
-
-[sub_resource type="Shortcut" id="Shortcut_pr2v5"]
-events = [SubResource("InputEventKey_vmqks")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_7555j"]
-device = -1
-keycode = 82
-unicode = 114
-
-[sub_resource type="Shortcut" id="Shortcut_y0qay"]
-events = [SubResource("InputEventKey_7555j")]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oblri"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rnwxm"]
-texture = ExtResource("3_4vba1")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sp5r6"]
-texture = ExtResource("3_vbm72")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivckr"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aknhm"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6w8eg"]
-size = Vector2(2554.5, 514)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ppge7"]
 emission_shape_scale = Vector3(0.74, 10, 2)
@@ -95,86 +65,252 @@ albedo_texture_force_srgb = true
 [sub_resource type="QuadMesh" id="QuadMesh_74hvr"]
 material = SubResource("StandardMaterial3D_0585v")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oblri"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rnwxm"]
+texture = ExtResource("3_4vba1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sp5r6"]
+texture = ExtResource("3_vbm72")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivckr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aknhm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xicrr"]
+
+[sub_resource type="Animation" id="Animation_0qy5o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ygxuc"]
+resource_name = "display_notification"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.3, 1.9, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4upaa"]
+_data = {
+"RESET": SubResource("Animation_0qy5o"),
+"display_notification": SubResource("Animation_ygxuc")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_14ddb"]
+size = Vector3(50, 4.099, 1)
+
 [node name="root" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fi0gu")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("game_logic", "battlefield_dropzone", "arrow_controller")]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("game_logic", "arrow_controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 size = 15.0
 near = 0.01
 script = ExtResource("1_fysce")
 game_logic = NodePath("../GameLogic")
-battlefield_dropzone = NodePath("../Dropzones/Control/BattlefieldDropzone")
 arrow_controller = NodePath("../Main Canvas/Arrow")
 sound_resource = ExtResource("12_g1dgu")
 
+[node name="CardIndex" type="Node3D" parent="."]
+script = ExtResource("4_4jspk")
+
+[node name="GameLogic" type="Node3D" parent="." node_paths=PackedStringArray("notifier")]
+script = ExtResource("6_qmtoo")
+my_avatar = NodePath("../MyAvatar")
+my_battlefield = NodePath("../Card Groups/Mine/MyBattlefield")
+my_hand = NodePath("../Card Groups/Mine/MyHand")
+my_deck = NodePath("../Card Groups/Mine/MyDeck")
+my_graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
+my_draw_display = NodePath("../Card Groups/Mine/MyDrawDisplay")
+opponent_avatar = NodePath("../OpponentAvatar")
+opponent_battlefield = NodePath("../Card Groups/Opponent/OpponentBattlefield")
+opponent_hand = NodePath("../Card Groups/Opponent/OpponentHand")
+opponent_deck = NodePath("../Card Groups/Opponent/OpponentDeck")
+opponent_graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
+dragger = NodePath("../Card Groups/Special/Dragger")
+panel_done = NodePath("../Main Canvas/DonePanel")
+button_done = NodePath("../Main Canvas/DonePanel/DoneButton")
+sound_resource = ExtResource("12_g1dgu")
+notifier = NodePath("../Main Canvas/NotificationPanel")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(-0.428807, 0.884797, -0.182373, -0.0726428, 0.16745, 0.983201, 0.900471, 0.434851, -0.00752959, 0, 0, 0)
+light_energy = 0.5
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(-0.428807, 0.884796, -0.182373, -0.842365, -0.464547, -0.273163, -0.326414, 0.0364906, 0.944522, 0, 0, -21.263)
+light_energy = 0.5
+
+[node name="Card Groups" type="Node3D" parent="."]
+
+[node name="Mine" type="Node3D" parent="Card Groups"]
+
+[node name="MyBattlefield" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.86888, 0)
+script = ExtResource("2_rndq6")
+controlled_by_me = true
+graveyard = NodePath("../MyGraveyard")
+
+[node name="MyHand" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.709553, -9.428, 0)
+script = ExtResource("7_mqjt8")
+controlled_by_me = true
+graveyard = NodePath("../MyGraveyard")
+
+[node name="MyDeck" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, -4.331, 0)
+script = ExtResource("7_3imuv")
+graveyard = NodePath("../MyGraveyard")
+
+[node name="MyGraveyard" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -4.331, 0)
+script = ExtResource("8_4bn74")
+graveyard = NodePath(".")
+
+[node name="MyDrawDisplay" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("destination_cardgroup", "graveyard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0434408, -0.3, 4.6705)
+script = ExtResource("13_kk3ip")
+destination_cardgroup = NodePath("../MyHand")
+graveyard = NodePath("../MyGraveyard")
+
+[node name="Opponent" type="Node3D" parent="Card Groups"]
+
+[node name="OpponentBattlefield" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.818743, 0)
+script = ExtResource("2_rndq6")
+graveyard = NodePath("../OpponentGraveyard")
+
+[node name="OpponentHand" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.748875, 9.61394, 0)
+script = ExtResource("7_mqjt8")
+hidden_hand = true
+graveyard = NodePath("../OpponentGraveyard")
+
+[node name="OpponentDeck" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.75, 5.5, 0)
+script = ExtResource("7_3imuv")
+graveyard = NodePath("../OpponentGraveyard")
+
+[node name="OpponentGraveyard" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 5.5, 0)
+script = ExtResource("8_4bn74")
+graveyard = NodePath(".")
+
+[node name="Special" type="Node3D" parent="Card Groups"]
+
+[node name="Dragger" type="Node3D" parent="Card Groups/Special"]
+script = ExtResource("9_slc2b")
+animation_speed = 50
+
+[node name="CloudGPUParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.2796, 0, -24.6282)
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+gi_mode = 0
+visibility_range_end = 500.0
+amount = 50
+lifetime = 41.29
+preprocess = 60.0
+randomness = 0.46
+process_material = SubResource("ParticleProcessMaterial_ppge7")
+draw_pass_1 = SubResource("QuadMesh_74hvr")
+
+[node name="CityScape" type="Node3D" parent="."]
+
+[node name="Sprite3D5" type="Sprite3D" parent="CityScape"]
+transform = Transform3D(138.836, 0, 0, 0, 138.836, 0, 0, 0, 2, 0, 2.518, -127)
+texture = ExtResource("19_tm8m1")
+
+[node name="Node3D" type="Node3D" parent="CityScape"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="CityScape/Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
+modulate = Color(0.180151, 0.260296, 0.553372, 1)
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D4" type="Sprite3D" parent="CityScape/Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
+modulate = Color(0.0739803, 0.118656, 0.284365, 1)
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D2" type="Sprite3D" parent="CityScape/Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
+modulate = Color(0.285414, 0.391143, 0.753332, 1)
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D3" type="Sprite3D" parent="CityScape/Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
+modulate = Color(0.469683, 0.551314, 0.84292, 1)
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Node3D2" type="Node3D" parent="CityScape"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="CityScape/Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
+modulate = Color(0.180151, 0.260296, 0.553372, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D4" type="Sprite3D" parent="CityScape/Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
+modulate = Color(0.0739803, 0.118656, 0.284365, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D2" type="Sprite3D" parent="CityScape/Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
+modulate = Color(0.285414, 0.391143, 0.753332, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="Sprite3D3" type="Sprite3D" parent="CityScape/Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
+modulate = Color(0.469683, 0.551314, 0.84292, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("16_sjurj")
+
+[node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63062, 4.05117)
+graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
+
+[node name="OpponentAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12341, 4.38049)
+graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
+
 [node name="Main Canvas" type="CanvasLayer" parent="."]
-
-[node name="AddCardButton" type="Button" parent="Main Canvas"]
-visible = false
-offset_left = 72.0
-offset_top = 72.0
-offset_right = 197.0
-offset_bottom = 122.0
-shortcut = SubResource("Shortcut_pr2v5")
-text = "Add card"
-
-[node name="RemoveCardButton" type="Button" parent="Main Canvas"]
-visible = false
-offset_left = 212.0
-offset_top = 72.0
-offset_right = 337.0
-offset_bottom = 122.0
-shortcut = SubResource("Shortcut_y0qay")
-text = "Remove card"
-
-[node name="AddCardButton2" type="Button" parent="Main Canvas"]
-visible = false
-offset_left = 352.0
-offset_top = 72.0
-offset_right = 477.0
-offset_bottom = 122.0
-shortcut = SubResource("Shortcut_pr2v5")
-text = "Add card"
-
-[node name="RemoveCardButton2" type="Button" parent="Main Canvas"]
-visible = false
-offset_left = 495.0
-offset_top = 72.0
-offset_right = 620.0
-offset_bottom = 122.0
-shortcut = SubResource("Shortcut_y0qay")
-text = "Remove card"
-
-[node name="NotificationPanel" type="Panel" parent="Main Canvas"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -333.0
-offset_top = -22.0
-offset_right = 333.0
-offset_bottom = 22.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(338, 20)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Main Canvas/NotificationPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 8.06
-offset_bottom = 8.06
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-text = "[center]This is a test![/center]"
 
 [node name="DonePanel" type="Panel" parent="Main Canvas"]
 anchors_preset = 6
@@ -378,9 +514,9 @@ expand_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1049.0
+offset_left = 1444.0
 offset_top = 1021.0
-offset_right = -509.0
+offset_right = -114.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -389,217 +525,78 @@ mouse_filter = 1
 mouse_default_cursor_shape = 16
 theme_override_styles/panel = SubResource("StyleBoxEmpty_aknhm")
 
-[node name="Dropzones" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="Dropzones"]
-layout_mode = 3
-anchors_preset = 14
+[node name="NotificationPanel" type="Panel" parent="Main Canvas" node_paths=PackedStringArray("text", "animator")]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = -347.0
-offset_right = 4.0
-offset_bottom = 224.0
+offset_left = -512.0
+offset_top = -51.0
+offset_right = 512.0
+offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(1295, 196)
-size_flags_horizontal = 0
-size_flags_vertical = 0
+pivot_offset = Vector2(528, 71)
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xicrr")
+script = ExtResource("10_yh5st")
+text = NodePath("CenterContainer/NotificationRichTextLabel")
+animator = NodePath("AnimationPlayer")
 
-[node name="BattlefieldDropzone" type="Area2D" parent="Dropzones/Control"]
-position = Vector2(972, 79)
-script = ExtResource("10_w3wlf")
+[node name="NinePatchRect" type="NinePatchRect" parent="Main Canvas/NotificationPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_rl25m")
+patch_margin_left = 19
+patch_margin_top = 22
+patch_margin_right = 20
+patch_margin_bottom = 20
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dropzones/Control/BattlefieldDropzone"]
-position = Vector2(-8, 324)
-shape = SubResource("RectangleShape2D_6w8eg")
+[node name="CenterContainer" type="CenterContainer" parent="Main Canvas/NotificationPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="CardIndex" type="Node3D" parent="."]
-script = ExtResource("4_4jspk")
+[node name="NotificationRichTextLabel" type="RichTextLabel" parent="Main Canvas/NotificationPanel/CenterContainer"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 60
+bbcode_enabled = true
+text = "[center][b][i]YOUR TURN![/i][/b][/center]"
+fit_content = true
 
-[node name="GameLogic" type="Node3D" parent="."]
-script = ExtResource("6_qmtoo")
-my_avatar = NodePath("../MyAvatar")
-my_battlefield = NodePath("../Card Groups/Mine/MyBattlefield")
-my_hand = NodePath("../Card Groups/Mine/MyHand")
-my_deck = NodePath("../Card Groups/Mine/MyDeck")
-my_graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
-my_draw_display = NodePath("../Card Groups/Mine/MyDrawDisplay")
-opponent_avatar = NodePath("../OpponentAvatar")
-opponent_battlefield = NodePath("../Card Groups/Opponent/OpponentBattlefield")
-opponent_hand = NodePath("../Card Groups/Opponent/OpponentHand")
-opponent_deck = NodePath("../Card Groups/Opponent/OpponentDeck")
-opponent_graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
-dragger = NodePath("../Card Groups/Special/Dragger")
-panel_done = NodePath("../Main Canvas/DonePanel")
-button_done = NodePath("../Main Canvas/DonePanel/DoneButton")
-panel_notification = NodePath("../Main Canvas/NotificationPanel")
-richtext_notification_message = NodePath("../Main Canvas/NotificationPanel/RichTextLabel")
-sound_resource = ExtResource("12_g1dgu")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Main Canvas/NotificationPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_4upaa")
+}
 
-[node name="Lights" type="Node3D" parent="."]
-visible = false
+[node name="BattlefieldRigidbody" type="RigidBody3D" parent="."]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.57503)
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+can_sleep = false
+freeze = true
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
-transform = Transform3D(-0.428807, 0.884797, -0.182373, -0.0726428, 0.16745, 0.983201, 0.900471, 0.434851, -0.00752959, 0, 0, 0)
-light_energy = 0.5
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BattlefieldRigidbody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0.148, 0)
+shape = SubResource("BoxShape3D_14ddb")
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Lights"]
-transform = Transform3D(-0.428807, 0.884796, -0.182373, -0.842365, -0.464547, -0.273163, -0.326414, 0.0364906, 0.944522, 0, 0, -21.263)
-light_energy = 0.5
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_tx78l")
+autoplay = true
+parameters/looping = true
 
-[node name="Card Groups" type="Node3D" parent="."]
-
-[node name="Mine" type="Node3D" parent="Card Groups"]
-
-[node name="MyBattlefield" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.86888, 0)
-script = ExtResource("2_rndq6")
-controlled_by_me = true
-graveyard = NodePath("../MyGraveyard")
-
-[node name="MyHand" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.709553, -9.428, 0)
-script = ExtResource("7_mqjt8")
-controlled_by_me = true
-graveyard = NodePath("../MyGraveyard")
-
-[node name="MyDeck" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, -4.331, 0)
-script = ExtResource("7_3imuv")
-graveyard = NodePath("../MyGraveyard")
-
-[node name="MyGraveyard" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -4.331, 0)
-script = ExtResource("8_4bn74")
-graveyard = NodePath(".")
-
-[node name="MyDrawDisplay" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("destination_cardgroup", "graveyard")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0434408, -0.3, 4.6705)
-script = ExtResource("13_kk3ip")
-destination_cardgroup = NodePath("../MyHand")
-graveyard = NodePath("../MyGraveyard")
-
-[node name="Opponent" type="Node3D" parent="Card Groups"]
-
-[node name="OpponentBattlefield" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.818743, 0)
-script = ExtResource("2_rndq6")
-graveyard = NodePath("../OpponentGraveyard")
-
-[node name="OpponentHand" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.748875, 9.61394, 0)
-script = ExtResource("7_mqjt8")
-hidden_hand = true
-graveyard = NodePath("../OpponentGraveyard")
-
-[node name="OpponentDeck" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.75, 5.5, 0)
-script = ExtResource("7_3imuv")
-graveyard = NodePath("../OpponentGraveyard")
-
-[node name="OpponentGraveyard" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 5.5, 0)
-script = ExtResource("8_4bn74")
-graveyard = NodePath(".")
-
-[node name="Special" type="Node3D" parent="Card Groups"]
-
-[node name="Dragger" type="Node3D" parent="Card Groups/Special"]
-script = ExtResource("9_slc2b")
-animation_speed = 50
-
-[node name="CloudGPUParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.2796, 0, -24.6282)
-extra_cull_margin = 16384.0
-ignore_occlusion_culling = true
-gi_mode = 0
-visibility_range_end = 500.0
-amount = 50
-lifetime = 41.29
-preprocess = 60.0
-randomness = 0.46
-process_material = SubResource("ParticleProcessMaterial_ppge7")
-draw_pass_1 = SubResource("QuadMesh_74hvr")
-
-[node name="CityScape" type="Node3D" parent="."]
-
-[node name="Sprite3D5" type="Sprite3D" parent="CityScape"]
-transform = Transform3D(138.836, 0, 0, 0, 138.836, 0, 0, 0, 2, 0, 2.518, -127)
-texture = ExtResource("19_tm8m1")
-
-[node name="Node3D" type="Node3D" parent="CityScape"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
-
-[node name="Sprite3D" type="Sprite3D" parent="CityScape/Node3D"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
-modulate = Color(0.180151, 0.260296, 0.553372, 1)
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D4" type="Sprite3D" parent="CityScape/Node3D"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
-modulate = Color(0.0739803, 0.118656, 0.284365, 1)
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D2" type="Sprite3D" parent="CityScape/Node3D"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
-modulate = Color(0.285414, 0.391143, 0.753332, 1)
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D3" type="Sprite3D" parent="CityScape/Node3D"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
-modulate = Color(0.469683, 0.551314, 0.84292, 1)
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Node3D2" type="Node3D" parent="CityScape"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3, 0)
-
-[node name="Sprite3D" type="Sprite3D" parent="CityScape/Node3D2"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
-modulate = Color(0.180151, 0.260296, 0.553372, 1)
-double_sided = false
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D4" type="Sprite3D" parent="CityScape/Node3D2"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
-modulate = Color(0.0739803, 0.118656, 0.284365, 1)
-double_sided = false
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D2" type="Sprite3D" parent="CityScape/Node3D2"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
-modulate = Color(0.285414, 0.391143, 0.753332, 1)
-double_sided = false
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D3" type="Sprite3D" parent="CityScape/Node3D2"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
-modulate = Color(0.469683, 0.551314, 0.84292, 1)
-double_sided = false
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63062, 4.05117)
-graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
-
-[node name="OpponentAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12341, 4.38049)
-graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
-
-[connection signal="pressed" from="Main Canvas/AddCardButton" to="Card Groups/Mine/MyBattlefield" method="_on_add_card_button_pressed"]
-[connection signal="pressed" from="Main Canvas/RemoveCardButton" to="Card Groups/Mine/MyBattlefield" method="_on_remove_card_button_pressed"]
-[connection signal="pressed" from="Main Canvas/AddCardButton2" to="Card Groups/Opponent/OpponentBattlefield" method="_on_add_card_button_pressed"]
-[connection signal="pressed" from="Main Canvas/RemoveCardButton2" to="Card Groups/Opponent/OpponentBattlefield" method="_on_remove_card_button_pressed"]
 [connection signal="pressed" from="Main Canvas/DonePanel/DoneButton" to="GameLogic" method="_on_done_pressed"]
+[connection signal="mouse_entered" from="BattlefieldRigidbody" to="Camera3D" method="_on_battlefield_mouse_entered"]
+[connection signal="mouse_exited" from="BattlefieldRigidbody" to="Camera3D" method="_on_battlefield_mouse_exited"]

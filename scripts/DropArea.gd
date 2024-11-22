@@ -12,7 +12,9 @@ func _on_parent_resized():
 	collision_shape.shape.extents = get_parent().size / 2
 
 func _mouse_enter() -> void:
+	print("mouse area entered")
 	hovered = true
 
 func _mouse_exit() -> void:
+	print("mouse area exited")
 	hovered = false

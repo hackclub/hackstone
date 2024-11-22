@@ -30,6 +30,7 @@ enum GameState {
 @export var richtext_notification_message : NodePath
 @onready var timer_finished_cb = connect("on_done_pressed", Callable(self, "_on_done_pressed"))
 @export var sound_resource : Resource
+@export var notifier : Node
 
 var state : GameState = GameState.MY_TURN
 var instance = null
@@ -154,8 +155,8 @@ func configure_done_button(str):
 	get_node(button_done).text = str
 	
 func display_notification(str):
-	get_node(richtext_notification_message).text = "[center]%s[/center]" % str
-
+	notifier.display_notification(str)
+	
 func test_clicking(card: CardController):
 	var parent = card.card_group_controller
 	if parent == get_node(my_hand):

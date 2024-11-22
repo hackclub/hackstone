@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cq5lurxxpg0m6"]
+[gd_scene load_steps=15 format=3 uid="uid://cq5lurxxpg0m6"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kawqa"]
 [ext_resource type="PackedScene" uid="uid://cyy80f1himq7q" path="res://scenes/flag.tscn" id="2_kkoix"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/FpsCounter.gd" id="3_3mbs6"]
 [ext_resource type="Texture2D" uid="uid://cnnpcx755qf7q" path="res://art/counterspell_hackclub/Reference/pink_button.png" id="3_65mxl"]
 [ext_resource type="FontFile" uid="uid://c4daplyykkrh0" path="res://fonts/phantomsans/PhantomSans0.8-Bold.otf" id="4_s4ja2"]
+[ext_resource type="AudioStream" uid="uid://b4pcqqgpo8ssa" path="res://sounds/background_menu_music.ogg" id="7_nv0cn"]
 
 [sub_resource type="Environment" id="Environment_hmidh"]
 background_mode = 1
@@ -128,5 +129,10 @@ environment = SubResource("Environment_gk5e2")
 
 [node name="flag" parent="SubViewport" instance=ExtResource("2_kkoix")]
 transform = Transform3D(0.0107671, 0, -0.0225626, 0, 0.025, 0, 0.0225626, 0, 0.0107671, 0, 0, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_nv0cn")
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="Panel/PlayButton" to="." method="goto_main"]
