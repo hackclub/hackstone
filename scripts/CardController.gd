@@ -161,6 +161,9 @@ func heal():
 	current_toughness = toughness
 	refresh_power_toughness()
 
+func is_damaged():
+	return toughness != current_toughness
+
 func show_power_toughness(visibility):
 	power_container.visible = visibility
 	toughness_container.visible = visibility

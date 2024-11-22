@@ -22,7 +22,7 @@ func get_drop_point(mouse_position:Vector2):
 		var space_state = get_world_3d().get_direct_space_state()
 		var params = PhysicsRayQueryParameters3D.new()
 		var drop_point = project_ray_origin(mouse_position) + project_ray_normal(mouse_position) * 20
-		return DropPoint.new(drop_point, get_node(game_logic.my_battlefield))
+		return DropPoint.new(drop_point, game_logic.my_battlefield)
 	return null
 
 func find_hovered_card(mouse_pos:Vector2):
@@ -50,11 +50,11 @@ func hovering(card):
 		return
 	
 	var valid_hover_cardgroups = [
-		get_node(game_logic.my_hand), 
-		get_node(game_logic.my_battlefield),
-		get_node(game_logic.my_graveyard),
-		get_node(game_logic.opponent_battlefield),
-		get_node(game_logic.opponent_graveyard),
+		game_logic.my_hand, 
+		game_logic.my_battlefield,
+		game_logic.my_graveyard,
+		game_logic.opponent_battlefield,
+		game_logic.opponent_graveyard,
 		]
 	if card != null and card.card_group_controller not in valid_hover_cardgroups:
 		return
@@ -129,10 +129,10 @@ func determine_dragtype(target):
 		if clicked_card.tapped:
 			return DragType.NONE
 				
-	if from_group == get_node(game_logic.my_battlefield):
+	if from_group == game_logic.my_battlefield:
 		return DragType.TARGET
 	
-	if from_group == get_node(game_logic.my_hand):
+	if from_group == game_logic.my_hand:
 		var type = target.type
 		if clicked_card != null:
 			type = clicked_card.type
@@ -166,7 +166,7 @@ func start_placement_click(event, card: CardController):
 	drag_start_position = event.position
 	group_dragged_from = card.card_group_controller
 	var gp = card.global_position
-	get_node(game_logic.dragger).insert_card(group_dragged_from.take(card), 0, gp)
+	game_logic.dragger.insert_card(group_dragged_from.take(card), 0, gp)
 	handle_placement_mousemotion()
 
 func on_placement_dropped(event, card: CardController):
@@ -240,7 +240,7 @@ func is_hackable(attacker, target):
 	if attacker.card_group_controller == target.card_group_controller:
 		return false
 		
-	if target.card_group_controller == get_node(game_logic.my_graveyard) or target.card_group_controller == get_node(game_logic.opponent_graveyard):
+	if target.card_group_controller == game_logic.my_graveyard or target.card_group_controller == game_logic.opponent_graveyard:
 		return false
 	
 	return true
@@ -249,10 +249,10 @@ func is_attackable(attacker, target):
 	if attacker.card_group_controller == target.card_group_controller:
 		return false
 		
-	if target.card_group_controller == get_node(game_logic.my_graveyard) or target.card_group_controller == get_node(game_logic.opponent_graveyard):
+	if target.card_group_controller == game_logic.my_graveyard or target.card_group_controller == game_logic.opponent_graveyard:
 		return false
 		
-	if target.card_group_controller == get_node(game_logic.my_hand) or target.card_group_controller == get_node(game_logic.opponent_hand):
+	if target.card_group_controller == game_logic.my_hand or target.card_group_controller == game_logic.opponent_hand:
 		return false
 	
 	return true
@@ -265,7 +265,7 @@ func play_hack(played_card, target):
 
 	played_card.card_group_controller.take(played_card)
 	# todo: this only works for protagonist, not enemy
-	get_node(game_logic.my_graveyard).insert_card(played_card, 0, played_card.global_position)
+	game_logic.my_graveyard.insert_card(played_card, 0, played_card.global_position)
 
 func play_attack(played_card, target):
 	if not is_attackable(played_card, target):
@@ -276,10 +276,10 @@ func play_attack(played_card, target):
 func on_target_dropped(event, card):
 	var target = find_hover_target()
 		
-	if clicked_card.card_group_controller == get_node(game_logic.my_hand):
+	if clicked_card.card_group_controller == game_logic.my_hand:
 		play_hack(clicked_card, target)
 	
-	if clicked_card.card_group_controller == get_node(game_logic.my_battlefield):
+	if clicked_card.card_group_controller == game_logic.my_battlefield:
 		play_attack(clicked_card, target)
 		
 	clear_mouse_state()
@@ -306,10 +306,10 @@ func handle_left_button(event, target):
 func find_hover_target():
 	var target = find_hovered_card(get_viewport().get_mouse_position())
 	
-	if get_node(game_logic.my_avatar).hovered:
-		target = get_node(game_logic.my_avatar)
-	if get_node(game_logic.opponent_avatar).hovered:
-		target = get_node(game_logic.opponent_avatar)
+	if game_logic.my_avatar.hovered:
+		target = game_logic.my_avatar
+	if game_logic.opponent_avatar.hovered:
+		target = game_logic.opponent_avatar
 	
 	return target
 	

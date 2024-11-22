@@ -135,7 +135,7 @@ sound_resource = ExtResource("12_g1dgu")
 [node name="CardIndex" type="Node3D" parent="."]
 script = ExtResource("4_4jspk")
 
-[node name="GameLogic" type="Node3D" parent="." node_paths=PackedStringArray("notifier")]
+[node name="GameLogic" type="Node3D" parent="." node_paths=PackedStringArray("my_avatar", "my_battlefield", "my_hand", "my_deck", "my_graveyard", "my_draw_display", "opponent_avatar", "opponent_battlefield", "opponent_hand", "opponent_deck", "opponent_graveyard", "dragger", "panel_done", "button_done", "panel_notification", "richtext_notification_message", "notifier")]
 script = ExtResource("6_qmtoo")
 my_avatar = NodePath("../MyAvatar")
 my_battlefield = NodePath("../Card Groups/Mine/MyBattlefield")
@@ -151,6 +151,8 @@ opponent_graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
 dragger = NodePath("../Card Groups/Special/Dragger")
 panel_done = NodePath("../Main Canvas/DonePanel")
 button_done = NodePath("../Main Canvas/DonePanel/DoneButton")
+panel_notification = NodePath("../Main Canvas/NotificationPanel")
+richtext_notification_message = NodePath("../Main Canvas/NotificationPanel/CenterContainer/NotificationRichTextLabel")
 sound_resource = ExtResource("12_g1dgu")
 notifier = NodePath("../Main Canvas/NotificationPanel")
 

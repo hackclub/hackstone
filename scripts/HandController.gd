@@ -21,7 +21,7 @@ func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
 
 func get_desired_position(index: int) -> Vector3:	
 	var num_cards = get_cards_len()
-	var desired_width = pow(1.25, float(num_cards)) * 3
+	var desired_width = clampf(pow(1.25, float(num_cards)) * 3, 0, 15)
 	var width_per_card = float(desired_width) / float(num_cards)
 
 	if num_cards == 1:
