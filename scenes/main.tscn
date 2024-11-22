@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=44 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
 [ext_resource type="PackedScene" uid="uid://dhw27v0raxlxp" path="res://components/arrow.tscn" id="2_5cnle"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://d7tnyehh7oxt" path="res://art/counterspell_hackclub/Reference/bg5.png" id="19_tm8m1"]
 [ext_resource type="Texture2D" uid="uid://bnwngrd34ng6o" path="res://art/counterspell_hackclub/Reference/cloud1.png" id="20_m3ydw"]
 [ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="21_5rpq5"]
+[ext_resource type="Script" path="res://scripts/HandHider.gd" id="24_t1swl"]
 [ext_resource type="AudioStream" uid="uid://bamttpx8po6un" path="res://sounds/background_game_music.ogg" id="24_tx78l"]
 
 [sub_resource type="Environment" id="Environment_fi0gu"]
@@ -117,6 +118,63 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_14ddb"]
 size = Vector3(50, 4.099, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xga5y"]
+size = Vector3(163.701, 27.5475, 1)
+
+[sub_resource type="Animation" id="Animation_nkfqs"]
+resource_name = "hand_display"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card Groups/Mine/MyHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.709553, -9.428, 0), Vector3(-0.71, -8, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4tns4"]
+resource_name = "hand_hide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card Groups/Mine/MyHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.71, -8, 0), Vector3(-0.709553, -9.428, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0fllw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card Groups/Mine/MyHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.709553, -9.428, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_66udh"]
+_data = {
+"RESET": SubResource("Animation_0fllw"),
+"hand_display": SubResource("Animation_nkfqs"),
+"hand_hide": SubResource("Animation_4tns4")
+}
 
 [node name="root" type="Node3D"]
 
@@ -599,6 +657,27 @@ stream = ExtResource("24_tx78l")
 autoplay = true
 parameters/looping = true
 
+[node name="HandHider" type="RigidBody3D" parent="." node_paths=PackedStringArray("animator")]
+collision_layer = 4
+collision_mask = 4
+gravity_scale = 0.0
+can_sleep = false
+freeze = true
+script = ExtResource("24_t1swl")
+animator = NodePath("AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandHider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0907745, -19.006, 0)
+shape = SubResource("BoxShape3D_xga5y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HandHider"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_66udh")
+}
+
 [connection signal="pressed" from="Main Canvas/DonePanel/DoneButton" to="GameLogic" method="_on_done_pressed"]
 [connection signal="mouse_entered" from="BattlefieldRigidbody" to="Camera3D" method="_on_battlefield_mouse_entered"]
 [connection signal="mouse_exited" from="BattlefieldRigidbody" to="Camera3D" method="_on_battlefield_mouse_exited"]
+[connection signal="mouse_entered" from="HandHider" to="HandHider" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HandHider" to="HandHider" method="_on_mouse_exited"]
