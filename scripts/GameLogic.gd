@@ -160,5 +160,8 @@ func test_clicking(card: CardController):
 		else:
 			my_battlefield.insert_card(card, 0, card.global_position)
 
+func is_my_turn():
+	return state == GameState.MY_TURN
+
 func card_clicked(card: CardController):
 	test_clicking(card)

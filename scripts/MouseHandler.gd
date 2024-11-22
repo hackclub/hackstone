@@ -145,6 +145,9 @@ func determine_dragtype(target):
 		
 		
 func handle_mousemotion(event):
+	if !game_logic.is_my_turn():
+		hovering(find_hovered_card(get_viewport().get_mouse_position()))		
+		return
 	if event.button_mask & MOUSE_BUTTON_MASK_LEFT:
 		match determine_dragtype(clicked_card):
 			DragType.TARGET:
@@ -157,7 +160,7 @@ func handle_mousemotion(event):
 		hovering(find_hovered_card(get_viewport().get_mouse_position()))		
 
 func start_placement_click(event, card: CardController):
-	if card == null or not card.is_controlled_by_me():
+	if !game_logic.is_my_turn() or card == null or not card.is_controlled_by_me():
 		print("Clicking not allowed on " + str(card.name))
 		clear_mouse_state()
 		return
