@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=37 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
 [ext_resource type="PackedScene" uid="uid://dhw27v0raxlxp" path="res://components/arrow.tscn" id="2_5cnle"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://scripts/GraveyardController.gd" id="8_4bn74"]
 [ext_resource type="Script" path="res://scripts/DragController.gd" id="9_slc2b"]
 [ext_resource type="Script" path="res://scripts/DropArea.gd" id="10_w3wlf"]
+[ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="12_g1dgu"]
 [ext_resource type="Script" path="res://scripts/CardDisplayController.gd" id="13_kk3ip"]
 [ext_resource type="Texture2D" uid="uid://c1kuehp5fdmdr" path="res://art/counterspell_hackclub/Reference/bg1_big.png" id="16_sjurj"]
 [ext_resource type="Texture2D" uid="uid://d7tnyehh7oxt" path="res://art/counterspell_hackclub/Reference/bg5.png" id="19_tm8m1"]
@@ -107,6 +108,7 @@ script = ExtResource("1_fysce")
 game_logic = NodePath("../GameLogic")
 battlefield_dropzone = NodePath("../Dropzones/Control/BattlefieldDropzone")
 arrow_controller = NodePath("../Main Canvas/Arrow")
+sound_resource = ExtResource("12_g1dgu")
 
 [node name="Main Canvas" type="CanvasLayer" parent="."]
 
@@ -208,7 +210,7 @@ offset_bottom = 1074.0
 mouse_filter = 2
 
 [node name="Stars" type="Node2D" parent="Main Canvas"]
-position = Vector2(501, 541)
+position = Vector2(894, 541)
 scale = Vector2(0.5, 0.5)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Main Canvas/Stars"]
@@ -435,6 +437,7 @@ panel_done = NodePath("../Main Canvas/DonePanel")
 button_done = NodePath("../Main Canvas/DonePanel/DoneButton")
 panel_notification = NodePath("../Main Canvas/NotificationPanel")
 richtext_notification_message = NodePath("../Main Canvas/NotificationPanel/RichTextLabel")
+sound_resource = ExtResource("12_g1dgu")
 
 [node name="Lights" type="Node3D" parent="."]
 visible = false
@@ -458,7 +461,7 @@ controlled_by_me = true
 graveyard = NodePath("../MyGraveyard")
 
 [node name="MyHand" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.709553, -6.28475, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.709553, -9.428, 0)
 script = ExtResource("7_mqjt8")
 controlled_by_me = true
 graveyard = NodePath("../MyGraveyard")
@@ -487,7 +490,7 @@ script = ExtResource("2_rndq6")
 graveyard = NodePath("../OpponentGraveyard")
 
 [node name="OpponentHand" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.748875, 8.03919, 0)
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.748875, 9.61394, 0)
 script = ExtResource("7_mqjt8")
 hidden_hand = true
 graveyard = NodePath("../OpponentGraveyard")
@@ -588,11 +591,11 @@ texture = ExtResource("16_sjurj")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.99695, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63062, 4.05117)
 graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
 
 [node name="OpponentAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.87758, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12341, 4.38049)
 graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
 
 [connection signal="pressed" from="Main Canvas/AddCardButton" to="Card Groups/Mine/MyBattlefield" method="_on_add_card_button_pressed"]

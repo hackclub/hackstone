@@ -7,6 +7,7 @@ var power : int = 0
 var card_group_controller : Node = null
 var hovered = false
 @export var graveyard : Node = null 	# the graveyard associated w/ this card group controller
+var type = Avatar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

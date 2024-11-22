@@ -29,6 +29,7 @@ enum GameState {
 @export var panel_notification : NodePath
 @export var richtext_notification_message : NodePath
 @onready var timer_finished_cb = connect("on_done_pressed", Callable(self, "_on_done_pressed"))
+@export var sound_resource : Resource
 
 var state : GameState = GameState.MY_TURN
 var instance = null
@@ -63,7 +64,7 @@ func deal_cards():
 	var time_between_cards = 0.25
 	#await add_test_battlefield_cards(time_between_cards)
 	
-	for i in 1:
+	for i in 7:
 		add_card(CardIndex.get_random_card(), my_hand)
 		add_card(CardIndex.get_random_card(), opponent_hand)
 		await get_tree().create_timer(time_between_cards).timeout
@@ -142,8 +143,7 @@ func reset_all_cards(card_group_controller):
 		card.heal()
 			
 func draw_card(hand, deck):	
-	var sounds = ResourceLoader.load("res://sounds/defaults.tres").sounds
-	Audio.play(sounds.get("draw"))
+	Audio.play(sound_resource.sounds.get("draw"))
 	var card = deck.take_card(0)	
 	if card == null:
 		print("NOTE - player tried to draw a card, failed to do so")

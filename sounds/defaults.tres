@@ -1,7 +1,9 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://d3f4j3k5ep0ew"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://d3f4j3k5ep0ew"]
 
 [ext_resource type="AudioStream" uid="uid://cdt7b5s5buo81" path="res://sounds/hit.ogg" id="1_8b5rk"]
-[ext_resource type="AudioStream" uid="uid://3nilbvu8p7s7" path="res://sounds/draw.mp3" id="2_kk36w"]
+[ext_resource type="AudioStream" uid="uid://ddgw2ir3mmqr8" path="res://sounds/draw.ogg" id="2_sgs4j"]
+[ext_resource type="AudioStream" uid="uid://bmbahxmv63kr4" path="res://sounds/plop.ogg" id="3_d8f2r"]
+[ext_resource type="AudioStream" uid="uid://l72p4xa51evd" path="res://sounds/yoink.ogg" id="4_t4bwo"]
 
 [sub_resource type="GDScript" id="GDScript_yrye7"]
 script/source = "@export var sounds : Dictionary
@@ -10,6 +12,8 @@ script/source = "@export var sounds : Dictionary
 [resource]
 script = SubResource("GDScript_yrye7")
 sounds = {
-"draw": ExtResource("2_kk36w"),
+"draw": ExtResource("2_sgs4j"),
+"enter_hand": ExtResource("4_t4bwo"),
+"enter_play": ExtResource("3_d8f2r"),
 "hit": ExtResource("1_8b5rk")
 }

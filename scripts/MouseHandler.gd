@@ -15,6 +15,7 @@ var old_drop_point = null
 @export var battlefield_dropzone : Node
 const CardType = preload("res://scripts/CardController.gd").CardType
 @export var arrow_controller : Control
+@export var sound_resource : Resource
 
 func get_drop_point(mouse_position:Vector2):
 	if battlefield_dropzone.hovered:
@@ -84,6 +85,8 @@ func handle_placement_mousemotion():
 
 	# Calculate intersection of ray with the plane
 	var intersect_pos = plane.intersects_ray(ray_origin, ray_direction)
+	if clicked_card.card_group_controller is HandController:
+		return
 	clicked_card.card_group_controller.position_override = intersect_pos
 	
 	var drop_point = get_drop_point(battlefield_dropzone.get_global_mouse_position())
@@ -182,6 +185,7 @@ func on_placement_dropped(event, card: CardController):
 		card.card_group_controller.take(card)
 		var drop_index = drop_point.card_group_controller.current_drag_index
 		drop_point.card_group_controller.insert_card(card, drop_index, gp)
+		Audio.play(sound_resource.sounds.get("enter_play"))
 	else:
 		card.card_group_controller.take(card)
 		group_dragged_from.insert_card(card, 0, gp)
