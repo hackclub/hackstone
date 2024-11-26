@@ -306,10 +306,6 @@ libraries = {
 "": SubResource("AnimationLibrary_66udh")
 }
 
-[node name="DebounceTimer" type="Timer" parent="HandHider"]
-wait_time = 0.5
-one_shot = true
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fi0gu")
 
