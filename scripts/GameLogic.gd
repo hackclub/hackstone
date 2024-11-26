@@ -105,7 +105,6 @@ func _perform_ai():
 		if my_avatar.toughness <= 0:
 			return
 		await get_tree().create_timer(1.0).timeout
-		var next_action = get_next_action()
 		var res = get_next_action(cur_mana)
 		var next_action = res[1]
 		cur_mana = res[0]
