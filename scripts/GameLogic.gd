@@ -103,7 +103,7 @@ func _perform_ai():
 	var cur_mana = 10
 	while(true):
 		if my_avatar.toughness <= 0:
-			return
+			return # Quick hack to fix bug on player's death
 		await get_tree().create_timer(1.0).timeout
 		var res = get_next_action(cur_mana)
 		var next_action = res[1]
