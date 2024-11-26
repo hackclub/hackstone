@@ -132,6 +132,7 @@ transform = Transform3D(0.0107671, 0, -0.0225626, 0, 0.025, 0, 0.0225626, 0, 0.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_nv0cn")
+volume_db = -29.931
 autoplay = true
 parameters/looping = true
 

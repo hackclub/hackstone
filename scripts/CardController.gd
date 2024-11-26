@@ -124,6 +124,8 @@ func on_clicked() -> void:
 func do_tap() -> void:	
 	tapped = !tapped
 	queue.append("tap" if tapped else "untap")
+	if not tapped:
+		Audio.play(sound_resource.sounds.get("untap"))
 	
 func do_turn():
 	turned = !turned

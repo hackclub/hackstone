@@ -25,6 +25,171 @@
 [ext_resource type="Script" path="res://scripts/HandHider.gd" id="24_t1swl"]
 [ext_resource type="AudioStream" uid="uid://bamttpx8po6un" path="res://sounds/background_game_music.ogg" id="24_tx78l"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xga5y"]
+size = Vector3(163.701, 15.2567, 1)
+
+[sub_resource type="Animation" id="Animation_0fllw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card Groups/Mine/MyHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.709553, -9.428, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MyAvatar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -2.63062, 4.05117)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HandHider/CollisionShape3D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(163.701, 15.2567, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BattlefieldRigidbody:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_nkfqs"]
+resource_name = "hand_display"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card Groups/Mine/MyHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.709553, -9.428, 0), Vector3(-0.71, -8, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MyAvatar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.1, 1),
+"update": 0,
+"values": [Vector3(0, -2.63062, 4.05117), Vector3(0, -7.9402, -3.57395)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HandHider/CollisionShape3D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(163.701, 11.8994, 1), Vector3(163.701, 13.5, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BattlefieldRigidbody:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4tns4"]
+resource_name = "hand_hide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card Groups/Mine/MyHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.71, -8, 0), Vector3(-0.709553, -9.428, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MyAvatar:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -4.931, 1.421), Vector3(0, -2.63062, 4.05117)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HandHider/CollisionShape3D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(163.701, 13.5, 1), Vector3(163.701, 11.899, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BattlefieldRigidbody:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_66udh"]
+_data = {
+"RESET": SubResource("Animation_0fllw"),
+"hand_display": SubResource("Animation_nkfqs"),
+"hand_hide": SubResource("Animation_4tns4")
+}
+
 [sub_resource type="Environment" id="Environment_fi0gu"]
 background_mode = 1
 background_color = Color(0.484884, 0.472692, 0.473723, 1)
@@ -117,66 +282,33 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_14ddb"]
-size = Vector3(50, 4.099, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xga5y"]
-size = Vector3(163.701, 27.5475, 1)
-
-[sub_resource type="Animation" id="Animation_nkfqs"]
-resource_name = "hand_display"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Card Groups/Mine/MyHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.709553, -9.428, 0), Vector3(-0.71, -8, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4tns4"]
-resource_name = "hand_hide"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Card Groups/Mine/MyHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.71, -8, 0), Vector3(-0.709553, -9.428, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_0fllw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Card Groups/Mine/MyHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.709553, -9.428, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_66udh"]
-_data = {
-"RESET": SubResource("Animation_0fllw"),
-"hand_display": SubResource("Animation_nkfqs"),
-"hand_hide": SubResource("Animation_4tns4")
-}
+size = Vector3(50, 1.59258, 1)
 
 [node name="root" type="Node3D"]
+
+[node name="HandHider" type="RigidBody3D" parent="." node_paths=PackedStringArray("animator")]
+collision_layer = 8
+collision_mask = 8
+gravity_scale = 0.0
+can_sleep = false
+freeze = true
+script = ExtResource("24_t1swl")
+animator = NodePath("AnimationPlayer")
+sound_resource = ExtResource("12_g1dgu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HandHider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0907745, -10.0203, 0.613312)
+shape = SubResource("BoxShape3D_xga5y")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HandHider"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_66udh")
+}
+
+[node name="DebounceTimer" type="Timer" parent="HandHider"]
+wait_time = 0.5
+one_shot = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fi0gu")
@@ -363,6 +495,7 @@ alpha_cut = 1
 texture = ExtResource("16_sjurj")
 
 [node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63062, 4.05117)
 graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
 
@@ -625,10 +758,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="NotificationRichTextLabel" type="RichTextLabel" parent="Main Canvas/NotificationPanel/CenterContainer"]
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
+mouse_filter = 2
 theme_override_font_sizes/bold_italics_font_size = 60
 bbcode_enabled = true
 text = "[center][b][i]YOUR TURN![/i][/b][/center]"
@@ -649,35 +784,17 @@ can_sleep = false
 freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BattlefieldRigidbody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0.148, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.001, 0.0373511, 2.604)
 shape = SubResource("BoxShape3D_14ddb")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("24_tx78l")
+volume_db = -30.0
 autoplay = true
 parameters/looping = true
 
-[node name="HandHider" type="RigidBody3D" parent="." node_paths=PackedStringArray("animator")]
-collision_layer = 4
-collision_mask = 4
-gravity_scale = 0.0
-can_sleep = false
-freeze = true
-script = ExtResource("24_t1swl")
-animator = NodePath("AnimationPlayer")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HandHider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0907745, -19.006, 0)
-shape = SubResource("BoxShape3D_xga5y")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HandHider"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_66udh")
-}
-
+[connection signal="mouse_entered" from="HandHider" to="HandHider" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HandHider" to="HandHider" method="_on_mouse_exited"]
 [connection signal="pressed" from="Main Canvas/DonePanel/DoneButton" to="GameLogic" method="_on_done_pressed"]
 [connection signal="mouse_entered" from="BattlefieldRigidbody" to="Camera3D" method="_on_battlefield_mouse_entered"]
 [connection signal="mouse_exited" from="BattlefieldRigidbody" to="Camera3D" method="_on_battlefield_mouse_exited"]
-[connection signal="mouse_entered" from="HandHider" to="HandHider" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="HandHider" to="HandHider" method="_on_mouse_exited"]

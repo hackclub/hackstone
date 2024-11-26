@@ -86,6 +86,7 @@ func _on_done_pressed():
 	await on_turn_start()
 
 func on_turn_start():
+	Audio.play(sound_resource.sounds.get("turn_start"))
 	await display_notification("Your turn" if state == GameState.MY_TURN else "Opponent's turn")
 	configure_done_button("DONE")
 	await get_tree().create_timer(2).timeout
