@@ -20,7 +20,6 @@ enum GameState {
 @export var opponent_hand : Node
 @export var opponent_deck : Node
 @export var opponent_graveyard : Node
-
 @export var dragger : Node
 
 @export var panel_done : Node
@@ -101,21 +100,63 @@ func on_turn_start():
 		await draw_card(my_draw_display, my_deck)
 
 func _perform_ai():
+	var cur_mana = 10
 	while(true):
+		if my_avatar.toughness <= 0:
+			return # Quick hack to fix bug on player's death
 		await get_tree().create_timer(1.0).timeout
-		var next_action = get_next_action()
+		var res = get_next_action(cur_mana)
+		var next_action = res[1]
+		cur_mana = res[0]
 		if next_action == null:
 			break
 		next_action.call()
 	await get_tree().create_timer(1.0).timeout
 	_on_done_pressed()
 
-func get_next_action():
-	var ai_hand = opponent_hand.get_cards()
-	var ai_battlefield = opponent_battlefield.get_cards()
-	var player_battlefield = my_battlefield.get_cards()
+# HACK: Returns an array of [int, Action] in order to keep track of mana for now
+func get_next_action(mana: int) -> Array:
+	if my_avatar == null || my_avatar.toughness <= 0:
+		return [mana, null]
 	
-	return null
+	var ai_hand_cards: Array[Node3D] = opponent_hand.get_cards()
+	var ai_hand = opponent_hand
+	var ai_battlefield_cards: Array[Node3D] = opponent_battlefield.get_cards()
+	var ai_battlefield = opponent_battlefield
+	var player_battlefield_cards: Array[Node3D] = my_battlefield.get_cards()
+	var player_battlefield = my_battlefield
+	
+	var card = null
+	var is_hack = false
+	for i in ai_hand_cards:
+		if i.casting_cost <= mana:
+			card = i
+			is_hack = i.type == CardType.HACK
+			break
+
+
+	if card != null:
+		if not is_hack:
+			return [mana - card.casting_cost, func(): ai_battlefield.insert_card(ai_hand.take(card), 0, card.transform.origin)]
+		elif player_battlefield_cards.size() > 0: 
+			return [mana - card.casting_cost, func(): card.play(player_battlefield_cards[randi() % player_battlefield_cards.size()])]
+		else:
+			return [mana - card.casting_cost, func(): card.play(my_avatar)]
+	# Can't play any minions, must attack now
+	for c in ai_battlefield_cards:
+		if c.tapped == false:
+			var rng = RandomNumberGenerator.new()
+			var f = func(): 
+				if rng.randf_range(0.0, 1.0)>0.5 && player_battlefield_cards.size() > 0:
+					c.play(player_battlefield_cards[randi() % player_battlefield_cards.size()])
+				else:
+					c.play(my_avatar) # Attack player
+	
+			return [mana, f]
+			
+	
+	
+	return [mana, null]
 
 func reset_all_cards(card_group_controller):
 	for card in card_group_controller.get_cards():
