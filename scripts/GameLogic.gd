@@ -62,11 +62,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		var evt = event as InputEventKey
-		if evt.keycode == KEY_SPACE:
-			await run_tests()
+#func _input(event):
+	#if event is InputEventKey and event.pressed:
+		#var evt = event as InputEventKey
+		#if evt.keycode == KEY_SPACE:
+			#await run_tests()
 
 func run_tests():
 	var groups = [my_hand, my_graveyard, my_deck, my_battlefield]
