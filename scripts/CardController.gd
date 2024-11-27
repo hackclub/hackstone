@@ -26,6 +26,7 @@ var queue = []
 @export var label_subtype : RichTextLabel
 @export var label_description : RichTextLabel
 @export var label_type : RichTextLabel
+@export var label_damage_indicator : RichTextLabel
 @export var power_container : Node
 @export var toughness_container : Node
 @export var cost_container : Node
@@ -154,6 +155,9 @@ func damage(amount):
 	Audio.play(sound_resource.sounds.get("hit"))
 	print(str(self.name) + " got damaged for " + str(amount))
 	current_toughness -= amount
+	label_damage_indicator.text = "[color=ff0000][center][b]" + str(-amount) + "[/b][/center]"
+	if amount > 0: 
+		queue.append("damaged" if not tapped else "damaged_tapped")
 	refresh_power_toughness()
 	
 func is_dead():

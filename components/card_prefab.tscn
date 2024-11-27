@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://dxdy4c55rwyag"]
+[gd_scene load_steps=43 format=4 uid="uid://dxdy4c55rwyag"]
 
 [ext_resource type="Script" path="res://scripts/CardController.gd" id="1_pfeis"]
 [ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="2_r6i3w"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bhpqonfiembbk" path="res://art/hackclub/pow.png" id="11_5iwf3"]
 [ext_resource type="Texture2D" uid="uid://bphjgh2fp7hvk" path="res://art/hackclub/heart.png" id="12_7mteo"]
 [ext_resource type="Texture2D" uid="uid://b8l3hckrx43uy" path="res://art/card_skin_template/background_rect_4xlight.png" id="12_vak35"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1snw7"]
+viewport_path = NodePath("DamageIndicatorViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx6a1"]
 resource_name = "Card Image"
@@ -239,6 +242,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DamageIndicatorSprite:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DamageIndicatorSprite:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_h51jn"]
 resource_name = "hover_begin"
@@ -410,9 +437,115 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, -1.5708), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_dobx1"]
+resource_name = "damaged"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(0.3, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.414097), Vector3(0, 0, -0.429595), Vector3(0, 0, 0.414097), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(0.3, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.414097), Vector3(0, 0, -0.429595), Vector3(0, 0, 0.414097), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageIndicatorSprite:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.025), Vector3(0, 1, 0.025)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageIndicatorSprite:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(2, 2, 2), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q22v4"]
+resource_name = "damaged_tapped"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(0.3, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.5708), Vector3(0, 0, -1.97222), Vector3(0, 0, -1.15192), Vector3(0, 0, -1.97222), Vector3(0, 0, -1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(0.3, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.5708), Vector3(0, 0, -1.97222), Vector3(0, 0, -1.15192), Vector3(0, 0, -1.97222), Vector3(0, 0, -1.5708)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DamageIndicatorSprite:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.025), Vector3(0, 1, 0.025)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DamageIndicatorSprite:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(2, 2, 2), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cjtkg"]
 _data = {
 "RESET": SubResource("Animation_1yn1y"),
+"damaged": SubResource("Animation_dobx1"),
+"damaged_tapped": SubResource("Animation_q22v4"),
 "hover_begin": SubResource("Animation_h51jn"),
 "hover_end": SubResource("Animation_j52lu"),
 "tap": SubResource("Animation_djkyf"),
@@ -429,7 +562,7 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2upq3"]
 
-[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "power_container", "toughness_container", "cost_container")]
+[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "label_damage_indicator", "power_container", "toughness_container", "cost_container")]
 gravity_scale = 0.0
 script = ExtResource("1_pfeis")
 description = "[color=41e18e][b]Replace me[/b][/color]: Does something generic.  Please replace this with your own text."
@@ -441,10 +574,17 @@ label_flavortext = NodePath("DescriptionViewport/CardInfo/MarginContainer2/Contr
 label_subtype = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/Subtype")
 label_description = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/VBoxContainer/Description")
 label_type = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/CardType")
+label_damage_indicator = NodePath("DamageIndicatorViewport/DamageIndicatorPanel/DamageIndicatorLabel")
 power_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/PowerContainer")
 toughness_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer")
 cost_container = NodePath("card/CastingCostSprite")
 sound_resource = ExtResource("2_r6i3w")
+
+[node name="DamageIndicatorSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+double_sided = false
+alpha_cut = 3
+texture = SubResource("ViewportTexture_1snw7")
 
 [node name="card" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -486,7 +626,7 @@ transform = Transform3D(0.64, 0, 0, 0, 0.64, 0, 0, 0, 1, 0, -0.236297, 0.0206564
 texture = SubResource("ViewportTexture_nflyd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00283813, -0.098938, 0.00246477)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0409518, -0.0836923, 0.00246477)
 shape = SubResource("BoxShape3D_huxpf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -641,7 +781,6 @@ theme = ExtResource("8_lkgco")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
 
 [node name="TextureRect" type="TextureRect" parent="TitleViewport/Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -726,7 +865,6 @@ theme = ExtResource("8_lkgco")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
 
 [node name="TextureRect" type="TextureRect" parent="PowerToughnessViewport/Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -912,3 +1050,40 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DamageIndicatorViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+
+[node name="DamageIndicatorPanel" type="Panel" parent="DamageIndicatorViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2upq3")
+
+[node name="DamageIndicatorLabel" type="RichTextLabel" parent="DamageIndicatorViewport/DamageIndicatorPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -27.5
+offset_right = 12.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 61)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.2757, 0.2757, 0.2757, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[color=ff0000][center][b]-5[/b][/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
