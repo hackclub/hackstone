@@ -155,8 +155,13 @@ func damage(amount):
 	Audio.play(sound_resource.sounds.get("hit"))
 	print(str(self.name) + " got damaged for " + str(amount))
 	current_toughness -= amount
-	label_damage_indicator.text = "[color=ff0000][center][b]" + str(-amount) + "[/b][/center]"
-	if amount > 0: 
+	
+	var anim_player: AnimationPlayer = $AnimationPlayer
+	if amount > 0:
+		label_damage_indicator.text = "[color=ff0000][center][b]" + str(-amount) + "[/b][/center]"
+	elif amount < 0:
+		label_damage_indicator.text = "[color=00ff00][center][b]+" + str(-amount) + "[/b][/center]"
+	if amount != 0: 
 		queue.append("damaged" if not tapped else "damaged_tapped")
 	refresh_power_toughness()
 	

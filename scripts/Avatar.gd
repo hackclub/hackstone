@@ -19,9 +19,15 @@ func _process(delta: float) -> void:
 	pass
 
 func damage(amount: int) -> void:
+	
+	# Handle damage label
+	var anim_player: AnimationPlayer = $AnimationPlayer
 	if amount > 0:
 		damage_indicator_label.text = "[color=ff0000][center][b]" + str(-amount) + "[/b][/center]"
-		$AnimationPlayer.play("avatar_damaged")
+	elif amount < 0:
+		damage_indicator_label.text = "[color=00ff00][center][b]+" + str(-amount) + "[/b][/center]"
+	if amount != 0: anim_player.play("avatar_damaged")
+	
 	print(str(self.name) + " got damaged for " + str(amount))
 	toughness -= amount
 	refresh()

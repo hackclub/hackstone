@@ -491,7 +491,6 @@ alpha_cut = 1
 texture = ExtResource("16_sjurj")
 
 [node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
-process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63062, 4.05117)
 graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
 
