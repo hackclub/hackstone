@@ -2,6 +2,7 @@ class_name Avatar
 extends Node3D
 
 @export var toughness_text : Node
+@export var damage_indicator_label : RichTextLabel
 var toughness : int = 20
 var power : int = 0
 var card_group_controller : Node = null
@@ -18,10 +19,12 @@ func _process(delta: float) -> void:
 	pass
 
 func damage(amount: int) -> void:
+	if amount > 0:
+		damage_indicator_label.text = "[color=ff0000][center][b]" + str(-amount) + "[/b][/center]"
+		$AnimationPlayer.play("avatar_damaged")
 	print(str(self.name) + " got damaged for " + str(amount))
 	toughness -= amount
 	refresh()
-#	
 	if toughness <= 0:
 		get_tree().change_scene_to_packed(load("res://scenes/gameover.tscn"))
 
