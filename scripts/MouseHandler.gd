@@ -11,11 +11,31 @@ var click_threshold = 10  # Distance threshold to differentiate between click an
 var clicked_card = null
 var group_dragged_from = null
 var old_drop_point = null
+
 @export var game_logic = Node
 const CardType = preload("res://scripts/CardController.gd").CardType
 @export var arrow_controller : Control
 @export var sound_resource : Resource
 var mouse_hovering_battlefield = false
+
+var rng = RandomNumberGenerator.new()
+var shake_strength = 0
+var shake_fade_speed = 1
+var inital_position: Vector3 = position
+func _process(delta: float) -> void: 
+	if shake_strength > 0:
+		shake_strength = lerp(shake_strength, 0.0, shake_fade_speed*delta)
+		position = inital_position + Vector3(rng.randf_range(-shake_strength, shake_strength), rng.randf_range(-shake_strength, shake_strength), 0.0)
+	else:
+		position = inital_position
+
+func initiate_camera_shake(strength: float, fade_speed: float) -> void:
+	var inital_position: Vector3 = position
+	shake_strength = strength
+	shake_fade_speed = fade_speed
+	
+
+
 
 func get_drop_point(mouse_position:Vector2):
 	if mouse_hovering_battlefield:

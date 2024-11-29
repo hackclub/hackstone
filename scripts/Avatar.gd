@@ -9,7 +9,7 @@ var card_group_controller : Node = null
 var hovered = false
 @export var graveyard : Node = null 	# the graveyard associated w/ this card group controller
 var type = Avatar
-
+@export var main_camera : Camera3D = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	refresh()
@@ -23,6 +23,7 @@ func damage(amount: int) -> void:
 	# Handle damage label
 	var anim_player: AnimationPlayer = $AnimationPlayer
 	if amount > 0:
+		await main_camera.initiate_camera_shake(amount, 10)
 		damage_indicator_label.text = "[color=ff0000][center][b]" + str(-amount) + "[/b][/center]"
 	elif amount < 0:
 		damage_indicator_label.text = "[color=00ff00][center][b]+" + str(-amount) + "[/b][/center]"

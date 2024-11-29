@@ -490,13 +490,15 @@ double_sided = false
 alpha_cut = 1
 texture = ExtResource("16_sjurj")
 
-[node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
+[node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard", "main_camera") instance=ExtResource("21_5rpq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63062, 4.05117)
 graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
+main_camera = NodePath("../Camera3D")
 
-[node name="OpponentAvatar" parent="." node_paths=PackedStringArray("graveyard") instance=ExtResource("21_5rpq5")]
+[node name="OpponentAvatar" parent="." node_paths=PackedStringArray("graveyard", "main_camera") instance=ExtResource("21_5rpq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12341, 4.38049)
 graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
+main_camera = NodePath("../Camera3D")
 
 [node name="Main Canvas" type="CanvasLayer" parent="."]
 

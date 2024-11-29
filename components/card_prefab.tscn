@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://dxdy4c55rwyag"]
+[gd_scene load_steps=41 format=4 uid="uid://dxdy4c55rwyag"]
 
 [ext_resource type="Script" path="res://scripts/CardController.gd" id="1_pfeis"]
 [ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="2_r6i3w"]
@@ -177,6 +177,9 @@ viewport_path = NodePath("CostViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_nflyd"]
 viewport_path = NodePath("TitleViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_4sttb"]
+viewport_path = NodePath("TiredViewport")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_huxpf"]
 size = Vector3(3.63873, 4.99524, 0.0436401)
 
@@ -269,7 +272,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_dobx1"]
 resource_name = "damaged"
-length = 0.5
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -277,7 +280,7 @@ tracks/0/path = NodePath("card:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.166667, 0.266667),
+"times": PackedFloat32Array(0, 0.0333333, 0.166667, 0.333333, 0.6),
 "transitions": PackedFloat32Array(0.3, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.414097), Vector3(0, 0, -0.429595), Vector3(0, 0, 0.414097), Vector3(0, 0, 0)]
@@ -289,7 +292,7 @@ tracks/1/path = NodePath("CollisionShape3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.166667, 0.266667),
+"times": PackedFloat32Array(0, 0.0333333, 0.166667, 0.333333, 0.6),
 "transitions": PackedFloat32Array(0.3, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.414097), Vector3(0, 0, -0.429595), Vector3(0, 0, 0.414097), Vector3(0, 0, 0)]
@@ -301,10 +304,10 @@ tracks/2/path = NodePath("DamageIndicatorSprite:position")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0.025), Vector3(0, 1, 0.025)]
+"values": [Vector3(0.9, -1, 0.025), Vector3(0.9, 0, 0.025)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -313,59 +316,7 @@ tracks/3/path = NodePath("DamageIndicatorSprite:scale")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(2, 2, 2), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_q22v4"]
-resource_name = "damaged_tapped"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("card:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.166667, 0.266667),
-"transitions": PackedFloat32Array(0.3, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, -1.5708), Vector3(0, 0, -1.97222), Vector3(0, 0, -1.15192), Vector3(0, 0, -1.97222), Vector3(0, 0, -1.5708)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.166667, 0.266667),
-"transitions": PackedFloat32Array(0.3, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, -1.5708), Vector3(0, 0, -1.97222), Vector3(0, 0, -1.15192), Vector3(0, 0, -1.97222), Vector3(0, 0, -1.5708)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("DamageIndicatorSprite:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0.025), Vector3(0, 1, 0.025)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("DamageIndicatorSprite:scale")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.333333, 0.5),
+"times": PackedFloat32Array(0, 0.566667, 0.666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(2, 2, 2), Vector3(0, 0, 0)]
@@ -453,34 +404,6 @@ tracks/2/keys = {
 "values": [Vector3(0, 0, 0.3), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_djkyf"]
-resource_name = "tap"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("card:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.3, 2),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.5708)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.3, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -1.5708)]
-}
-
 [sub_resource type="Animation" id="Animation_ffm8s"]
 resource_name = "turn_down"
 length = 0.5
@@ -513,45 +436,14 @@ tracks/0/keys = {
 "values": [Vector3(0, 3.14159, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_8o8kj"]
-resource_name = "untap"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("card:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.2, 0.01),
-"update": 0,
-"values": [Vector3(0, 0, -1.5708), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.3, 1),
-"update": 0,
-"values": [Vector3(0, 0, -1.5708), Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cjtkg"]
 _data = {
 "RESET": SubResource("Animation_1yn1y"),
 "damaged": SubResource("Animation_dobx1"),
-"damaged_tapped": SubResource("Animation_q22v4"),
 "hover_begin": SubResource("Animation_h51jn"),
 "hover_end": SubResource("Animation_j52lu"),
-"tap": SubResource("Animation_djkyf"),
 "turn_down": SubResource("Animation_ffm8s"),
-"turn_up": SubResource("Animation_ts05e"),
-"untap": SubResource("Animation_8o8kj")
+"turn_up": SubResource("Animation_ts05e")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btjd5"]
@@ -562,7 +454,7 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2upq3"]
 
-[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "label_damage_indicator", "power_container", "toughness_container", "cost_container")]
+[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "label_damage_indicator", "label_asleep_indicator", "power_container", "toughness_container", "cost_container")]
 gravity_scale = 0.0
 script = ExtResource("1_pfeis")
 description = "[color=41e18e][b]Replace me[/b][/color]: Does something generic.  Please replace this with your own text."
@@ -575,6 +467,7 @@ label_subtype = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxConta
 label_description = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/VBoxContainer/Description")
 label_type = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/CardType")
 label_damage_indicator = NodePath("DamageIndicatorViewport/DamageIndicatorPanel/DamageIndicatorLabel")
+label_asleep_indicator = NodePath("TiredViewport/Panel/TiredLabel")
 power_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/PowerContainer")
 toughness_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer")
 cost_container = NodePath("card/CastingCostSprite")
@@ -624,6 +517,12 @@ texture = SubResource("ViewportTexture_dk2me")
 [node name="TitleSprite" type="Sprite3D" parent="card"]
 transform = Transform3D(0.64, 0, 0, 0, 0.64, 0, 0, 0, 1, 0, -0.236297, 0.0206564)
 texture = SubResource("ViewportTexture_nflyd")
+
+[node name="TiredLabelSprite" type="Sprite3D" parent="card"]
+transform = Transform3D(0.325965, -0.248031, 0, 0.248031, 0.325965, 0, 0, 0, 2.40537, 0.457929, 0.706594, 0.0999313)
+modulate = Color(0, 1, 0, 1)
+pixel_size = 0.059
+texture = SubResource("ViewportTexture_4sttb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0409518, -0.0836923, 0.00246477)
@@ -1085,5 +984,47 @@ theme_override_font_sizes/bold_font_size = 40
 bbcode_enabled = true
 text = "[color=ff0000][center][b]-5[/b][/center]"
 fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="TiredViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(512, 128)
+render_target_update_mode = 4
+
+[node name="Panel" type="Panel" parent="TiredViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_lkgco")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
+
+[node name="TiredLabel" type="RichTextLabel" parent="TiredViewport/Panel"]
+custom_minimum_size = Vector2(359.25, 36.09)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.625
+offset_top = -18.045
+offset_right = 179.625
+offset_bottom = 18.045
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(779.104, -126.758)
+theme = ExtResource("8_lkgco")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/bold_font_size = 35
+bbcode_enabled = true
+text = "[center][b]ASLEEP[/b][/center]"
 scroll_active = false
 autowrap_mode = 0

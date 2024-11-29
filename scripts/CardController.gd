@@ -27,6 +27,7 @@ var queue = []
 @export var label_description : RichTextLabel
 @export var label_type : RichTextLabel
 @export var label_damage_indicator : RichTextLabel
+@export var label_asleep_indicator : RichTextLabel
 @export var power_container : Node
 @export var toughness_container : Node
 @export var cost_container : Node
@@ -44,6 +45,7 @@ func _ready() -> void:
 	if sound_resource == null:
 		sound_resource = load("res://sounds/defaults.tres")
 	self.name = card_name
+	label_asleep_indicator.visible = false
 	original_basis = self.transform.basis
 	anim_player = $AnimationPlayer
 	anim_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
@@ -124,9 +126,11 @@ func on_clicked() -> void:
 
 func do_tap() -> void:	
 	tapped = !tapped
-	queue.append("tap" if tapped else "untap")
-	if not tapped:
-		Audio.play(sound_resource.sounds.get("untap"))
+	label_asleep_indicator.visible = tapped # TODO: Add animations
+	
+	#queue.append("tap" if tapped else "untap")
+	#if not tapped:
+		#Audio.play(sound_resource.sounds.get("untap"))
 	
 func do_turn():
 	turned = !turned
@@ -162,7 +166,7 @@ func damage(amount):
 	elif amount < 0:
 		label_damage_indicator.text = "[color=00ff00][center][b]+" + str(-amount) + "[/b][/center]"
 	if amount != 0: 
-		queue.append("damaged" if not tapped else "damaged_tapped")
+		queue.append("damaged")
 	refresh_power_toughness()
 	
 func is_dead():
