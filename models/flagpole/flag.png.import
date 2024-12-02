@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cp37c554xh3ha"
-path.bptc="res://.godot/imported/flag.png-d5b2c047ecd8d1ab8324967f574122f0.bptc.ctex"
-path.astc="res://.godot/imported/flag.png-d5b2c047ecd8d1ab8324967f574122f0.astc.ctex"
+path="res://.godot/imported/flag.png-d5b2c047ecd8d1ab8324967f574122f0.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://models/flagpole/flag.png"
-dest_files=["res://.godot/imported/flag.png-d5b2c047ecd8d1ab8324967f574122f0.bptc.ctex", "res://.godot/imported/flag.png-d5b2c047ecd8d1ab8324967f574122f0.astc.ctex"]
+dest_files=["res://.godot/imported/flag.png-d5b2c047ecd8d1ab8324967f574122f0.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=true
 compress/lossy_quality=0.7
 compress/hdr_compression=1

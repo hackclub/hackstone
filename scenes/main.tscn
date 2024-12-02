@@ -191,8 +191,8 @@ _data = {
 }
 
 [sub_resource type="Environment" id="Environment_fi0gu"]
-background_mode = 1
 background_color = Color(0.484884, 0.472692, 0.473723, 1)
+ambient_light_color = Color(0, 0, 0, 0)
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
@@ -309,11 +309,12 @@ libraries = {
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fi0gu")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("game_logic", "arrow_controller")]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("my_avatar", "game_logic", "arrow_controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 size = 15.0
 near = 0.01
 script = ExtResource("1_fysce")
+my_avatar = NodePath("../MyAvatar")
 game_logic = NodePath("../GameLogic")
 arrow_controller = NodePath("../Main Canvas/Arrow")
 sound_resource = ExtResource("12_g1dgu")
@@ -398,12 +399,12 @@ hidden_hand = true
 graveyard = NodePath("../OpponentGraveyard")
 
 [node name="OpponentDeck" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.75, 5.5, 0)
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 9.75, 4.1923, 0)
 script = ExtResource("7_3imuv")
 graveyard = NodePath("../OpponentGraveyard")
 
 [node name="OpponentGraveyard" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 5.5, 0)
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 12, 4.1923, 0)
 script = ExtResource("8_4bn74")
 graveyard = NodePath(".")
 
@@ -490,15 +491,17 @@ double_sided = false
 alpha_cut = 1
 texture = ExtResource("16_sjurj")
 
-[node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard", "main_camera") instance=ExtResource("21_5rpq5")]
+[node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard", "main_camera", "stars") instance=ExtResource("21_5rpq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63062, 4.05117)
 graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
 main_camera = NodePath("../Camera3D")
+stars = [NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect2"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect3"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect4"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect5"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect6"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect7"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect8"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect9"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect10")]
 
-[node name="OpponentAvatar" parent="." node_paths=PackedStringArray("graveyard", "main_camera") instance=ExtResource("21_5rpq5")]
+[node name="OpponentAvatar" parent="." node_paths=PackedStringArray("graveyard", "main_camera", "stars") instance=ExtResource("21_5rpq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12341, 4.38049)
 graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
 main_camera = NodePath("../Camera3D")
+stars = [NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect2"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect3"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect4"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect5"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect6"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect7"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect8"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect9"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect10")]
 
 [node name="Main Canvas" type="CanvasLayer" parent="."]
 
@@ -535,11 +538,11 @@ offset_right = 1914.0
 offset_bottom = 1074.0
 mouse_filter = 2
 
-[node name="Stars" type="Node2D" parent="Main Canvas"]
-position = Vector2(894, 541)
+[node name="MyStars" type="Node2D" parent="Main Canvas"]
+position = Vector2(975, 536)
 scale = Vector2(0.5, 0.5)
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Main Canvas/Stars"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Main Canvas/MyStars"]
 clip_contents = true
 anchors_preset = 3
 anchor_left = 1.0
@@ -559,7 +562,7 @@ patch_margin_top = 20
 patch_margin_right = 22
 patch_margin_bottom = 19
 
-[node name="Stars" type="Panel" parent="Main Canvas/Stars"]
+[node name="Stars" type="Panel" parent="Main Canvas/MyStars"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -575,7 +578,7 @@ scale = Vector2(0.666, 0.666)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ivckr")
 
-[node name="Unfilled Stars" type="HBoxContainer" parent="Main Canvas/Stars/Stars"]
+[node name="Unfilled Stars" type="HBoxContainer" parent="Main Canvas/MyStars/Stars"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -584,57 +587,57 @@ offset_right = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect2" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect3" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect4" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect4" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect5" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect5" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect6" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect6" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect7" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect7" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect8" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect8" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect9" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect9" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="TextureRect10" type="TextureRect" parent="Main Canvas/Stars/Stars/Unfilled Stars"]
+[node name="TextureRect10" type="TextureRect" parent="Main Canvas/MyStars/Stars/Unfilled Stars"]
 layout_mode = 2
 texture = ExtResource("3_xkvhj")
 expand_mode = 2
 
-[node name="Filled Stars" type="HBoxContainer" parent="Main Canvas/Stars/Stars"]
+[node name="Filled Stars" type="HBoxContainer" parent="Main Canvas/MyStars/Stars"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -643,59 +646,230 @@ offset_right = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
+[node name="TextureRect" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
+[node name="TextureRect2" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
+[node name="TextureRect3" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect4" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
-visible = false
+[node name="TextureRect4" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect5" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
-visible = false
+[node name="TextureRect5" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect6" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
-visible = false
+[node name="TextureRect6" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect7" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
-visible = false
+[node name="TextureRect7" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect8" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
-visible = false
+[node name="TextureRect8" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect9" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
-visible = false
+[node name="TextureRect9" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2
 
-[node name="TextureRect10" type="TextureRect" parent="Main Canvas/Stars/Stars/Filled Stars"]
-visible = false
+[node name="TextureRect10" type="TextureRect" parent="Main Canvas/MyStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="OpponentStars" type="Node2D" parent="Main Canvas"]
+position = Vector2(975, -472)
+scale = Vector2(0.5, 0.5)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Main Canvas/OpponentStars"]
+clip_contents = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1095.0
+offset_top = 960.0
+offset_right = 1818.0
+offset_bottom = 1072.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_rl25m")
+region_rect = Rect2(1.5, 3.25, 254.5, 251.5)
+patch_margin_left = 19
+patch_margin_top = 20
+patch_margin_right = 22
+patch_margin_bottom = 19
+
+[node name="Stars" type="Panel" parent="Main Canvas/OpponentStars"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1114.0
+offset_top = 983.0
+offset_right = 2152.33
+offset_bottom = 1083.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.666, 0.666)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ivckr")
+
+[node name="Unfilled Stars" type="HBoxContainer" parent="Main Canvas/OpponentStars/Stars"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect7" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect8" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect9" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="TextureRect10" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Unfilled Stars"]
+layout_mode = 2
+texture = ExtResource("3_xkvhj")
+expand_mode = 2
+
+[node name="Filled Stars" type="HBoxContainer" parent="Main Canvas/OpponentStars/Stars"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect7" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect8" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect9" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
+layout_mode = 2
+texture = ExtResource("4_na3d7")
+expand_mode = 2
+
+[node name="TextureRect10" type="TextureRect" parent="Main Canvas/OpponentStars/Stars/Filled Stars"]
+modulate = Color(0.153077, 0.153077, 0.153077, 1)
 layout_mode = 2
 texture = ExtResource("4_na3d7")
 expand_mode = 2

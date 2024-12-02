@@ -11,6 +11,7 @@ var click_threshold = 10  # Distance threshold to differentiate between click an
 var clicked_card = null
 var group_dragged_from = null
 var old_drop_point = null
+@export var my_avatar : Node
 
 @export var game_logic = Node
 const CardType = preload("res://scripts/CardController.gd").CardType
@@ -22,6 +23,8 @@ var rng = RandomNumberGenerator.new()
 var shake_strength = 0
 var shake_fade_speed = 1
 var inital_position: Vector3 = position
+
+
 func _process(delta: float) -> void: 
 	if shake_strength > 0:
 		shake_strength = lerp(shake_strength, 0.0, shake_fade_speed*delta)
@@ -34,8 +37,6 @@ func initiate_camera_shake(strength: float, fade_speed: float) -> void:
 	shake_strength = strength
 	shake_fade_speed = fade_speed
 	
-
-
 
 func get_drop_point(mouse_position:Vector2):
 	if mouse_hovering_battlefield:
@@ -184,6 +185,11 @@ func start_placement_click(event, card: CardController):
 		print("Clicking not allowed on " + str(card.name))
 		clear_mouse_state()
 		return
+		
+	if not my_avatar.check_cost(card.casting_cost):
+		print("Not enough mana to play " + str(card.name))
+		clear_mouse_state()
+		return
 	clicked_card = card
 	is_dragging = false
 	drag_start_position = event.position
@@ -293,7 +299,7 @@ func play_hack(played_card, target):
 func play_attack(played_card, target):
 	if not is_attackable(played_card, target):
 		return false
-		
+	
 	played_card.play(target)
 		
 func on_target_dropped(event, card):
