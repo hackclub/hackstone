@@ -270,6 +270,23 @@ tracks/6/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_s7cj7"]
+resource_name = "attack"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.101824, 0.199309),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.209749, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_dobx1"]
 resource_name = "damaged"
 length = 0.7
@@ -436,23 +453,6 @@ tracks/0/keys = {
 "values": [Vector3(0, 3.14159, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_s7cj7"]
-resource_name = "attack"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("card:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.101824, 0.199309),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.209749, 0), Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cjtkg"]
 _data = {
 "RESET": SubResource("Animation_1yn1y"),
@@ -510,9 +510,9 @@ surface_material_override/2 = SubResource("StandardMaterial3D_jye3l")
 [node name="Empty" type="Node3D" parent="card"]
 
 [node name="PowerToughnessSprite" type="Sprite3D" parent="card"]
-transform = Transform3D(0.632914, 0, 0, 0, 0.632914, 0, 0, 0, 1.47148, 0.003, -2.431, 0.021)
+transform = Transform3D(0.632914, 0, 0, 0, 0.632914, 0, 0, 0, 1.47148, 0.003, -2.431, 0.02)
 double_sided = false
-alpha_cut = 3
+render_priority = 5
 texture = SubResource("ViewportTexture_mwdf3")
 
 [node name="DescriptionSprite" type="Sprite3D" parent="card"]
@@ -522,14 +522,12 @@ material_override = SubResource("StandardMaterial3D_wunfl")
 cast_shadow = 0
 gi_mode = 0
 double_sided = false
-alpha_cut = 2
 alpha_scissor_threshold = 0.1
 texture = SubResource("ViewportTexture_nfmpx")
 
 [node name="CastingCostSprite" type="Sprite3D" parent="card"]
 transform = Transform3D(1.24757, 0, 0, 0, 1.24757, 0, 0, 0, 1, -1.753, 2.379, 0.021)
 double_sided = false
-alpha_cut = 3
 texture = SubResource("ViewportTexture_dk2me")
 
 [node name="TitleSprite" type="Sprite3D" parent="card"]
@@ -790,7 +788,6 @@ offset_top = -190.0
 offset_right = 509.0
 offset_bottom = -45.0
 grow_vertical = 2
-texture = ExtResource("5_wf1j1")
 expand_mode = 2
 
 [node name="TitleBackground" type="Panel" parent="PowerToughnessViewport/Panel"]

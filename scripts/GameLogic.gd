@@ -91,14 +91,21 @@ func on_turn_start():
 	await get_tree().create_timer(2).timeout
 
 	if state == GameState.OPPONENT_TURN:
+		await add_mana(opponent_avatar)
 		await reset_all_cards(opponent_battlefield)
 		draw_card(opponent_hand, opponent_deck)
 		await get_tree().create_timer(1.0).timeout
 		Thread.new().start(Callable(self, "_perform_ai"))
 	else:
+		await add_mana(my_avatar)
 		await reset_all_cards(my_battlefield)
 		await draw_card(my_draw_display, my_deck)
 
+func add_mana(avatar_node):
+	var new_mana = min(10, avatar_node.get_max_mana()+1)
+	avatar_node.set_max_mana(new_mana)
+	avatar_node.regen_mana()
+	
 func _perform_ai():
 	var cur_mana = 10
 	while(true):
