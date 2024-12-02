@@ -23,7 +23,7 @@ func damage(amount: int) -> void:
 	# Handle damage label
 	var anim_player: AnimationPlayer = $AnimationPlayer
 	if amount > 0:
-		await main_camera.initiate_camera_shake(amount, 10)
+		main_camera.initiate_camera_shake(amount, 10)
 		damage_indicator_label.text = "[color=ff0000][center][b]" + str(-amount) + "[/b][/center]"
 	elif amount < 0:
 		damage_indicator_label.text = "[color=00ff00][center][b]+" + str(-amount) + "[/b][/center]"
@@ -34,6 +34,9 @@ func damage(amount: int) -> void:
 	refresh()
 	if toughness <= 0:
 		get_tree().change_scene_to_packed(load("res://scenes/gameover.tscn"))
+	
+	await get_tree().create_timer(0.5).timeout
+
 
 func refresh():
 	toughness_text.text = "[center]%d[/center]" % (toughness)

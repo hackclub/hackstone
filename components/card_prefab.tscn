@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://dxdy4c55rwyag"]
+[gd_scene load_steps=42 format=4 uid="uid://dxdy4c55rwyag"]
 
 [ext_resource type="Script" path="res://scripts/CardController.gd" id="1_pfeis"]
 [ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="2_r6i3w"]
@@ -436,9 +436,27 @@ tracks/0/keys = {
 "values": [Vector3(0, 3.14159, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_s7cj7"]
+resource_name = "attack"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("card:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.101824, 0.199309),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.209749, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cjtkg"]
 _data = {
 "RESET": SubResource("Animation_1yn1y"),
+"attack": SubResource("Animation_s7cj7"),
 "damaged": SubResource("Animation_dobx1"),
 "hover_begin": SubResource("Animation_h51jn"),
 "hover_end": SubResource("Animation_j52lu"),

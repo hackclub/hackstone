@@ -126,11 +126,7 @@ func on_clicked() -> void:
 
 func do_tap() -> void:	
 	tapped = !tapped
-	label_asleep_indicator.visible = tapped # TODO: Add animations
-	
-	#queue.append("tap" if tapped else "untap")
-	#if not tapped:
-		#Audio.play(sound_resource.sounds.get("untap"))
+	label_asleep_indicator.visible = tapped
 	
 func do_turn():
 	turned = !turned
@@ -168,6 +164,8 @@ func damage(amount):
 	if amount != 0: 
 		queue.append("damaged")
 	refresh_power_toughness()
+	await get_tree().create_timer(0.5).timeout
+
 	
 func is_dead():
 	return current_toughness <= 0
@@ -200,13 +198,16 @@ func move_to_graveyard():
 
 func play(target):
 	print("Playing card %s on %s" % [name, target.name])
+	queue.append("attack")
+	await get_tree().create_timer(0.3).timeout
 	target.damage(power)
-	
+		
 	if target is CardController and target.is_dead():
 		target.move_to_graveyard()
+
 
 	damage(target.power)
 	if is_dead():
 		move_to_graveyard()
-	else:
+	else:		
 		do_tap()
