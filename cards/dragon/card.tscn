@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd33jd7cgnam0"]
+[gd_scene load_steps=11 format=3 uid="uid://bd33jd7cgnam0"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_erpla"]
 [ext_resource type="Texture2D" uid="uid://d4dq3knlwss5f" path="res://cards/dragon/card_dragon.png" id="2_6jg6s"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_oallc"]
+viewport_path = NodePath("DamageIndicatorViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sn4no"]
 albedo_texture = ExtResource("2_6jg6s")
@@ -36,6 +39,9 @@ toughness = 5
 flavortext = "Its very presence is terrifying"
 description = "[color=41e18e][b]Announcement[/b][/color]: Deal 5 damage to all enemies."
 
+[node name="DamageIndicatorSprite" parent="." index="0"]
+texture = SubResource("ViewportTexture_oallc")
+
 [node name="counterspell_card" parent="card" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_sn4no")
 
@@ -52,5 +58,5 @@ texture = SubResource("ViewportTexture_0tvsc")
 [node name="TitleSprite" parent="card" index="5"]
 texture = SubResource("ViewportTexture_4gh7w")
 
-[node name="CollisionShape3D" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00283813, -0.00924338, 0.00246477)

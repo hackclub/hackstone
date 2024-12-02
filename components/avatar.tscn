@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://4cw3cdp1kc87"]
+[gd_scene load_steps=12 format=3 uid="uid://4cw3cdp1kc87"]
 
 [ext_resource type="Script" path="res://scripts/Avatar.gd" id="1_qm4ao"]
 [ext_resource type="Texture2D" uid="uid://b47mnp8qk81lr" path="res://art/hackclub/anonymous.png" id="2_aenoy"]
@@ -12,9 +12,100 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8u3be"]
 
-[node name="Avatar" type="Node3D" node_paths=PackedStringArray("toughness_text")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f5s0n"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qacib"]
+viewport_path = NodePath("DamageIndicatorViewport")
+
+[sub_resource type="Animation" id="Animation_4fe75"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageIndicatorSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageIndicatorSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AvatarSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v8rs8"]
+resource_name = "avatar_damaged"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageIndicatorSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.5, 0.4), Vector3(0, 0.25, 0.4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageIndicatorSprite:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.633333, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.75, 0.75, 0.75), Vector3(1.5, 1.5, 1.5), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AvatarSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s4v35"]
+_data = {
+"RESET": SubResource("Animation_4fe75"),
+"avatar_damaged": SubResource("Animation_v8rs8")
+}
+
+[node name="Avatar" type="Node3D" node_paths=PackedStringArray("toughness_text", "damage_indicator_label")]
 script = ExtResource("1_qm4ao")
 toughness_text = NodePath("SubViewport/Control/Avatar2/NinePatchRect/NinePatchRect/ToughnessRichTextLabel")
+damage_indicator_label = NodePath("DamageIndicatorViewport/DamageIndicatorPanel/DamageIndicatorLabel")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 axis_lock_linear_x = true
@@ -29,6 +120,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0171814, -0.0847778, -0.007
 shape = SubResource("BoxShape3D_6p20s")
 
 [node name="AvatarSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0042569, 0.00373971, -0.000514865)
 texture = SubResource("ViewportTexture_bqatu")
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -122,6 +214,52 @@ bbcode_enabled = true
 text = "[center]20[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="DamageIndicatorViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+
+[node name="DamageIndicatorPanel" type="Panel" parent="DamageIndicatorViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_f5s0n")
+
+[node name="DamageIndicatorLabel" type="RichTextLabel" parent="DamageIndicatorViewport/DamageIndicatorPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -27.5
+offset_right = 12.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 61)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.2757, 0.2757, 0.2757, 1)
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[color=ff0000][center][b]-5[/b][/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="DamageIndicatorSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1)
+texture = SubResource("ViewportTexture_qacib")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s4v35")
+}
 
 [connection signal="mouse_entered" from="RigidBody3D" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="RigidBody3D" to="." method="_on_mouse_exited"]
