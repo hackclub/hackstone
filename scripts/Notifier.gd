@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 @export var text : RichTextLabel
 @export var animator : AnimationPlayer

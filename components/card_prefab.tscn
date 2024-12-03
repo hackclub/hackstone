@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://dxdy4c55rwyag"]
+[gd_scene load_steps=44 format=4 uid="uid://dxdy4c55rwyag"]
 
 [ext_resource type="Script" path="res://scripts/CardController.gd" id="1_pfeis"]
 [ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="2_r6i3w"]
@@ -269,6 +269,54 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("TiredViewport/Control/Panel:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, 42)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TiredViewport/Control/Panel2:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(34, 53)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TiredViewport/Control/Panel3:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(58, 36)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TiredViewport/Control/Panel4:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(91, 26)]
+}
 
 [sub_resource type="Animation" id="Animation_s7cj7"]
 resource_name = "attack"
@@ -472,7 +520,64 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2upq3"]
 
-[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "label_damage_indicator", "label_asleep_indicator", "power_container", "toughness_container", "cost_container")]
+[sub_resource type="Animation" id="Animation_mcia8"]
+resource_name = "sleeping"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 42), Vector2(10.55, 47.99), Vector2(6, 42)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Panel2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(34, 53), Vector2(38.27, 57.59), Vector2(34, 53)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Panel3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(58, 36), Vector2(66.39, 32.77), Vector2(58, 36)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/Panel4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(91, 26), Vector2(102.46, 34.98), Vector2(91, 26)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_foj2p"]
+_data = {
+"sleeping": SubResource("Animation_mcia8")
+}
+
+[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "label_damage_indicator", "asleep_indicator", "power_container", "toughness_container", "cost_container")]
 gravity_scale = 0.0
 script = ExtResource("1_pfeis")
 description = "[color=41e18e][b]Replace me[/b][/color]: Does something generic.  Please replace this with your own text."
@@ -485,7 +590,7 @@ label_subtype = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxConta
 label_description = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/VBoxContainer/Description")
 label_type = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/CardType")
 label_damage_indicator = NodePath("DamageIndicatorViewport/DamageIndicatorPanel/DamageIndicatorLabel")
-label_asleep_indicator = NodePath("TiredViewport/Panel/TiredLabel")
+asleep_indicator = NodePath("card/TiredLabelSprite")
 power_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/PowerContainer")
 toughness_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer")
 cost_container = NodePath("card/CastingCostSprite")
@@ -535,7 +640,7 @@ transform = Transform3D(0.64, 0, 0, 0, 0.64, 0, 0, 0, 1, 0, -0.236297, 0.0206564
 texture = SubResource("ViewportTexture_nflyd")
 
 [node name="TiredLabelSprite" type="Sprite3D" parent="card"]
-transform = Transform3D(0.325965, -0.248031, 0, 0.248031, 0.325965, 0, 0, 0, 2.40537, 0.457929, 0.706594, 0.0999313)
+transform = Transform3D(0.4096, 0, 0, 0, 0.4096, 0, 0, 0, 2.40537, -0.0336272, 0.706594, 0.0999313)
 modulate = Color(0, 1, 0, 1)
 pixel_size = 0.059
 texture = SubResource("ViewportTexture_4sttb")
@@ -965,6 +1070,12 @@ autowrap_mode = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+
 [node name="DamageIndicatorViewport" type="SubViewport" parent="."]
 transparent_bg = true
 size = Vector2i(128, 128)
@@ -1004,20 +1115,25 @@ autowrap_mode = 0
 
 [node name="TiredViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(512, 128)
+size = Vector2i(128, 128)
 render_target_update_mode = 4
 
-[node name="Panel" type="Panel" parent="TiredViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -64.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Control" type="Control" parent="TiredViewport"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="TiredViewport/Control"]
+offset_left = 8.55272
+offset_top = 45.3606
+offset_right = 40.5527
+offset_bottom = 77.3606
 theme = ExtResource("8_lkgco")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
 
-[node name="TiredLabel" type="RichTextLabel" parent="TiredViewport/Panel"]
+[node name="TiredLabel" type="RichTextLabel" parent="TiredViewport/Control/Panel"]
 custom_minimum_size = Vector2(359.25, 36.09)
 layout_mode = 1
 anchors_preset = 8
@@ -1040,6 +1156,117 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_outline_size = 4
 theme_override_font_sizes/bold_font_size = 35
 bbcode_enabled = true
-text = "[center][b]ASLEEP[/b][/center]"
+text = "[center][b]Z[/b][/center]"
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Panel2" type="Panel" parent="TiredViewport/Control"]
+offset_left = 36.3956
+offset_top = 55.5752
+offset_right = 68.3956
+offset_bottom = 87.5752
+theme = ExtResource("8_lkgco")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
+
+[node name="TiredLabel" type="RichTextLabel" parent="TiredViewport/Control/Panel2"]
+custom_minimum_size = Vector2(359.25, 36.09)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.625
+offset_top = -18.045
+offset_right = 179.625
+offset_bottom = 18.045
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(779.104, -126.758)
+theme = ExtResource("8_lkgco")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/bold_font_size = 35
+bbcode_enabled = true
+text = "[center][b]Z[/b][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Panel3" type="Panel" parent="TiredViewport/Control"]
+offset_left = 62.7071
+offset_top = 34.1878
+offset_right = 94.7071
+offset_bottom = 66.1879
+theme = ExtResource("8_lkgco")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
+
+[node name="TiredLabel" type="RichTextLabel" parent="TiredViewport/Control/Panel3"]
+custom_minimum_size = Vector2(359.25, 36.09)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.625
+offset_top = -18.045
+offset_right = 179.625
+offset_bottom = 18.045
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(779.104, -126.758)
+theme = ExtResource("8_lkgco")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/bold_font_size = 35
+bbcode_enabled = true
+text = "[center][b]Z[/b][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Panel4" type="Panel" parent="TiredViewport/Control"]
+offset_left = 97.4295
+offset_top = 31.0381
+offset_right = 129.43
+offset_bottom = 63.0381
+theme = ExtResource("8_lkgco")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
+
+[node name="TiredLabel" type="RichTextLabel" parent="TiredViewport/Control/Panel4"]
+custom_minimum_size = Vector2(359.25, 36.09)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.625
+offset_top = -18.045
+offset_right = 179.625
+offset_bottom = 18.045
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(779.104, -126.758)
+theme = ExtResource("8_lkgco")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/bold_font_size = 35
+bbcode_enabled = true
+text = "[center][b]Z[/b][/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TiredViewport"]
+libraries = {
+"": SubResource("AnimationLibrary_foj2p")
+}
+autoplay = "sleeping"

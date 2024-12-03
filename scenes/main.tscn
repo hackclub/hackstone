@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=47 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
 [ext_resource type="PackedScene" uid="uid://dhw27v0raxlxp" path="res://components/arrow.tscn" id="2_5cnle"]
@@ -214,19 +214,18 @@ radial_velocity_max = 0.999978
 gravity = Vector3(0, 0, 0)
 linear_accel_min = 0.0999978
 linear_accel_max = 0.169998
-scale_min = 5.0
-scale_max = 80.0
+scale_min = 30.0
+scale_max = 50.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0585v"]
 transparency = 1
 blend_mode = 4
-cull_mode = 2
+depth_draw_mode = 2
 shading_mode = 0
 disable_ambient_light = true
 disable_fog = true
-albedo_color = Color(0.141176, 0.141176, 0.141176, 0.0196078)
+albedo_color = Color(0.051971, 0.051971, 0.051971, 0.0156863)
 albedo_texture = ExtResource("20_m3ydw")
-albedo_texture_force_srgb = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_74hvr"]
 material = SubResource("StandardMaterial3D_0585v")
@@ -281,6 +280,43 @@ _data = {
 "display_notification": SubResource("Animation_ygxuc")
 }
 
+[sub_resource type="Animation" id="Animation_odm0p"]
+resource_name = "display_notification"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e55wo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0hsd4"]
+_data = {
+"RESET": SubResource("Animation_e55wo"),
+"display_notification": SubResource("Animation_odm0p")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_14ddb"]
 size = Vector3(50, 1.59258, 1)
 
@@ -309,12 +345,13 @@ libraries = {
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fi0gu")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("my_avatar", "game_logic", "arrow_controller")]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("my_avatar", "toaster", "game_logic", "arrow_controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 size = 15.0
 near = 0.01
 script = ExtResource("1_fysce")
 my_avatar = NodePath("../MyAvatar")
+toaster = NodePath("../Main Canvas/ToastPanel")
 game_logic = NodePath("../GameLogic")
 arrow_controller = NodePath("../Main Canvas/Arrow")
 sound_resource = ExtResource("12_g1dgu")
@@ -415,14 +452,14 @@ script = ExtResource("9_slc2b")
 animation_speed = 50
 
 [node name="CloudGPUParticles" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.2796, 0, -24.6282)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -106.056, 0, -24.6282)
 extra_cull_margin = 16384.0
 ignore_occlusion_culling = true
 gi_mode = 0
 visibility_range_end = 500.0
-amount = 50
-lifetime = 41.29
-preprocess = 60.0
+amount = 100
+lifetime = 60.0
+preprocess = 120.0
 randomness = 0.46
 process_material = SubResource("ParticleProcessMaterial_ppge7")
 draw_pass_1 = SubResource("QuadMesh_74hvr")
@@ -878,10 +915,25 @@ expand_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1444.0
+offset_left = 1521.0
 offset_top = 1021.0
-offset_right = -114.0
+offset_right = -37.0
 offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Stars are what you use to play cards.  Stars are replenished every turn, and you gain access to one more each new turn (max of 10)."
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+theme_override_styles/panel = SubResource("StyleBoxEmpty_aknhm")
+
+[node name="Panel2" type="Panel" parent="Main Canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1521.0
+offset_top = 11.0
+offset_right = -37.0
+offset_bottom = -1012.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Stars are what you use to play cards.  Stars are replenished every turn, and you gain access to one more each new turn (max of 10)."
@@ -943,6 +995,56 @@ fit_content = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Main Canvas/NotificationPanel"]
 libraries = {
 "": SubResource("AnimationLibrary_4upaa")
+}
+
+[node name="ToastPanel" type="Control" parent="Main Canvas" node_paths=PackedStringArray("text", "animator")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -60.0
+offset_right = 389.0
+offset_bottom = -11.0
+grow_vertical = 0
+pivot_offset = Vector2(-1, 50)
+script = ExtResource("10_yh5st")
+text = NodePath("NinePatchRect/RichTextLabel")
+animator = NodePath("AnimationPlayer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Main Canvas/ToastPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_rl25m")
+patch_margin_left = 21
+patch_margin_top = 23
+patch_margin_right = 19
+patch_margin_bottom = 18
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Main Canvas/ToastPanel/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 9.65
+offset_bottom = 9.65
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(383, -133.65)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]Not enough mana [/center]"
+fit_content = true
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Main Canvas/ToastPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_0hsd4")
 }
 
 [node name="BattlefieldRigidbody" type="RigidBody3D" parent="."]
