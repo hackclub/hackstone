@@ -203,6 +203,7 @@ func on_placement_dropped(event, card: CardController):
 	print("Placement drop detected!")
 	if card == null:
 		print("weird")
+		clear_mouse_state()
 		return
 
 	if old_drop_point != null:
@@ -214,6 +215,10 @@ func on_placement_dropped(event, card: CardController):
 	
 	if drop_point != null:
 		card.card_group_controller.take(card)
+		if not my_avatar.spend(card.casting_cost):
+			print("Whoa, weird")
+			clear_mouse_state()
+			return
 		var drop_index = drop_point.card_group_controller.current_drag_index
 		drop_point.card_group_controller.insert_card(card, drop_index, gp)
 		card.on_entered_play()
@@ -289,6 +294,10 @@ func is_attackable(attacker, target):
 
 func play_hack(played_card, target):
 	if not is_hackable(played_card, target):
+		return false
+
+	if not my_avatar.spend(played_card.casting_cost):
+		toaster.display_notification("Not enough mana")
 		return false
 
 	await played_card.play(target)

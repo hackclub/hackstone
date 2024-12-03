@@ -107,14 +107,11 @@ func add_mana(avatar_node):
 	avatar_node.regen_mana()
 	
 func _perform_ai():
-	var cur_mana = 10
 	while(true):
 		if my_avatar.toughness <= 0:
 			return # Quick hack to fix bug on player's death
 		await get_tree().create_timer(1.0).timeout
-		var res = get_next_action(cur_mana)
-		var next_action = res[1]
-		cur_mana = res[0]
+		var next_action = get_next_action(opponent_avatar.mana)
 		if next_action == null:
 			break
 		next_action.call()
@@ -122,9 +119,9 @@ func _perform_ai():
 	_on_done_pressed()
 
 # HACK: Returns an array of [int, Action] in order to keep track of mana for now
-func get_next_action(mana: int) -> Array:
+func get_next_action(mana: int):
 	if my_avatar == null || my_avatar.toughness <= 0:
-		return [mana, null]
+		return null
 	
 	var ai_hand_cards: Array[Node3D] = opponent_hand.get_cards()
 	var ai_hand = opponent_hand
@@ -142,15 +139,19 @@ func get_next_action(mana: int) -> Array:
 			break
 
 	if card != null:
+		
+		if not opponent_avatar.spend(card.casting_cost):
+			print("whoa, weird")
+			return null
+
 		if not is_hack:
-			return [mana - card.casting_cost, func(): 
+			return func(): 
 				ai_battlefield.insert_card(ai_hand.take(card), 0, card.transform.origin)
 				card.on_entered_play()
-				]
 		elif player_battlefield_cards.size() > 0: 
-			return [mana - card.casting_cost, func(): card.play(player_battlefield_cards[randi() % player_battlefield_cards.size()])]
+			return func(): card.play(player_battlefield_cards[randi() % player_battlefield_cards.size()])
 		else:
-			return [mana - card.casting_cost, func(): card.play(my_avatar)]
+			return func(): card.play(my_avatar)
 	# Can't play any minions, must attack now
 	for c in ai_battlefield_cards:
 		if c.tapped == false:
@@ -161,11 +162,9 @@ func get_next_action(mana: int) -> Array:
 				else:
 					c.play(my_avatar) # Attack player
 	
-			return [mana, f]
+			return f
 			
-	
-	
-	return [mana, null]
+	return null
 
 func reset_all_cards(card_group_controller):
 	for card in card_group_controller.get_cards():
