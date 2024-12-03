@@ -12,6 +12,7 @@ var clicked_card = null
 var group_dragged_from = null
 var old_drop_point = null
 @export var my_avatar : Node
+@export var toaster : Node
 
 @export var game_logic = Node
 const CardType = preload("res://scripts/CardController.gd").CardType
@@ -187,7 +188,7 @@ func start_placement_click(event, card: CardController):
 		return
 		
 	if not my_avatar.check_cost(card.casting_cost):
-		print("Not enough mana to play " + str(card.name))
+		toaster.display_notification("Not enough mana")
 		clear_mouse_state()
 		return
 	clicked_card = card

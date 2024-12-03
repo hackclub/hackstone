@@ -27,7 +27,7 @@ var queue = []
 @export var label_description : RichTextLabel
 @export var label_type : RichTextLabel
 @export var label_damage_indicator : RichTextLabel
-@export var label_asleep_indicator : RichTextLabel
+@export var asleep_indicator : Node
 @export var power_container : Node
 @export var toughness_container : Node
 @export var cost_container : Node
@@ -45,7 +45,7 @@ func _ready() -> void:
 	if sound_resource == null:
 		sound_resource = load("res://sounds/defaults.tres")
 	self.name = card_name
-	label_asleep_indicator.visible = false
+	asleep_indicator.visible = false
 	original_basis = self.transform.basis
 	anim_player = $AnimationPlayer
 	anim_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
@@ -126,7 +126,7 @@ func on_clicked() -> void:
 
 func do_tap() -> void:	
 	tapped = !tapped
-	label_asleep_indicator.visible = tapped
+	asleep_indicator.visible = tapped
 	
 func do_turn():
 	turned = !turned
