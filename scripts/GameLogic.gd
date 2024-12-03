@@ -141,10 +141,12 @@ func get_next_action(mana: int) -> Array:
 			is_hack = i.type == CardType.HACK
 			break
 
-
 	if card != null:
 		if not is_hack:
-			return [mana - card.casting_cost, func(): ai_battlefield.insert_card(ai_hand.take(card), 0, card.transform.origin)]
+			return [mana - card.casting_cost, func(): 
+				ai_battlefield.insert_card(ai_hand.take(card), 0, card.transform.origin)
+				card.on_entered_play()
+				]
 		elif player_battlefield_cards.size() > 0: 
 			return [mana - card.casting_cost, func(): card.play(player_battlefield_cards[randi() % player_battlefield_cards.size()])]
 		else:

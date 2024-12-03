@@ -216,7 +216,7 @@ func on_placement_dropped(event, card: CardController):
 		card.card_group_controller.take(card)
 		var drop_index = drop_point.card_group_controller.current_drag_index
 		drop_point.card_group_controller.insert_card(card, drop_index, gp)
-		Audio.play(sound_resource.sounds.get("enter_play"))
+		card.on_entered_play()
 	else:
 		card.card_group_controller.take(card)
 		group_dragged_from.insert_card(card, 0, gp)

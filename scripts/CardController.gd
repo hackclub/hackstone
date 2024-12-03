@@ -211,3 +211,6 @@ func play(target):
 		move_to_graveyard()
 	else:		
 		do_tap()
+
+func on_entered_play():
+	Audio.play(sound_resource.sounds.get("enter_play"))

@@ -1126,6 +1126,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Panel" type="Panel" parent="TiredViewport/Control"]
+layout_mode = 0
 offset_left = 8.55272
 offset_top = 45.3606
 offset_right = 40.5527
@@ -1161,6 +1162,7 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Panel2" type="Panel" parent="TiredViewport/Control"]
+layout_mode = 0
 offset_left = 36.3956
 offset_top = 55.5752
 offset_right = 68.3956
@@ -1196,6 +1198,7 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Panel3" type="Panel" parent="TiredViewport/Control"]
+layout_mode = 0
 offset_left = 62.7071
 offset_top = 34.1878
 offset_right = 94.7071
@@ -1231,6 +1234,7 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Panel4" type="Panel" parent="TiredViewport/Control"]
+layout_mode = 0
 offset_left = 97.4295
 offset_top = 31.0381
 offset_right = 129.43
