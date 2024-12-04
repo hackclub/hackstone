@@ -401,7 +401,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0.2, 1),
 "update": 0,
-"values": [Vector3(0.5, 0.5, 0.5), Vector3(1.5, 1.5, 1.5)]
+"values": [Vector3(0.5, 0.5, 0.5), Vector3(0.9, 0.9, 0.9)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -425,7 +425,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0.1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.3)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_j52lu"]
@@ -442,7 +442,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0.2, 1),
 "update": 0,
-"values": [Vector3(1.5, 1.5, 1.5), Vector3(0.5, 0.5, 0.5)]
+"values": [Vector3(0.9, 0.9, 0.9), Vector3(0.5, 0.5, 0.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -466,7 +466,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(0.1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0.3), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ffm8s"]
@@ -599,7 +599,6 @@ sound_resource = ExtResource("2_r6i3w")
 [node name="DamageIndicatorSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 double_sided = false
-alpha_cut = 3
 texture = SubResource("ViewportTexture_1snw7")
 
 [node name="card" type="Node3D" parent="."]
@@ -1127,10 +1126,10 @@ offset_bottom = 40.0
 
 [node name="Panel" type="Panel" parent="TiredViewport/Control"]
 layout_mode = 0
-offset_left = 8.55272
-offset_top = 45.3606
-offset_right = 40.5527
-offset_bottom = 77.3606
+offset_left = 6.0
+offset_top = 42.0
+offset_right = 38.0
+offset_bottom = 74.0
 theme = ExtResource("8_lkgco")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
 
@@ -1163,10 +1162,10 @@ autowrap_mode = 0
 
 [node name="Panel2" type="Panel" parent="TiredViewport/Control"]
 layout_mode = 0
-offset_left = 36.3956
-offset_top = 55.5752
-offset_right = 68.3956
-offset_bottom = 87.5752
+offset_left = 34.0
+offset_top = 53.0
+offset_right = 66.0
+offset_bottom = 85.0
 theme = ExtResource("8_lkgco")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
 
@@ -1199,10 +1198,10 @@ autowrap_mode = 0
 
 [node name="Panel3" type="Panel" parent="TiredViewport/Control"]
 layout_mode = 0
-offset_left = 62.7071
-offset_top = 34.1878
-offset_right = 94.7071
-offset_bottom = 66.1879
+offset_left = 58.0
+offset_top = 36.0
+offset_right = 90.0
+offset_bottom = 68.0001
 theme = ExtResource("8_lkgco")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
 
@@ -1235,10 +1234,10 @@ autowrap_mode = 0
 
 [node name="Panel4" type="Panel" parent="TiredViewport/Control"]
 layout_mode = 0
-offset_left = 97.4295
-offset_top = 31.0381
-offset_right = 129.43
-offset_bottom = 63.0381
+offset_left = 91.0
+offset_top = 26.0
+offset_right = 123.0
+offset_bottom = 58.0
 theme = ExtResource("8_lkgco")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_bqnan")
 

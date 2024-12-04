@@ -5,7 +5,12 @@ var current_drag_index : int
 
 func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
 	super.insert_card(card, index, global_position)	
-	card.show_cost(false)
+	card.on_entered_play()
+
+func take_card(index: int) -> Node3D:
+	var card = super.take_card(index)
+	card.on_exited_play()
+	return card
 
 func get_desired_position(index: int) -> Vector3:
 	var num_cards = get_cards_len()

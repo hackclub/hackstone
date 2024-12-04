@@ -52,7 +52,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -2.63062, 4.05117)]
+"values": [Vector3(0, -3.75, 2)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -78,6 +78,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Card Groups/Mine/MyHand:is_hovering")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MyAvatar:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_nkfqs"]
 resource_name = "hand_display"
@@ -92,7 +116,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.709553, -9.428, 0), Vector3(-0.71, -8, 0)]
+"values": [Vector3(-0.709553, -9.428, 0), Vector3(-0.71, -6.75, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -104,7 +128,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(0.1, 1),
 "update": 0,
-"values": [Vector3(0, -2.63062, 4.05117), Vector3(0, -7.9402, -3.57395)]
+"values": [Vector3(0, -3.75, 2), Vector3(0, -8, -3.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -130,6 +154,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Card Groups/Mine/MyHand:is_hovering")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MyAvatar:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.266667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_4tns4"]
 resource_name = "hand_hide"
@@ -144,7 +192,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.71, -8, 0), Vector3(-0.709553, -9.428, 0)]
+"values": [Vector3(-0.71, -6.75, 0), Vector3(-0.709553, -9.428, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -156,7 +204,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, -4.931, 1.421), Vector3(0, -2.63062, 4.05117)]
+"values": [Vector3(0, -8, -3.5), Vector3(0, -3.75, 2)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -178,6 +226,30 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Card Groups/Mine/MyHand:is_hovering")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MyAvatar:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0666667),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -355,7 +427,7 @@ sound_resource = ExtResource("12_g1dgu")
 [node name="CardIndex" type="Node3D" parent="."]
 script = ExtResource("4_4jspk")
 
-[node name="GameLogic" type="Node3D" parent="." node_paths=PackedStringArray("my_avatar", "my_battlefield", "my_hand", "my_deck", "my_graveyard", "my_draw_display", "opponent_avatar", "opponent_battlefield", "opponent_hand", "opponent_deck", "opponent_graveyard", "dragger", "panel_done", "button_done", "panel_notification", "richtext_notification_message", "notifier")]
+[node name="GameLogic" type="Node3D" parent="." node_paths=PackedStringArray("my_avatar", "my_battlefield", "my_hand", "my_deck", "my_graveyard", "my_draw_display", "opponent_avatar", "opponent_battlefield", "opponent_hand", "opponent_deck", "opponent_graveyard", "dragger", "panel_done", "button_done", "panel_notification", "richtext_notification_message", "notifier", "toaster")]
 script = ExtResource("6_qmtoo")
 my_avatar = NodePath("../MyAvatar")
 my_battlefield = NodePath("../Card Groups/Mine/MyBattlefield")
@@ -375,6 +447,7 @@ panel_notification = NodePath("../Main Canvas/NotificationPanel")
 richtext_notification_message = NodePath("../Main Canvas/NotificationPanel/CenterContainer/NotificationRichTextLabel")
 sound_resource = ExtResource("12_g1dgu")
 notifier = NodePath("../Main Canvas/NotificationPanel")
+toaster = NodePath("../Main Canvas/ToastPanel")
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -391,7 +464,7 @@ light_energy = 0.5
 [node name="Mine" type="Node3D" parent="Card Groups"]
 
 [node name="MyBattlefield" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.86888, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.13862, 0)
 script = ExtResource("2_rndq6")
 controlled_by_me = true
 graveyard = NodePath("../MyGraveyard")
@@ -421,7 +494,7 @@ graveyard = NodePath("../MyGraveyard")
 [node name="Opponent" type="Node3D" parent="Card Groups"]
 
 [node name="OpponentBattlefield" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.818743, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76808, 0)
 script = ExtResource("2_rndq6")
 graveyard = NodePath("../OpponentGraveyard")
 
@@ -525,13 +598,13 @@ alpha_cut = 1
 texture = ExtResource("16_sjurj")
 
 [node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard", "main_camera", "stars") instance=ExtResource("21_5rpq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.63062, 4.05117)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -3.75, 2)
 graveyard = NodePath("../Card Groups/Mine/MyGraveyard")
 main_camera = NodePath("../Camera3D")
 stars = [NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect2"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect3"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect4"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect5"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect6"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect7"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect8"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect9"), NodePath("../Main Canvas/MyStars/Stars/Filled Stars/TextureRect10")]
 
 [node name="OpponentAvatar" parent="." node_paths=PackedStringArray("graveyard", "main_camera", "stars") instance=ExtResource("21_5rpq5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.12341, 4.38049)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 4.10797, 2)
 graveyard = NodePath("../Card Groups/Opponent/OpponentGraveyard")
 main_camera = NodePath("../Camera3D")
 stars = [NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect2"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect3"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect4"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect5"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect6"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect7"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect8"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect9"), NodePath("../Main Canvas/OpponentStars/Stars/Filled Stars/TextureRect10")]
@@ -1027,8 +1100,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 9.65
-offset_bottom = 9.65
+offset_top = 14.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(383, -133.65)

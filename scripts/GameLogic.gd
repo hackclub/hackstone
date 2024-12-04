@@ -30,6 +30,8 @@ enum GameState {
 @onready var timer_finished_cb = connect("on_done_pressed", Callable(self, "_on_done_pressed"))
 @export var sound_resource : Resource
 @export var notifier : Node
+var can_perform_actions = false
+@export var toaster : Node
 
 var state : GameState = GameState.MY_TURN
 var instance = null
@@ -81,25 +83,35 @@ func run_tests():
 	print("loop done!")
 
 func _on_done_pressed():	
+	if not can_perform_actions:
+		toaster.display_notification("Please wait for your turn")
+		return
+	_on_done_pressed_internal()
+
+func _on_done_pressed_internal():	
+	can_perform_actions = false
 	state = GameState.MY_TURN if state == GameState.OPPONENT_TURN else GameState.OPPONENT_TURN
 	await on_turn_start()
 
-func on_turn_start():
+func on_turn_start():	
 	Audio.play(sound_resource.sounds.get("turn_start"))
+	await end_all_cards(opponent_battlefield if state == GameState.MY_TURN else my_battlefield)
 	await display_notification("Your turn" if state == GameState.MY_TURN else "Opponent's turn")
 	configure_done_button("DONE")
 	await get_tree().create_timer(2).timeout
 
 	if state == GameState.OPPONENT_TURN:
 		await add_mana(opponent_avatar)
-		await reset_all_cards(opponent_battlefield)
+		await start_all_cards(opponent_battlefield)
 		draw_card(opponent_hand, opponent_deck)
 		await get_tree().create_timer(1.0).timeout
 		Thread.new().start(Callable(self, "_perform_ai"))
 	else:
 		await add_mana(my_avatar)
-		await reset_all_cards(my_battlefield)
+		await start_all_cards(my_battlefield)
 		await draw_card(my_draw_display, my_deck)
+		await get_tree().create_timer(0.25).timeout
+		can_perform_actions = true
 
 func add_mana(avatar_node):
 	var new_mana = min(10, avatar_node.get_max_mana()+1)
@@ -116,7 +128,7 @@ func _perform_ai():
 			break
 		next_action.call()
 	await get_tree().create_timer(1.0).timeout
-	_on_done_pressed()
+	_on_done_pressed_internal()
 
 # HACK: Returns an array of [int, Action] in order to keep track of mana for now
 func get_next_action(mana: int):
@@ -147,11 +159,11 @@ func get_next_action(mana: int):
 		if not is_hack:
 			return func(): 
 				ai_battlefield.insert_card(ai_hand.take(card), 0, card.transform.origin)
-				card.on_entered_play()
 		elif player_battlefield_cards.size() > 0: 
 			return func(): card.play(player_battlefield_cards[randi() % player_battlefield_cards.size()])
 		else:
 			return func(): card.play(my_avatar)
+			
 	# Can't play any minions, must attack now
 	for c in ai_battlefield_cards:
 		if c.tapped == false:
@@ -166,15 +178,21 @@ func get_next_action(mana: int):
 			
 	return null
 
-func reset_all_cards(card_group_controller):
+func start_all_cards(card_group_controller):
 	for card in card_group_controller.get_cards():
 		var should_pause = false
-		if card.tapped:
+		if card.tapped or card.is_damaged():
 			should_pause = true
-			card.do_tap()
-		if card.is_damaged():
+		card.on_turn_start()
+		if should_pause:
+			await get_tree().create_timer(0.25).timeout
+
+func end_all_cards(card_group_controller):
+	for card in card_group_controller.get_cards():
+		var should_pause = false
+		if card.tapped or card.is_damaged():
 			should_pause = true
-			card.heal()
+		card.on_turn_end()
 		if should_pause:
 			await get_tree().create_timer(0.25).timeout
 
@@ -211,7 +229,7 @@ func test_clicking(card: CardController):
 			my_battlefield.insert_card(card, 0, card.global_position)
 
 func is_my_turn():
-	return state == GameState.MY_TURN
+	return state == GameState.MY_TURN and can_perform_actions
 
 func card_clicked(card: CardController):
 	test_clicking(card)

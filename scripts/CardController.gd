@@ -6,6 +6,7 @@ var tapped = false
 var turned = false
 var hovered = false
 var moving = false
+var in_play = false
 var anim_player = null
 enum CardType {MINION, HACK}
 enum CardState {TAP = 0, UNTAP = 1, TURN_DOWN = 2, TURN_UP = 3}
@@ -213,4 +214,59 @@ func play(target):
 		do_tap()
 
 func on_entered_play():
+	in_play = true
+	show_cost(false)
+	if not tapped:
+		do_tap()
 	Audio.play(sound_resource.sounds.get("enter_play"))
+
+func on_exited_play():
+	in_play = false
+
+func on_played_on(target):
+	pass
+	
+func on_drawn():
+	pass
+	
+func on_card_draw(card):
+	pass
+	
+func on_death(killer):
+	pass
+	
+func on_attack(target):
+	pass
+	
+func on_attacked(attacker):
+	pass
+	
+func on_targeted(attacker):
+	pass
+	
+func on_damaged(attacker, amount):
+	pass
+	
+func on_healed(healer, amount):
+	pass
+
+func on_turn_start():
+	if tapped:
+		do_tap()
+	if is_damaged():
+		heal()
+
+func on_turn_end():
+	if tapped:
+		do_tap()
+	if is_damaged():
+		heal()
+	
+func on_neighbors_changed():
+	pass
+	
+func on_enemy_neighbors_changed():
+	pass
+
+func on_enemy_draw_card():
+	pass

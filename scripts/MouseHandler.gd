@@ -182,8 +182,16 @@ func handle_mousemotion(event):
 		hovering(find_hovered_card(get_viewport().get_mouse_position()))		
 
 func start_placement_click(event, card: CardController):
-	if !game_logic.is_my_turn() or card == null or not card.is_controlled_by_me():
-		print("Clicking not allowed on " + str(card.name))
+	if card == null:
+		toaster.display_notification("Weird, null card...?")
+		clear_mouse_state()
+		return
+	if !game_logic.is_my_turn():
+		toaster.display_notification("Please wait for your turn")
+		clear_mouse_state()
+		return
+	if not card.is_controlled_by_me():
+		toaster.display_notification("That card is not yours")
 		clear_mouse_state()
 		return
 		
@@ -221,7 +229,6 @@ func on_placement_dropped(event, card: CardController):
 			return
 		var drop_index = drop_point.card_group_controller.current_drag_index
 		drop_point.card_group_controller.insert_card(card, drop_index, gp)
-		card.on_entered_play()
 	else:
 		card.card_group_controller.take(card)
 		group_dragged_from.insert_card(card, 0, gp)
@@ -265,6 +272,12 @@ func start_target_click(event, target):
 	if target.is_in_group("avatar"):
 		clear_mouse_state()
 		return
+		
+	if !game_logic.is_my_turn():
+		toaster.display_notification("Please wait for your turn")
+		clear_mouse_state()
+		return
+
 	clicked_card = target
 	if target != null:
 		group_dragged_from = target.card_group_controller
