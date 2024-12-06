@@ -3,6 +3,8 @@ extends "res://scripts/CardGroupController.gd"
 	
 @export var hidden_hand = false
 var original_rotation : Basis
+@export var is_hovering = false
+
 func _ready() -> void:
 	super._ready()
 	original_rotation = transform.basis
@@ -32,6 +34,9 @@ func get_desired_position(index: int) -> Vector3:
 	return Vector3(centered_x_offset, 2, -0.01 * float(index))
 
 func get_desired_rotation(index: int) -> Basis:
+	if is_hovering:
+		return Basis.IDENTITY
+
 	var num_cards = get_cards_len()
 	var spread_degrees = deg_to_rad(float(num_cards) * 5)
 	var index_ratio = float(index) / (float(num_cards)-1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://3fwojj544i31"]
+[gd_scene load_steps=22 format=3 uid="uid://3fwojj544i31"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_821a5"]
 [ext_resource type="Texture2D" uid="uid://wut6cbf0pwgv" path="res://cards/party_parrot/output-0.png" id="2_y01yf"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://c1fw5rjnqrcoi" path="res://cards/party_parrot/output-7.png" id="9_ab2f1"]
 [ext_resource type="Texture2D" uid="uid://vjkqj0w46lmp" path="res://cards/party_parrot/output-8.png" id="10_ihygr"]
 [ext_resource type="Texture2D" uid="uid://dw4mtbl45x4wn" path="res://cards/party_parrot/output-9.png" id="11_bkbjj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xp3x6"]
+viewport_path = NodePath("DamageIndicatorViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kom82"]
 
@@ -59,6 +62,9 @@ frame_9/duration = 1.0
 [sub_resource type="ViewportTexture" id="ViewportTexture_v8eu4"]
 viewport_path = NodePath("TitleViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_2ti2t"]
+viewport_path = NodePath("TiredViewport")
+
 [node name="Card" instance=ExtResource("1_821a5")]
 card_name = "Party Parrot"
 subtype = "Emoji"
@@ -66,6 +72,9 @@ power = -1
 toughness = -1
 casting_cost = 1
 type = 1
+
+[node name="DamageIndicatorSprite" parent="." index="0"]
+texture = SubResource("ViewportTexture_xp3x6")
 
 [node name="counterspell_card" parent="card" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_kom82")
@@ -87,3 +96,6 @@ texture = SubResource("AnimatedTexture_s67ib")
 
 [node name="TitleSprite" parent="card" index="6"]
 texture = SubResource("ViewportTexture_v8eu4")
+
+[node name="TiredLabelSprite" parent="card" index="7"]
+texture = SubResource("ViewportTexture_2ti2t")

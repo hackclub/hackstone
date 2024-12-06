@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dirjjn7l7s0tg"]
+[gd_scene load_steps=11 format=3 uid="uid://dirjjn7l7s0tg"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_tesb7"]
-[ext_resource type="Texture2D" uid="uid://b8ue2yw23wxhb" path="res://cards/orpheus_orphling/card_orphling.png" id="2_bgor1"]
+[ext_resource type="Script" path="res://cards/orpheus_orphling/OrpheusOrphlingCardController.gd" id="2_dsxoi"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahpd5"]
-albedo_texture = ExtResource("2_bgor1")
+[sub_resource type="ViewportTexture" id="ViewportTexture_36cyv"]
+viewport_path = NodePath("DamageIndicatorViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pk8xo"]
+viewport_path = NodePath("PowerToughnessViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ugcvc"]
 viewport_path = NodePath("DescriptionViewport")
@@ -25,15 +28,22 @@ viewport_path = NodePath("CostViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_ot2bv"]
 viewport_path = NodePath("TitleViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_gq5r3"]
+viewport_path = NodePath("TiredViewport")
+
 [node name="Card2" instance=ExtResource("1_tesb7")]
+script = ExtResource("2_dsxoi")
 card_name = "An Orphling"
 subtype = "Dinosaur"
 flavortext = "Hello world!"
 description = ""
 casting_cost = 0
 
-[node name="counterspell_card" parent="card" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_ahpd5")
+[node name="DamageIndicatorSprite" parent="." index="0"]
+texture = SubResource("ViewportTexture_36cyv")
+
+[node name="PowerToughnessSprite" parent="card" index="2"]
+texture = SubResource("ViewportTexture_pk8xo")
 
 [node name="DescriptionSprite" parent="card" index="3"]
 material_override = SubResource("StandardMaterial3D_6al8g")
@@ -44,3 +54,6 @@ texture = SubResource("ViewportTexture_4rum8")
 
 [node name="TitleSprite" parent="card" index="5"]
 texture = SubResource("ViewportTexture_ot2bv")
+
+[node name="TiredLabelSprite" parent="card" index="6"]
+texture = SubResource("ViewportTexture_gq5r3")
