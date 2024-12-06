@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://dirjjn7l7s0tg"]
+[gd_scene load_steps=13 format=3 uid="uid://dirjjn7l7s0tg"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_tesb7"]
 [ext_resource type="Script" path="res://cards/orpheus_orphling/OrpheusOrphlingCardController.gd" id="2_dsxoi"]
+[ext_resource type="Texture2D" uid="uid://b8ue2yw23wxhb" path="res://cards/orpheus_orphling/card_orphling.png" id="3_odndt"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_36cyv"]
 viewport_path = NodePath("DamageIndicatorViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwpy3"]
+albedo_texture = ExtResource("3_odndt")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_pk8xo"]
 viewport_path = NodePath("PowerToughnessViewport")
@@ -41,6 +45,9 @@ casting_cost = 0
 
 [node name="DamageIndicatorSprite" parent="." index="0"]
 texture = SubResource("ViewportTexture_36cyv")
+
+[node name="counterspell_card" parent="card" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_uwpy3")
 
 [node name="PowerToughnessSprite" parent="card" index="2"]
 texture = SubResource("ViewportTexture_pk8xo")
