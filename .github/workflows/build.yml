@@ -18,6 +18,8 @@ jobs:
       # your project is available for Godot to export
     - name: checkout
       uses: actions/checkout@v4
+      with:
+        lfs: 'true'
 
     - name: export game
       id: export
