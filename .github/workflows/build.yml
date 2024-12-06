@@ -18,7 +18,7 @@ jobs:
       # your project is available for Godot to export
     - name: checkout
       uses: actions/checkout@v4
-  
+
     - name: export game
       id: export
       # Use latest version (see releases for all versions)
@@ -29,6 +29,7 @@ jobs:
         godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
         relative_project_path: ./
         archive_output: true
+        verbose: true
 
       # This release action has worked well for me. However, you can most likely use any release action of your choosing.
       # https://github.com/ncipollo/release-action
