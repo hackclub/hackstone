@@ -1,12 +1,12 @@
-[gd_scene load_steps=44 format=4 uid="uid://dxdy4c55rwyag"]
+[gd_scene load_steps=43 format=4 uid="uid://dxdy4c55rwyag"]
 
 [ext_resource type="Script" path="res://scripts/CardController.gd" id="1_pfeis"]
 [ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="2_r6i3w"]
 [ext_resource type="Texture2D" uid="uid://cpwpa546g7vf0" path="res://cards/orpheus_maximus/card_orpheus.png" id="2_wefk8"]
 [ext_resource type="Texture2D" uid="uid://s8613qfo7hln" path="res://art/card_skin_template/card_counterspell_card_back_02.png" id="3_kn6cs"]
 [ext_resource type="Texture2D" uid="uid://2ml1s0jdha7w" path="res://art/card_skin_template/card_counterspell_card_back_effects.png" id="4_5wt4x"]
-[ext_resource type="Texture2D" uid="uid://rlupg0vs4ko8" path="res://art/card_skin_template/counterspell_card_counterspell_card_back_02.png" id="5_2i75m"]
 [ext_resource type="Texture2D" uid="uid://d2lnjqd528c5j" path="res://art/card_skin_template/dot.png" id="5_wf1j1"]
+[ext_resource type="Texture2D" uid="uid://dmfeq0w4cbbid" path="res://art/counterspell_hackclub/Reference/counterspell_card_back.png" id="6_5m52j"]
 [ext_resource type="Texture2D" uid="uid://bxcli71e622oa" path="res://art/card_skin_template/background_rect_4xdark.png" id="7_pm8y7"]
 [ext_resource type="Theme" uid="uid://cdb82eyjhsla4" path="res://themes/card.tres" id="8_lkgco"]
 [ext_resource type="Texture2D" uid="uid://bhpqonfiembbk" path="res://art/hackclub/pow.png" id="11_5iwf3"]
@@ -149,11 +149,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xve3p")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gt3wp"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jye3l"]
-albedo_texture = ExtResource("5_2i75m")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctj6b"]
+albedo_texture = ExtResource("6_5m52j")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_mwdf3"]
 viewport_path = NodePath("PowerToughnessViewport")
@@ -577,23 +574,10 @@ _data = {
 "sleeping": SubResource("Animation_mcia8")
 }
 
-[node name="Card" type="RigidBody3D" node_paths=PackedStringArray("label_title", "label_power", "label_toughness", "label_casting_cost", "label_flavortext", "label_subtype", "label_description", "label_type", "label_damage_indicator", "asleep_indicator", "power_container", "toughness_container", "cost_container")]
+[node name="Card" type="RigidBody3D"]
 gravity_scale = 0.0
 script = ExtResource("1_pfeis")
 description = "[color=41e18e][b]Replace me[/b][/color]: Does something generic.  Please replace this with your own text."
-label_title = NodePath("TitleViewport/Panel/TitleBackground/TitleLabel")
-label_power = NodePath("PowerToughnessViewport/Panel/TitleBackground/PowerContainer/Power")
-label_toughness = NodePath("PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer/Heart")
-label_casting_cost = NodePath("CostViewport/CostPanel/CastingCostLabel")
-label_flavortext = NodePath("DescriptionViewport/CardInfo/MarginContainer2/Control/Flavortext")
-label_subtype = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/Subtype")
-label_description = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/VBoxContainer/Description")
-label_type = NodePath("DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/CardType")
-label_damage_indicator = NodePath("DamageIndicatorViewport/DamageIndicatorPanel/DamageIndicatorLabel")
-asleep_indicator = NodePath("card/TiredLabelSprite")
-power_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/PowerContainer")
-toughness_container = NodePath("PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer")
-cost_container = NodePath("card/CastingCostSprite")
 sound_resource = ExtResource("2_r6i3w")
 
 [node name="DamageIndicatorSprite" type="Sprite3D" parent="."]
@@ -608,8 +592,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00625388, -1.58946e-07, 0.000475556)
 mesh = SubResource("ArrayMesh_npock")
 skeleton = NodePath("")
-surface_material_override/1 = SubResource("StandardMaterial3D_gt3wp")
-surface_material_override/2 = SubResource("StandardMaterial3D_jye3l")
+surface_material_override/2 = SubResource("StandardMaterial3D_ctj6b")
 
 [node name="Empty" type="Node3D" parent="card"]
 

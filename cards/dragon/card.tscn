@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bd33jd7cgnam0"]
+[gd_scene load_steps=12 format=3 uid="uid://bd33jd7cgnam0"]
 
 [ext_resource type="PackedScene" uid="uid://dxdy4c55rwyag" path="res://components/card_prefab.tscn" id="1_erpla"]
 [ext_resource type="Texture2D" uid="uid://d4dq3knlwss5f" path="res://cards/dragon/card_dragon.png" id="2_6jg6s"]
@@ -31,6 +31,9 @@ viewport_path = NodePath("CostViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_4gh7w"]
 viewport_path = NodePath("TitleViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_wkbdx"]
+viewport_path = NodePath("TiredViewport")
+
 [node name="Card" instance=ExtResource("1_erpla")]
 card_name = "A stupidly large dragon"
 subtype = "Dragon"
@@ -57,6 +60,9 @@ texture = SubResource("ViewportTexture_0tvsc")
 
 [node name="TitleSprite" parent="card" index="5"]
 texture = SubResource("ViewportTexture_4gh7w")
+
+[node name="TiredLabelSprite" parent="card" index="6"]
+texture = SubResource("ViewportTexture_wkbdx")
 
 [node name="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.00283813, -0.00924338, 0.00246477)

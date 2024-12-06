@@ -38,6 +38,8 @@ var instance = null
 
 func add_card(card_scene, card_group_controller):
 	var node3d_card = card_scene.instantiate() as Node3D
+	add_child(node3d_card)
+	node3d_card.initialize(self)
 	node3d_card.transform.origin = Vector3(0, -20, 50)
 	card_group_controller.insert_card(node3d_card, 0, node3d_card.transform.origin)
 
@@ -207,7 +209,10 @@ func draw_card(hand, deck):
 		
 func configure_done_button(str):
 	button_done.text = str
-	
+
+func display_toast(str):
+	toaster.display_notification(str)
+
 func display_notification(str):
 	notifier.display_notification(str)
 	

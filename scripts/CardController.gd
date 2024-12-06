@@ -1,17 +1,23 @@
 class_name CardController
 extends Node3D
 
+var debug = false
 var animating = false
 var tapped = false
 var turned = false
 var hovered = false
 var moving = false
 var in_play = false
-var anim_player = null
 enum CardType {MINION, HACK}
 enum CardState {TAP = 0, UNTAP = 1, TURN_DOWN = 2, TURN_UP = 3}
 var test_state : CardState = 0
 var queue = []
+var original_basis : Basis
+var card_group_controller = null
+var current_toughness
+var engine : Node
+var effects : Array[Effect] = []
+
 @export var card_name : String = "Unknown"
 @export var subtype : String = "Unknown"
 @export var power = 0
@@ -19,27 +25,26 @@ var queue = []
 @export var flavortext : String = "This text should be replaced"
 @export var description : String = "[color=d500d9][b]Replace me[/b][/color]: Does something generic.  Please replace this with your own text."
 @export var casting_cost : int = 10
-@export var label_title : RichTextLabel
-@export var label_power : RichTextLabel
-@export var label_toughness : RichTextLabel
-@export var label_casting_cost : RichTextLabel
-@export var label_flavortext : RichTextLabel
-@export var label_subtype : RichTextLabel
-@export var label_description : RichTextLabel
-@export var label_type : RichTextLabel
-@export var label_damage_indicator : RichTextLabel
-@export var asleep_indicator : Node
-@export var power_container : Node
-@export var toughness_container : Node
-@export var cost_container : Node
 @export var type : CardType
 @export var sound_resource : Resource = null
 
-var original_basis : Basis
-var debug = false
-var card_group_controller = null
-var current_toughness
+@onready var label_title : RichTextLabel = $TitleViewport/Panel/TitleBackground/TitleLabel
+@onready var label_power : RichTextLabel = $PowerToughnessViewport/Panel/TitleBackground/PowerContainer/Power
+@onready var label_toughness : RichTextLabel = $PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer/Heart
+@onready var label_casting_cost : RichTextLabel = $CostViewport/CostPanel/CastingCostLabel
+@onready var label_flavortext : RichTextLabel = $DescriptionViewport/CardInfo/MarginContainer2/Control/Flavortext
+@onready var label_subtype : RichTextLabel = $DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/Subtype
+@onready var label_description : RichTextLabel = $DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/VBoxContainer/Description
+@onready var label_type : RichTextLabel = $DescriptionViewport/CardInfo/MarginContainer/VBoxContainer/TitleContainerHBox/CardType
+@onready var label_damage_indicator : RichTextLabel = $DamageIndicatorViewport/DamageIndicatorPanel/DamageIndicatorLabel
+@onready var asleep_indicator : Node = $card/TiredLabelSprite
+@onready var power_container : Node = $PowerToughnessViewport/Panel/TitleBackground/PowerContainer
+@onready var toughness_container : Node = $PowerToughnessViewport/Panel/TitleBackground/ToughnessContainer
+@onready var cost_container : Node = $CostViewport/CostPanel
+@onready var anim_player = $AnimationPlayer
 
+func initialize(engine : Node):
+	self.engine = engine
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,8 +53,8 @@ func _ready() -> void:
 	self.name = card_name
 	asleep_indicator.visible = false
 	original_basis = self.transform.basis
-	anim_player = $AnimationPlayer
 	anim_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
+	
 	var box = $CollisionShape3D
 	# VERY IMPORTANT - shapes do not seem to be
 	box.shape = (box.shape as BoxShape3D).duplicate()
@@ -71,8 +76,12 @@ func refresh_power_toughness():
 	label_description.text = make_description()
 	label_title.text = "[center][b]" + card_name + "[/b][/center]"
 	label_subtype.text = "[b]" + subtype + "[/b]"
-	
-	
+
+func modify_stats(power_delta, toughness_delta):
+	toughness += toughness_delta
+	power += power_delta
+	refresh_power_toughness()
+		
 func make_description():
 	return description
 	
@@ -206,12 +215,33 @@ func play(target):
 	if target is CardController and target.is_dead():
 		target.move_to_graveyard()
 
-
 	damage(target.power)
 	if is_dead():
 		move_to_graveyard()
 	else:		
 		do_tap()
+
+func get_adjacent_neighbors():
+	var neighbors = []
+	var group = self.card_group_controller
+	var my_index = group.index_of_card(self)
+	
+	var i = 0
+	for card in group.get_cards():
+		var dist = abs(my_index - i) 
+		if dist != 0 and dist < 2:
+			neighbors.append(card) 
+		i = i + 1
+	return neighbors
+	
+func get_all_neighbors():
+	var neighbors = []	
+	for card in owner.card_group_controller.get_cards():
+		if card != owner:
+			neighbors.append(card)
+
+func display_toast(msg):
+	self.engine.display_toast(msg)
 
 func on_entered_play():
 	in_play = true
@@ -219,10 +249,15 @@ func on_entered_play():
 	if not tapped:
 		do_tap()
 	Audio.play(sound_resource.sounds.get("enter_play"))
+	for card in get_adjacent_neighbors():
+		card.toughness += 5
 
 func on_exited_play():
 	in_play = false
 
+func on_entered_graveyard():
+	pass
+	
 func on_played_on(target):
 	pass
 	
@@ -269,4 +304,10 @@ func on_enemy_neighbors_changed():
 	pass
 
 func on_enemy_draw_card():
+	pass
+
+func on_enemy_turn_start():
+	pass
+	
+func on_enemy_turn_end():
 	pass
