@@ -116,7 +116,7 @@ theme_override_constants/shadow_outline_size = 15
 theme_override_fonts/bold_font = ExtResource("4_s4ja2")
 theme_override_font_sizes/bold_font_size = 211
 bbcode_enabled = true
-text = "[center][b]TEST[/b][/center]"
+text = "[center][b]TEST 2[/b][/center]"
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
 material = SubResource("CanvasItemMaterial_pqisb")
