@@ -6,7 +6,7 @@ import os
 class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
-            self.path = "index.html"
+            self.path = '/index.html'
         return server.SimpleHTTPRequestHandler.do_GET(self)
 
     def end_headers(self):
