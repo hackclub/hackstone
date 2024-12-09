@@ -12,5 +12,4 @@ class MyHTTPRequestHandler(server.SimpleHTTPRequestHandler):
                 self.send_header("Cross-Origin-Opener-Policy", "same-origin")
 
 if __name__ == '__main__':
-        server.test(HandlerClass=MyHTTPRequestHandler)
-
+        server.test(HandlerClass=MyHTTPRequestHandler, port=80)
