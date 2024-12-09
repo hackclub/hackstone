@@ -98,26 +98,6 @@ theme_override_font_sizes/bold_font_size = 211
 bbcode_enabled = true
 text = "[center][b]HACKSTONE[/b][/center]"
 
-[node name="TitleText2" type="RichTextLabel" parent="Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -708.0
-offset_top = 428.0
-offset_right = 680.18
-offset_bottom = 738.18
-grow_horizontal = 2
-pivot_offset = Vector2(672.86, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 16
-theme_override_constants/shadow_offset_x = 11
-theme_override_constants/shadow_outline_size = 15
-theme_override_fonts/bold_font = ExtResource("4_s4ja2")
-theme_override_font_sizes/bold_font_size = 211
-bbcode_enabled = true
-text = "[center][b]TEST 2[/b][/center]"
-
 [node name="TextureRect" type="TextureRect" parent="Panel"]
 material = SubResource("CanvasItemMaterial_pqisb")
 layout_mode = 1
