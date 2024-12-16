@@ -576,6 +576,7 @@ _data = {
 
 [node name="Card" type="RigidBody3D"]
 gravity_scale = 0.0
+freeze = true
 script = ExtResource("1_pfeis")
 description = "[color=41e18e][b]Replace me[/b][/color]: Does something generic.  Please replace this with your own text."
 sound_resource = ExtResource("2_r6i3w")
