@@ -5,6 +5,7 @@ extends Node3D
 var managed_cards : Array[Node3D] = []
 var current_drag_point = null
 @export var graveyard : Node = null 	# the graveyard associated w/ this card group controller
+var should_lerp = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,10 +15,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:	
 	for i in range(0, len(managed_cards)):		
 		var desired_pos = get_desired_position(i)
-		managed_cards[i].transform.origin = \
-		managed_cards[i].transform.origin.lerp(desired_pos, \
-		delta * animation_speed)		
 		
+		if should_lerp:
+			managed_cards[i].transform.origin = \
+			managed_cards[i].transform.origin.lerp(desired_pos, \
+			delta * animation_speed)		
+		else:
+			managed_cards[i].transform.origin = desired_pos
 		if managed_cards[i].transform.origin.distance_squared_to(desired_pos) < 0.01:
 			managed_cards[i].moving = false					
 		
@@ -106,6 +110,5 @@ func card_clicked(card: CardController):
 func index_of_card(card: CardController):
 	return managed_cards.find(card)
 		
-
 func set_drag_point(drag_point):
 	current_drag_point = drag_point
