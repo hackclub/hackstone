@@ -205,7 +205,6 @@ func move_to_graveyard():
 	card_group_controller.take(self)
 	graveyard.insert_card(self, 0, self.global_position)
 
-
 func play(target):
 	print("Playing card %s on %s" % [name, target.name])
 	queue.append("attack")
@@ -249,8 +248,6 @@ func on_entered_play():
 	if not tapped:
 		do_tap()
 	Audio.play(sound_resource.sounds.get("enter_play"))
-	for card in get_adjacent_neighbors():
-		card.toughness += 5
 
 func on_exited_play():
 	in_play = false
@@ -288,14 +285,10 @@ func on_healed(healer, amount):
 func on_turn_start():
 	if tapped:
 		do_tap()
-	if is_damaged():
-		heal()
 
 func on_turn_end():
 	if tapped:
 		do_tap()
-	if is_damaged():
-		heal()
 	
 func on_neighbors_changed():
 	pass
