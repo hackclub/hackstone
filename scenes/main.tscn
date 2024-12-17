@@ -26,7 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://bamttpx8po6un" path="res://sounds/background_game_music.ogg" id="24_tx78l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xga5y"]
-size = Vector3(163.701, 15.2567, 1)
+size = Vector3(163.701, 14.5, 1)
 
 [sub_resource type="Animation" id="Animation_0fllw"]
 length = 0.001
@@ -64,7 +64,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(163.701, 15.2567, 1)]
+"values": [Vector3(163.701, 14.5, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -140,7 +140,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(163.701, 11.8994, 1), Vector3(163.701, 13.5, 1)]
+"values": [Vector3(163.701, 11.8994, 1), Vector3(163.701, 14.5, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -173,10 +173,10 @@ tracks/5/path = NodePath("MyAvatar:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.266667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_4tns4"]
@@ -216,7 +216,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(163.701, 13.5, 1), Vector3(163.701, 11.899, 1)]
+"values": [Vector3(163.701, 14.5, 1), Vector3(163.701, 11.899, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -249,10 +249,10 @@ tracks/5/path = NodePath("MyAvatar:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.0666667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_66udh"]
