@@ -25,7 +25,7 @@ func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
 
 	card.on_drawn()
 	for c in opponent_battlefield.managed_cards:
-		c.on_enemy_draw_card()	
+		c.on_enemy_draw_card(card)	
 
 func get_desired_position(index: int) -> Vector3:	
 	var num_cards = get_cards_len()

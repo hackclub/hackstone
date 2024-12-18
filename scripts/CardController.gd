@@ -292,11 +292,11 @@ func on_targeted(attacker):
 	pass
 	
 func on_damaged(attacker, amount):
-	print(card_name + " was damaged by " + attacker.card_name + " for " + amount + " damage")
+	print(card_name + " was damaged by " + attacker.card_name + " for " + str(amount) + " damage")
 	pass
 	
 func on_healed(healer, amount):
-	print(card_name + " was healed by " + healer.card_name + " for " + amount + " damage")
+	print(card_name + " was healed by " + healer.card_name + " for " + str(amount) + " damage")
 	pass
 
 func on_turn_start():
