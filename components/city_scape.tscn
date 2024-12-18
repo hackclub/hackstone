@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsw0npqbxdtpj"]
+
+[ext_resource type="Texture2D" uid="uid://d7tnyehh7oxt" path="res://art/counterspell_hackclub/Reference/bg5.png" id="1_ioqvj"]
+[ext_resource type="Texture2D" uid="uid://c1kuehp5fdmdr" path="res://art/counterspell_hackclub/Reference/bg1_big.png" id="2_2lk5g"]
+
+[node name="CityScape" type="Node3D"]
+
+[node name="Sprite3D5" type="Sprite3D" parent="."]
+transform = Transform3D(138.836, 0, 0, 0, 138.836, 0, 0, 0, 2, 0, 2.518, -127)
+texture = ExtResource("1_ioqvj")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
+modulate = Color(0.180151, 0.260296, 0.553372, 1)
+alpha_cut = 1
+texture = ExtResource("2_2lk5g")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
+modulate = Color(0.0739803, 0.118656, 0.284365, 1)
+alpha_cut = 1
+texture = ExtResource("2_2lk5g")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
+modulate = Color(0.285414, 0.391143, 0.753332, 1)
+alpha_cut = 1
+texture = ExtResource("2_2lk5g")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
+modulate = Color(0.469683, 0.551314, 0.84292, 1)
+alpha_cut = 1
+texture = ExtResource("2_2lk5g")
+
+[node name="Node3D2" type="Node3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
+modulate = Color(0.180151, 0.260296, 0.553372, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("2_2lk5g")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
+modulate = Color(0.0739803, 0.118656, 0.284365, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("2_2lk5g")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
+modulate = Color(0.285414, 0.391143, 0.753332, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("2_2lk5g")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Node3D2"]
+transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
+modulate = Color(0.469683, 0.551314, 0.84292, 1)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("2_2lk5g")

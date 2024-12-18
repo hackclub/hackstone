@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cjtnhugpl35ay"]
+[gd_scene load_steps=46 format=3 uid="uid://cjtnhugpl35ay"]
 
 [ext_resource type="Script" path="res://scripts/MouseHandler.gd" id="1_fysce"]
 [ext_resource type="PackedScene" uid="uid://dhw27v0raxlxp" path="res://components/arrow.tscn" id="2_5cnle"]
@@ -17,9 +17,8 @@
 [ext_resource type="Script" path="res://scripts/DragController.gd" id="9_slc2b"]
 [ext_resource type="Script" path="res://scripts/Notifier.gd" id="10_yh5st"]
 [ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="12_g1dgu"]
+[ext_resource type="PackedScene" uid="uid://dsw0npqbxdtpj" path="res://components/city_scape.tscn" id="13_i4787"]
 [ext_resource type="Script" path="res://scripts/CardDisplayController.gd" id="13_kk3ip"]
-[ext_resource type="Texture2D" uid="uid://c1kuehp5fdmdr" path="res://art/counterspell_hackclub/Reference/bg1_big.png" id="16_sjurj"]
-[ext_resource type="Texture2D" uid="uid://d7tnyehh7oxt" path="res://art/counterspell_hackclub/Reference/bg5.png" id="19_tm8m1"]
 [ext_resource type="Texture2D" uid="uid://bnwngrd34ng6o" path="res://art/counterspell_hackclub/Reference/cloud1.png" id="20_m3ydw"]
 [ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="21_5rpq5"]
 [ext_resource type="Script" path="res://scripts/HandHider.gd" id="24_t1swl"]
@@ -539,69 +538,7 @@ randomness = 0.46
 process_material = SubResource("ParticleProcessMaterial_ppge7")
 draw_pass_1 = SubResource("QuadMesh_74hvr")
 
-[node name="CityScape" type="Node3D" parent="."]
-
-[node name="Sprite3D5" type="Sprite3D" parent="CityScape"]
-transform = Transform3D(138.836, 0, 0, 0, 138.836, 0, 0, 0, 2, 0, 2.518, -127)
-texture = ExtResource("19_tm8m1")
-
-[node name="Node3D" type="Node3D" parent="CityScape"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, 0)
-
-[node name="Sprite3D" type="Sprite3D" parent="CityScape/Node3D"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
-modulate = Color(0.180151, 0.260296, 0.553372, 1)
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D4" type="Sprite3D" parent="CityScape/Node3D"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
-modulate = Color(0.0739803, 0.118656, 0.284365, 1)
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D2" type="Sprite3D" parent="CityScape/Node3D"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
-modulate = Color(0.285414, 0.391143, 0.753332, 1)
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D3" type="Sprite3D" parent="CityScape/Node3D"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
-modulate = Color(0.469683, 0.551314, 0.84292, 1)
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Node3D2" type="Node3D" parent="CityScape"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 3, 0)
-
-[node name="Sprite3D" type="Sprite3D" parent="CityScape/Node3D2"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, 0, -13.147, -24.3)
-modulate = Color(0.180151, 0.260296, 0.553372, 1)
-double_sided = false
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D4" type="Sprite3D" parent="CityScape/Node3D2"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -15, -15.147, -19.3)
-modulate = Color(0.0739803, 0.118656, 0.284365, 1)
-double_sided = false
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D2" type="Sprite3D" parent="CityScape/Node3D2"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -12.147, -29.3)
-modulate = Color(0.285414, 0.391143, 0.753332, 1)
-double_sided = false
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
-
-[node name="Sprite3D3" type="Sprite3D" parent="CityScape/Node3D2"]
-transform = Transform3D(6.45, 0, 0, 0, 6.45, 0, 0, 0, 2, -26, -14.147, -44.3)
-modulate = Color(0.469683, 0.551314, 0.84292, 1)
-double_sided = false
-alpha_cut = 1
-texture = ExtResource("16_sjurj")
+[node name="CityScape" parent="." instance=ExtResource("13_i4787")]
 
 [node name="MyAvatar" parent="." node_paths=PackedStringArray("graveyard", "main_camera", "stars") instance=ExtResource("21_5rpq5")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -3.75, 2)

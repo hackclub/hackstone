@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cq5lurxxpg0m6"]
+[gd_scene load_steps=15 format=3 uid="uid://cq5lurxxpg0m6"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kawqa"]
 [ext_resource type="Texture2D" uid="uid://dhrki7qfnf2ng" path="res://art/counterspell_hackclub/Reference/pink_button_hover.png" id="2_nuhov"]
 [ext_resource type="Script" path="res://scripts/FpsCounter.gd" id="3_3mbs6"]
 [ext_resource type="Texture2D" uid="uid://cnnpcx755qf7q" path="res://art/counterspell_hackclub/Reference/pink_button.png" id="3_65mxl"]
 [ext_resource type="FontFile" uid="uid://c4daplyykkrh0" path="res://fonts/phantomsans/PhantomSans0.8-Bold.otf" id="4_s4ja2"]
+[ext_resource type="PackedScene" uid="uid://dsw0npqbxdtpj" path="res://components/city_scape.tscn" id="7_nmblm"]
 [ext_resource type="AudioStream" uid="uid://b4pcqqgpo8ssa" path="res://sounds/background_menu_music.ogg" id="7_nv0cn"]
 
 [sub_resource type="Environment" id="Environment_hmidh"]
@@ -49,6 +50,7 @@ script = ExtResource("1_kawqa")
 environment = SubResource("Environment_hmidh")
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -99,6 +101,7 @@ bbcode_enabled = true
 text = "[center][b]HACKSTONE[/b][/center]"
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
+visible = false
 material = SubResource("CanvasItemMaterial_pqisb")
 layout_mode = 1
 anchors_preset = 2
@@ -114,7 +117,7 @@ texture = SubResource("ViewportTexture_0jba3")
 script = ExtResource("3_3mbs6")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7617, 230, 10.0851)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.363239, -0.926666, -0.233976)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 metadata/_edit_lock_ = true
@@ -131,5 +134,7 @@ stream = ExtResource("7_nv0cn")
 volume_db = -29.931
 autoplay = true
 parameters/looping = true
+
+[node name="CityScape" parent="." instance=ExtResource("7_nmblm")]
 
 [connection signal="pressed" from="Panel/PlayButton" to="." method="goto_main"]
