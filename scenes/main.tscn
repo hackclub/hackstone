@@ -463,15 +463,17 @@ light_energy = 0.5
 
 [node name="Mine" type="Node3D" parent="Card Groups"]
 
-[node name="MyBattlefield" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
+[node name="MyBattlefield" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("opponent_battlefield", "graveyard")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.13862, 0)
 script = ExtResource("2_rndq6")
+opponent_battlefield = NodePath("../../Opponent/OpponentBattlefield")
 controlled_by_me = true
 graveyard = NodePath("../MyGraveyard")
 
-[node name="MyHand" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("graveyard")]
+[node name="MyHand" type="Node3D" parent="Card Groups/Mine" node_paths=PackedStringArray("opponent_hand_controller", "graveyard")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.709553, -9.428, 0)
 script = ExtResource("7_mqjt8")
+opponent_hand_controller = NodePath("../../Opponent/OpponentHand")
 controlled_by_me = true
 graveyard = NodePath("../MyGraveyard")
 
@@ -493,15 +495,17 @@ graveyard = NodePath("../MyGraveyard")
 
 [node name="Opponent" type="Node3D" parent="Card Groups"]
 
-[node name="OpponentBattlefield" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
+[node name="OpponentBattlefield" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("opponent_battlefield", "graveyard")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76808, 0)
 script = ExtResource("2_rndq6")
+opponent_battlefield = NodePath("../../Mine/MyBattlefield")
 graveyard = NodePath("../OpponentGraveyard")
 
-[node name="OpponentHand" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]
+[node name="OpponentHand" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("opponent_hand_controller", "graveyard")]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0.748875, 9.61394, 0)
 script = ExtResource("7_mqjt8")
 hidden_hand = true
+opponent_hand_controller = NodePath("../../Mine/MyHand")
 graveyard = NodePath("../OpponentGraveyard")
 
 [node name="OpponentDeck" type="Node3D" parent="Card Groups/Opponent" node_paths=PackedStringArray("graveyard")]

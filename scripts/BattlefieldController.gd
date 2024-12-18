@@ -1,15 +1,28 @@
+class_name BattlefieldController
 extends "res://scripts/CardGroupController.gd"
 
 var desired_total_width : float = 20
 var current_drag_index : int
+@export var opponent_battlefield : BattlefieldController
 
 func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
 	super.insert_card(card, index, global_position)	
+	
+	for neighbor in self.managed_cards:
+		neighbor.on_neighbors_changed()
+		
+	for neighbor in opponent_battlefield.managed_cards:
+		neighbor.on_enemy_neighbors_changed()
+
 	card.on_entered_play()
 
 func take_card(index: int) -> Node3D:
 	var card = super.take_card(index)
 	card.on_exited_play()
+	for neighbor in self.managed_cards:
+		neighbor.on_neighbors_changed()
+	for neighbor in opponent_battlefield.managed_cards:
+		neighbor.on_enemy_neighbors_changed()
 	return card
 
 func get_desired_position(index: int) -> Vector3:

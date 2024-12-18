@@ -161,15 +161,17 @@ func _on_animation_finished(anim_name):
 	else:
 		_process_queue()
 
-func damage(amount):
+func damage(source, amount):
 	Audio.play(sound_resource.sounds.get("hit"))
 	print(str(self.name) + " got damaged for " + str(amount))
 	current_toughness -= amount
 	
 	var anim_player: AnimationPlayer = $AnimationPlayer
 	if amount > 0:
+		on_healed(source, amount)
 		label_damage_indicator.text = "[color=ff0000][center][b]" + str(-amount) + "[/b][/center]"
 	elif amount < 0:
+		on_damaged(source, amount)
 		label_damage_indicator.text = "[color=00ff00][center][b]+" + str(-amount) + "[/b][/center]"
 	if amount != 0: 
 		queue.append("damaged")
@@ -181,8 +183,10 @@ func is_dead():
 	return current_toughness <= 0
 	
 func heal():
+	var heal_amount = toughness - current_toughness
 	current_toughness = toughness
-	refresh_power_toughness()
+	refresh_power_toughness()	
+	self.on_healed(self, heal_amount)
 
 func is_damaged():
 	return toughness != current_toughness
@@ -209,12 +213,13 @@ func play(target):
 	print("Playing card %s on %s" % [name, target.name])
 	queue.append("attack")
 	await get_tree().create_timer(0.3).timeout
-	target.damage(power)
+	await self.on_played_on(target)
+	target.damage(self, power)
 		
 	if target is CardController and target.is_dead():
 		target.move_to_graveyard()
 
-	damage(target.power)
+	damage(target, target.power)
 	if is_dead():
 		move_to_graveyard()
 	else:		

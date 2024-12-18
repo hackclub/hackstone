@@ -94,7 +94,7 @@ func handle_placement_mousemotion():
 		return
 		
 	if not is_dragging and drag_start_position.distance_to(arrow_controller.get_global_mouse_position()) > click_threshold:
-		print("started dragging")
+		#print("started dragging")
 		is_dragging = true
 
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -208,7 +208,7 @@ func start_placement_click(event, card: CardController):
 	handle_placement_mousemotion()
 
 func on_placement_dropped(event, card: CardController):
-	print("Placement drop detected!")
+	#print("Placement drop detected!")
 	if card == null:
 		print("weird")
 		clear_mouse_state()
@@ -248,7 +248,7 @@ func on_placement_clicked(event, card: CardController):
 	clear_mouse_state()
 
 func clear_mouse_state():
-	print("clearing mouse state")
+	#print("clearing mouse state")
 	is_dragging = false
 	clicked_card = null
 	drag_start_position = Vector2.ZERO

@@ -43,7 +43,7 @@ func refresh_mana():
 		else:
 			stars[i].modulate = Color.GOLDENROD
 			
-func damage(amount: int) -> void:
+func damage(source, amount: int) -> void:
 	# Handle damage label
 	var anim_player: AnimationPlayer = $AnimationPlayer
 	if amount > 0:
@@ -60,15 +60,12 @@ func damage(amount: int) -> void:
 	if toughness <= 0:
 		get_tree().change_scene_to_packed(load("res://scenes/gameover.tscn"))
 
-
 func refresh():
 	toughness_text.text = "[center]%d[/center]" % (toughness)
-
 
 func _on_mouse_entered() -> void:
 	hovered = true
 	print("mouse entered avatar!")
-
 
 func _on_mouse_exited() -> void:
 	hovered = false
