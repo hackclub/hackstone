@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/FpsCounter.gd" id="3_3mbs6"]
 [ext_resource type="Texture2D" uid="uid://cnnpcx755qf7q" path="res://art/counterspell_hackclub/Reference/pink_button.png" id="3_65mxl"]
 [ext_resource type="FontFile" uid="uid://c4daplyykkrh0" path="res://fonts/phantomsans/PhantomSans0.8-Bold.otf" id="4_s4ja2"]
-[ext_resource type="PackedScene" uid="uid://dsw0npqbxdtpj" path="res://components/city_scape.tscn" id="7_nmblm"]
+[ext_resource type="PackedScene" path="res://components/city_scape.tscn" id="7_nmblm"]
 [ext_resource type="AudioStream" uid="uid://b4pcqqgpo8ssa" path="res://sounds/background_menu_music.ogg" id="7_nv0cn"]
 
 [sub_resource type="Environment" id="Environment_hmidh"]
@@ -50,7 +50,6 @@ script = ExtResource("1_kawqa")
 environment = SubResource("Environment_hmidh")
 
 [node name="Panel" type="Panel" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
