@@ -248,6 +248,7 @@ func display_toast(msg):
 	self.engine.display_toast(msg)
 
 func on_entered_play():
+	print(card_name + " came into play")
 	in_play = true
 	show_cost(false)
 	if not tapped:
@@ -255,57 +256,71 @@ func on_entered_play():
 	Audio.play(sound_resource.sounds.get("enter_play"))
 
 func on_exited_play():
+	print(card_name + " exited play")
 	in_play = false
 
 func on_entered_graveyard():
+	print(card_name + " entered graveyard")
 	pass
 	
 func on_played_on(target):
+	print(card_name + " was played on " + target.card_name)
 	pass
 	
 func on_drawn():
+	print(card_name + " was drawn")
 	pass
-	
-func on_card_draw(card):
+
+func on_enemy_draw_card(card):
+	print(card_name + " was was notified that enemy drew " + card.card_name)
 	pass
-	
+
+		
 func on_death(killer):
+	print(card_name + " died")
 	pass
 	
 func on_attack(target):
+	print(card_name + " attacked " + target.card_name)
 	pass
 	
 func on_attacked(attacker):
+	print(card_name + " was attacked by " + attacker.card_name)	
 	pass
 	
 func on_targeted(attacker):
 	pass
 	
 func on_damaged(attacker, amount):
+	print(card_name + " was damaged by " + attacker.card_name + " for " + amount + " damage")
 	pass
 	
 func on_healed(healer, amount):
+	print(card_name + " was healed by " + healer.card_name + " for " + amount + " damage")
 	pass
 
 func on_turn_start():
+	print(card_name + " was was notified of turn start")
 	if tapped:
 		do_tap()
 
 func on_turn_end():
+	print(card_name + " was was notified of turn end")
 	if tapped:
 		do_tap()
 	
 func on_neighbors_changed():
+	print(card_name + " was was notified its battlefield might have changed")
 	pass
 	
 func on_enemy_neighbors_changed():
-	pass
-
-func on_enemy_draw_card():
+	print(card_name + " was was notified the opponent's battlefield might have changed")
 	pass
 
 func on_enemy_turn_start():
+	print(card_name + " was was notified of the enemy's turn start")
 	pass
 	
 func on_enemy_turn_end():
+	print(card_name + " was was notified of the enemy's turn end")
 	pass

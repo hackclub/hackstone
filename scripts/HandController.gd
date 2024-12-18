@@ -5,6 +5,7 @@ extends "res://scripts/CardGroupController.gd"
 var original_rotation : Basis
 @export var is_hovering = false
 @export var opponent_hand_controller : HandController
+@export var opponent_battlefield : BattlefieldController
 
 func _ready() -> void:
 	super._ready()
@@ -21,6 +22,10 @@ func insert_card(card: Node3D, index: int, global_position: Vector3) -> void:
 		Audio.play(ResourceLoader.load("res://sounds/defaults.tres").sounds.get("enter_hand"))
 	super.insert_card(card, index, global_position)	
 	card.show_power_toughness(!hidden_hand)	
+
+	card.on_drawn()
+	for c in opponent_battlefield.managed_cards:
+		c.on_enemy_draw_card()	
 
 func get_desired_position(index: int) -> Vector3:	
 	var num_cards = get_cards_len()
