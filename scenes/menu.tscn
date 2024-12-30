@@ -1,19 +1,17 @@
-[gd_scene load_steps=32 format=3 uid="uid://cq5lurxxpg0m6"]
+[gd_scene load_steps=30 format=3 uid="uid://cq5lurxxpg0m6"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kawqa"]
 [ext_resource type="Texture2D" uid="uid://dhrki7qfnf2ng" path="res://art/counterspell_hackclub/Reference/pink_button_hover.png" id="2_nuhov"]
 [ext_resource type="Script" path="res://scripts/FpsCounter.gd" id="3_3mbs6"]
 [ext_resource type="Texture2D" uid="uid://cnnpcx755qf7q" path="res://art/counterspell_hackclub/Reference/pink_button.png" id="3_65mxl"]
 [ext_resource type="FontFile" uid="uid://c4daplyykkrh0" path="res://fonts/phantomsans/PhantomSans0.8-Bold.otf" id="4_s4ja2"]
+[ext_resource type="Script" path="res://scripts/OpenUrl.gd" id="4_uxj7i"]
 [ext_resource type="Texture2D" uid="uid://cnv1blqx06pxh" path="res://art/hackclub/flag-orpheus-top.png" id="5_r2vtw"]
-[ext_resource type="Script" path="res://scenes/open_hackclub_url.gd" id="5_vbfap"]
 [ext_resource type="Texture2D" uid="uid://bqqp3k8uklm0q" path="res://icon.png" id="6_30r1a"]
 [ext_resource type="PackedScene" uid="uid://dsw0npqbxdtpj" path="res://components/city_scape.tscn" id="7_nmblm"]
 [ext_resource type="AudioStream" uid="uid://b4pcqqgpo8ssa" path="res://sounds/background_menu_music.ogg" id="7_nv0cn"]
-[ext_resource type="Script" path="res://scenes/open_github.gd" id="8_2q2h4"]
 [ext_resource type="Texture2D" uid="uid://l3l65hyw5t0" path="res://art/hackclub/github-mark.png" id="8_5p5w7"]
 [ext_resource type="Texture2D" uid="uid://dqlffb3i7uwy6" path="res://art/hackclub/play-button.png" id="9_iql0b"]
-[ext_resource type="Script" path="res://scenes/open_get_started.gd" id="10_v3cit"]
 
 [sub_resource type="Environment" id="Environment_hmidh"]
 background_mode = 1
@@ -130,7 +128,8 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_kprfh")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_udjrh")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ahxi3")
 flat = true
-script = ExtResource("5_vbfap")
+script = ExtResource("4_uxj7i")
+url = "https://hackclub.com"
 
 [node name="TextureRect2" type="TextureRect" parent="Panel/Button"]
 layout_mode = 1
@@ -248,7 +247,8 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_n1fvq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_x48y1")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ewflp")
 flat = true
-script = ExtResource("8_2q2h4")
+script = ExtResource("4_uxj7i")
+url = "https://github.com/hackclub/hackstone"
 
 [node name="URLButtonFooter2" type="Button" parent="Panel"]
 layout_mode = 2
@@ -262,7 +262,8 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_n1fvq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_x48y1")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ewflp")
 flat = true
-script = ExtResource("10_v3cit")
+script = ExtResource("4_uxj7i")
+url = "https://github.com/hackclub/hackstone/blob/main/README.md"
 
 [node name="Button2" type="Button" parent="Panel"]
 layout_mode = 0
