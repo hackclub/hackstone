@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://scripts/DragController.gd" id="9_slc2b"]
 [ext_resource type="Script" path="res://scripts/Notifier.gd" id="10_yh5st"]
 [ext_resource type="Resource" uid="uid://d3f4j3k5ep0ew" path="res://sounds/defaults.tres" id="12_g1dgu"]
-[ext_resource type="PackedScene" path="res://components/city_scape.tscn" id="13_i4787"]
+[ext_resource type="PackedScene" uid="uid://dsw0npqbxdtpj" path="res://components/city_scape.tscn" id="13_i4787"]
 [ext_resource type="Script" path="res://scripts/CardDisplayController.gd" id="13_kk3ip"]
 [ext_resource type="Texture2D" uid="uid://bnwngrd34ng6o" path="res://art/counterspell_hackclub/Reference/cloud1.png" id="20_m3ydw"]
 [ext_resource type="PackedScene" uid="uid://4cw3cdp1kc87" path="res://components/avatar.tscn" id="21_5rpq5"]
