@@ -1,17 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://cq5lurxxpg0m6"]
+[gd_scene load_steps=28 format=3 uid="uid://cq5lurxxpg0m6"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kawqa"]
 [ext_resource type="Texture2D" uid="uid://dhrki7qfnf2ng" path="res://art/counterspell_hackclub/Reference/pink_button_hover.png" id="2_nuhov"]
 [ext_resource type="Script" path="res://scripts/FpsCounter.gd" id="3_3mbs6"]
 [ext_resource type="Texture2D" uid="uid://cnnpcx755qf7q" path="res://art/counterspell_hackclub/Reference/pink_button.png" id="3_65mxl"]
+[ext_resource type="Texture2D" uid="uid://dyispeylku8dw" path="res://art/hackclub/flag-orpheus-top.png" id="4_fv4yh"]
 [ext_resource type="FontFile" uid="uid://c4daplyykkrh0" path="res://fonts/phantomsans/PhantomSans0.8-Bold.otf" id="4_s4ja2"]
-[ext_resource type="Script" path="res://scripts/OpenUrl.gd" id="4_uxj7i"]
-[ext_resource type="Texture2D" uid="uid://cnv1blqx06pxh" path="res://art/hackclub/flag-orpheus-top.png" id="5_r2vtw"]
+[ext_resource type="Script" path="res://scripts/OpenUrl.gd" id="6_8nkfv"]
 [ext_resource type="Texture2D" uid="uid://bqqp3k8uklm0q" path="res://icon.png" id="6_30r1a"]
-[ext_resource type="PackedScene" uid="uid://dsw0npqbxdtpj" path="res://components/city_scape.tscn" id="7_nmblm"]
+[ext_resource type="Texture2D" uid="uid://rgbq535a0xii" path="res://art/github/github-mark.png" id="6_gubuq"]
+[ext_resource type="PackedScene" path="res://components/city_scape.tscn" id="7_nmblm"]
 [ext_resource type="AudioStream" uid="uid://b4pcqqgpo8ssa" path="res://sounds/background_menu_music.ogg" id="7_nv0cn"]
-[ext_resource type="Texture2D" uid="uid://l3l65hyw5t0" path="res://art/hackclub/github-mark.png" id="8_5p5w7"]
-[ext_resource type="Texture2D" uid="uid://dqlffb3i7uwy6" path="res://art/hackclub/play-button.png" id="9_iql0b"]
 
 [sub_resource type="Environment" id="Environment_hmidh"]
 background_mode = 1
@@ -63,11 +62,6 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ewflp"]
 
-[sub_resource type="Environment" id="Environment_gk5e2"]
-background_energy_multiplier = 0.0
-ambient_light_source = 1
-tonemap_mode = 3
-
 [node name="Menu" type="Node3D"]
 script = ExtResource("1_kawqa")
 
@@ -99,6 +93,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(582, 146)
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 180
 theme_override_styles/hover = SubResource("StyleBoxTexture_h047p")
 theme_override_styles/normal = SubResource("StyleBoxTexture_hsu72")
@@ -117,27 +112,22 @@ offset_bottom = 3.0
 grow_vertical = 0
 texture = SubResource("ViewportTexture_0jba3")
 
-[node name="Button" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 26.0
-offset_right = 401.0
-offset_bottom = 208.0
+[node name="HCFlagButton" type="Button" parent="Panel"]
+layout_mode = 1
+offset_left = 54.0
+offset_right = 614.0
+offset_bottom = 315.0
+scale = Vector2(0.5, 0.5)
+mouse_default_cursor_shape = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wdinj")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_maf7b")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_kprfh")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_udjrh")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ahxi3")
+icon = ExtResource("4_fv4yh")
 flat = true
-script = ExtResource("4_uxj7i")
+script = ExtResource("6_8nkfv")
 url = "https://hackclub.com"
-
-[node name="TextureRect2" type="TextureRect" parent="Panel/Button"]
-layout_mode = 1
-offset_left = 13.0
-offset_right = 385.0
-offset_bottom = 209.0
-texture = ExtResource("5_r2vtw")
-expand_mode = 2
 
 [node name="TitleContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -147,9 +137,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -960.0
-offset_top = -279.0
+offset_top = -189.0
 offset_right = 961.0
-offset_bottom = -8.0
+offset_bottom = 82.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -172,27 +162,28 @@ theme_override_font_sizes/bold_font_size = 211
 bbcode_enabled = true
 text = "[center][b]HACKSTONE[/b][/center]"
 
-[node name="FooterContainer1" type="HBoxContainer" parent="Panel"]
-layout_mode = 1
+[node name="MakeCardButton" type="Node" parent="Panel"]
+
+[node name="FooterContainer1" type="HBoxContainer" parent="Panel/MakeCardButton"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 40.0
 offset_top = -150.0
-offset_right = 662.0
+offset_right = 1009.0
 offset_bottom = -40.0
 grow_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="Panel/FooterContainer1"]
+[node name="GithubIcon" type="TextureRect" parent="Panel/MakeCardButton/FooterContainer1"]
 layout_mode = 2
-texture = ExtResource("8_5p5w7")
+texture = ExtResource("6_gubuq")
 expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Panel/FooterContainer1"]
+[node name="TextureRect2" type="TextureRect" parent="Panel/MakeCardButton/FooterContainer1"]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="TitleText" type="RichTextLabel" parent="Panel/FooterContainer1"]
+[node name="TitleText" type="RichTextLabel" parent="Panel/MakeCardButton/FooterContainer1"]
 custom_minimum_size = Vector2(480, 110)
 layout_mode = 2
 size_flags_vertical = 4
@@ -200,75 +191,25 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/bold_font = ExtResource("4_s4ja2")
 theme_override_font_sizes/bold_font_size = 100
 bbcode_enabled = true
-text = "[b]Contribute[/b]"
+text = "[b]Make a new card![/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
-[node name="FooterContainer2" type="HBoxContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -703.0
-offset_top = -150.0
-offset_right = -40.0
-offset_bottom = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="TextureRect" type="TextureRect" parent="Panel/FooterContainer2"]
-layout_mode = 2
-texture = ExtResource("9_iql0b")
-expand_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="Panel/FooterContainer2"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-
-[node name="TitleText" type="RichTextLabel" parent="Panel/FooterContainer2"]
-custom_minimum_size = Vector2(530, 110)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/bold_font = ExtResource("4_s4ja2")
-theme_override_font_sizes/bold_font_size = 100
-bbcode_enabled = true
-text = "[b]Get Started[/b]"
-
-[node name="URLButtonFooter1" type="Button" parent="Panel"]
-layout_mode = 2
+[node name="URLButtonFooter1" type="Button" parent="Panel/MakeCardButton"]
 offset_left = 31.0
 offset_top = 930.0
-offset_right = 665.0
+offset_right = 953.0
 offset_bottom = 1040.0
+mouse_default_cursor_shape = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_r84am")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_tsm1a")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_n1fvq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_x48y1")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ewflp")
 flat = true
-script = ExtResource("4_uxj7i")
-url = "https://github.com/hackclub/hackstone"
-
-[node name="URLButtonFooter2" type="Button" parent="Panel"]
-layout_mode = 2
-offset_left = 1211.0
-offset_top = 930.0
-offset_right = 1875.0
-offset_bottom = 1040.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_r84am")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_tsm1a")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_n1fvq")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_x48y1")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ewflp")
-flat = true
-script = ExtResource("4_uxj7i")
+script = ExtResource("6_8nkfv")
 url = "https://github.com/hackclub/hackstone/blob/main/README.md"
-
-[node name="Button2" type="Button" parent="Panel"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("3_3mbs6")
@@ -279,13 +220,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.363239, -0.926666, -0.2339
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="SubViewport" type="SubViewport" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334301, 1.00952, 1.33931)
-visible = false
-environment = SubResource("Environment_gk5e2")
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_nv0cn")
 volume_db = -29.931
@@ -295,6 +229,5 @@ parameters/looping = true
 [node name="CityScape" parent="." instance=ExtResource("7_nmblm")]
 
 [connection signal="pressed" from="Panel/PlayButton" to="." method="goto_main"]
-[connection signal="pressed" from="Panel/Button" to="Panel/Button" method="_on_Button_pressed"]
-[connection signal="pressed" from="Panel/URLButtonFooter1" to="Panel/URLButtonFooter1" method="_on_Button_pressed"]
-[connection signal="pressed" from="Panel/URLButtonFooter2" to="Panel/URLButtonFooter2" method="_on_Button_pressed"]
+[connection signal="pressed" from="Panel/HCFlagButton" to="Panel/HCFlagButton" method="open"]
+[connection signal="pressed" from="Panel/MakeCardButton/URLButtonFooter1" to="Panel/MakeCardButton/URLButtonFooter1" method="open"]
